@@ -6,28 +6,26 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import {useStylesVarianTheme} from '../hook';
-import {ClassStyleType} from '../model';
+import {useClassName} from '../../hook';
+import {ClassStyleType} from '../../model';
 
 export type PropsBox = {
   style?: StyleProp<ViewStyle>;
   children?: ReactNode;
   scaleScreen?: boolean;
+  className?: string;
   classStyles?: ClassStyleType | ClassStyleType[];
   onPress?: () => void;
   onTouchStart?: () => void;
 };
 
 const Box = (props: PropsBox) => {
-  const {style, children, scaleScreen, classStyles, onTouchStart, onPress} =
+  const {style, children, scaleScreen, className, onTouchStart, onPress} =
     props;
-
-  const stylesCustom = useStylesVarianTheme({
-    classStyles,
+  const stylesCustom = useClassName({
+    className,
     scaleScreen,
   });
-
-  console.log('stylesCustom', stylesCustom);
 
   const styleCard = StyleSheet.compose(stylesCustom, style);
 

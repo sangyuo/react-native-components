@@ -2,7 +2,7 @@ import React from 'react';
 import {SafeAreaView, useColorScheme} from 'react-native';
 
 import {Colors} from 'react-native/Libraries/NewAppScreen';
-import {Box} from './src/box';
+import {Box} from './src';
 
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';

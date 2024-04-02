@@ -8,6 +8,8 @@ import {
 } from './Position.styles';
 import {classSizeNoneScaleStyle, classSizeStyle} from './Size.styles';
 import {ClassStyleType} from '../model';
+import {textColorStyle} from './Text.styles';
+import {backgroundColorStyle} from './background.styles';
 
 const classStyles = {
   ...flexStyles,
@@ -17,6 +19,8 @@ const classStyles = {
   ...classPaddingStyle,
   ...classPositionStyle,
   ...classSizeStyle,
+  ...textColorStyle,
+  ...backgroundColorStyle,
 };
 
 const classNoneScaleStyles = {
@@ -27,8 +31,9 @@ const classNoneScaleStyles = {
   ...classPaddingNoneScaleStyle,
   ...classPositionNoneScaleStyle,
   ...classSizeNoneScaleStyle,
+  ...textColorStyle,
+  ...backgroundColorStyle,
 };
-
 export const getClassStyles = (
   className: ClassStyleType | ClassStyleType[],
   scaleScreen = true,
@@ -46,5 +51,24 @@ export const getClassStyles = (
       return classStyles[className];
     }
     return classNoneScaleStyles[className];
+  }
+};
+
+export const getClassNameStyles = (className: string, scaleScreen = true) => {
+  try {
+    if (className.length > 0) {
+      const listClass = className?.split(' ');
+      const listStyles = scaleScreen ? classStyles : classNoneScaleStyles;
+      return listClass.map(item => {
+        try {
+          return listStyles[item as never];
+        } catch (error) {
+          return {};
+        }
+      });
+    }
+    return {};
+  } catch (error) {
+    return {};
   }
 };

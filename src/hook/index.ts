@@ -1,2 +1,4 @@
 import useStylesVarianTheme from './useStylesVarianTheme';
-export {useStylesVarianTheme};
+import useClassName from './useClassName';
+
+export {useStylesVarianTheme, useClassName};
