@@ -8,7 +8,11 @@ import {
 } from './Position.styles';
 import {classSizeNoneScaleStyle, classSizeStyle} from './Size.styles';
 import {ClassStyleType} from '../model';
-import {textColorStyle} from './Text.styles';
+import {
+  textFontSizeNoneScaleStyle,
+  textFontSizeStyle,
+  textStyles,
+} from './Text.styles';
 import {backgroundColorStyle} from './background.styles';
 
 const classStyles = {
@@ -19,8 +23,9 @@ const classStyles = {
   ...classPaddingStyle,
   ...classPositionStyle,
   ...classSizeStyle,
-  ...textColorStyle,
+  ...textStyles,
   ...backgroundColorStyle,
+  ...textFontSizeStyle,
 };
 
 const classNoneScaleStyles = {
@@ -31,8 +36,9 @@ const classNoneScaleStyles = {
   ...classPaddingNoneScaleStyle,
   ...classPositionNoneScaleStyle,
   ...classSizeNoneScaleStyle,
-  ...textColorStyle,
   ...backgroundColorStyle,
+  ...textStyles,
+  ...textFontSizeNoneScaleStyle,
 };
 export const getClassStyles = (
   className: ClassStyleType | ClassStyleType[],

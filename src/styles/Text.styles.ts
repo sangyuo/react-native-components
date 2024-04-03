@@ -1,6 +1,7 @@
 import {StyleSheet} from 'react-native';
+import {fontSize, moderateScale} from '../utils';
 
-export const textColorStyle = StyleSheet.create({
+const textColorStyle = StyleSheet.create({
   'text-amber-100': {color: 'rgb(254,243,199)'},
   'text-amber-200': {color: 'rgb(253,230,138)'},
   'text-amber-300': {color: 'rgb(252,211,77)'},
@@ -249,3 +250,162 @@ export const textColorStyle = StyleSheet.create({
   'text-zinc-900': {color: 'rgb(24,24,27)'},
   'text-zinc-950': {color: 'rgb(9,9,11)'},
 });
+
+export const textFontSizeStyle = StyleSheet.create({
+  'text-xs': {
+    fontSize: fontSize(10),
+    lineHeight: moderateScale(18),
+  },
+  'text-sm': {
+    fontSize: fontSize(12),
+    lineHeight: moderateScale(20),
+  },
+  'text-base': {
+    fontSize: fontSize(14),
+    lineHeight: moderateScale(22),
+  },
+  'text-md': {
+    fontSize: fontSize(16),
+    lineHeight: moderateScale(24),
+  },
+  'text-lg': {
+    fontSize: fontSize(18),
+    lineHeight: moderateScale(26),
+  },
+  'text-xl': {
+    fontSize: fontSize(20),
+    lineHeight: moderateScale(26),
+  },
+  'text-2xl': {
+    fontSize: fontSize(24),
+    lineHeight: moderateScale(32),
+  },
+  'text-3xl': {
+    fontSize: fontSize(30),
+    lineHeight: moderateScale(36),
+  },
+  'text-4xl': {
+    fontSize: fontSize(36),
+    lineHeight: moderateScale(40),
+  },
+  'text-5xl': {
+    fontSize: fontSize(48),
+  },
+  'text-6xl': {
+    fontSize: fontSize(60),
+  },
+  'text-7xl': {
+    fontSize: fontSize(72),
+  },
+  'text-8xl': {
+    fontSize: fontSize(96),
+  },
+  'text-9xl': {
+    fontSize: fontSize(128),
+  },
+});
+
+export const textFontSizeNoneScaleStyle = StyleSheet.create({
+  'text-xs': {
+    fontSize: 10,
+    lineHeight: 18,
+  },
+  'text-sm': {
+    fontSize: 12,
+    lineHeight: 20,
+  },
+  'text-base': {
+    fontSize: 14,
+    lineHeight: 22,
+  },
+  'text-md': {
+    fontSize: 16,
+    lineHeight: 24,
+  },
+  'text-lg': {
+    fontSize: 18,
+    lineHeight: 26,
+  },
+  'text-xl': {
+    fontSize: 20,
+    lineHeight: 26,
+  },
+  'text-2xl': {
+    fontSize: 24,
+    lineHeight: 32,
+  },
+  'text-3xl': {
+    fontSize: 30,
+    lineHeight: 36,
+  },
+  'text-4xl': {
+    fontSize: 36,
+    lineHeight: 40,
+  },
+  'text-5xl': {
+    fontSize: 48,
+  },
+  'text-6xl': {
+    fontSize: 60,
+  },
+  'text-7xl': {
+    fontSize: 72,
+  },
+  'text-8xl': {
+    fontSize: 96,
+  },
+  'text-9xl': {
+    fontSize: 128,
+  },
+});
+
+const textFontStyle = StyleSheet.create({
+  'text-center': {
+    textAlign: 'center',
+  },
+  'text-left': {
+    textAlign: 'left',
+  },
+  'text-right': {
+    textAlign: 'right',
+  },
+  'text-auto': {
+    textAlign: 'auto',
+  },
+  'text-justify': {
+    textAlign: 'justify',
+  },
+  'font-thin': {
+    fontWeight: '100',
+  },
+  'font-extraLight': {
+    fontWeight: '200',
+  },
+  'font-light': {
+    fontWeight: '300',
+  },
+  'font-normal': {
+    fontWeight: '400',
+  },
+  'font-medium': {
+    fontWeight: '500',
+  },
+  'font-semibold': {
+    fontWeight: '600',
+  },
+  'font-bold': {
+    fontWeight: '700',
+  },
+  'font-extrabold': {
+    fontWeight: '800',
+  },
+  'font-black': {
+    fontWeight: '900',
+  },
+});
+
+export const textStyles = {
+  ...textColorStyle,
+  ...textFontSizeStyle,
+  ...textFontStyle,
+};

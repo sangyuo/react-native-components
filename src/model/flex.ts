@@ -1,8 +1,10 @@
 export type FlexType =
+  | 'd-none'
+  | 'd-flex'
   | 'flex-1'
   | 'flex-wrap'
   | 'flex-wrap-reverse'
-  | 'flex-noWrap'
+  | 'flex-nowrap'
   | 'row'
   | 'row-center'
   | 'row-v-center'
@@ -22,7 +24,14 @@ export type FlexType =
   | 'space-between'
   | 'items-center'
   | 'items-start'
-  | 'items-end';
+  | 'items-end'
+  | 'aspectRatio'
+  | 'aspectRatio-16/9'
+  | 'aspectRatio-4/3'
+  | 'object-cover'
+  | 'object-contain'
+  | 'object-fill'
+  | 'object-scale-down';
 
 export type GapType =
   | 'gap'
