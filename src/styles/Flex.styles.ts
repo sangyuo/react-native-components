@@ -2,10 +2,12 @@ import {StyleSheet} from 'react-native';
 import {horizontalScale} from '../utils';
 
 export const flexStyles = StyleSheet.create({
+  'd-none': {display: 'none'},
+  'd-flex': {display: 'flex'},
   'flex-1': {flex: 1},
   'flex-wrap': {flexWrap: 'wrap'},
   'flex-wrap-reverse': {flexWrap: 'wrap-reverse'},
-  'flex-noWrap': {flexWrap: 'nowrap'},
+  'flex-nowrap': {flexWrap: 'nowrap'},
   row: {flexDirection: 'row'},
   'row-center': {flexDirection: 'row', alignItems: 'center'},
   'row-v-center': {flexDirection: 'row', justifyContent: 'center'},
@@ -26,6 +28,13 @@ export const flexStyles = StyleSheet.create({
   'items-start': {alignItems: 'flex-start'},
   'items-center': {alignItems: 'center'},
   'items-end': {alignItems: 'flex-end'},
+  aspectRatio: {aspectRatio: 1},
+  'aspectRatio-16/9': {aspectRatio: 16 / 9},
+  'aspectRatio-4/3': {aspectRatio: 4 / 3},
+  'object-cover': {objectFit: 'cover'},
+  'object-contain': {objectFit: 'contain'},
+  'object-fill': {objectFit: 'fill'},
+  'object-scale-down': {objectFit: 'scale-down'},
 });
 
 export const gapStyles = StyleSheet.create({
