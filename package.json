@@ -1,7 +1,6 @@
 {
-  "name": "box",
+  "name": "react-native-components",
   "version": "0.0.1",
-  "private": true,
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
@@ -32,5 +31,24 @@
   },
   "engines": {
     "node": ">=18"
-  }
+  },
+  "description": "This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sangyuo/react-native-components.git"
+  },
+  "keywords": [
+    "react-native-components",
+    "react-native-styles",
+    "react-native-className",
+    "react-native-button",
+    "react-native-text"
+  ],
+  "author": "SangYuo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sangyuo/react-native-components/issues"
+  },
+  "homepage": "https://github.com/sangyuo/react-native-components#readme"
 }
