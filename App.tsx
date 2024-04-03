@@ -12,7 +12,7 @@ function App(): React.JSX.Element {
 
   return (
     <SafeAreaView style={backgroundStyle}>
-      <Box className="bg-amber-300 h-1/5" />
+      <Box className="bg-amber-300 h-1/5 bg" />
       <Button className="h-1/5 bg-pink-600" isDebounce />
       <Text className="text-amber-600 font-bold">hahaha</Text>
     </SafeAreaView>
