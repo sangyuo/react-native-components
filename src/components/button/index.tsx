@@ -6,12 +6,17 @@ import {
   TouchableOpacityProps,
 } from 'react-native';
 import {useClassName} from '../../hook';
+import Text from '../text';
+import {getClassNameVarian} from '../../utils/helper.util';
 
 export interface ButtonComponentProps extends TouchableOpacityProps {
   scaleScreen?: boolean;
   className?: string;
+  classNameText?: string;
   isDebounce?: boolean;
   delayDebounce?: number;
+  varian?: 'primary' | 'outline';
+  title?: string;
 }
 const Button = (props: ButtonComponentProps) => {
   const {
@@ -19,15 +24,22 @@ const Button = (props: ButtonComponentProps) => {
     scaleScreen,
     isDebounce,
     delayDebounce,
-    onPress,
     className,
+    classNameText,
+    varian,
+    title,
+    children,
+    onPress,
     ...rest
   } = props;
 
   const stylesCustom = useClassName({
-    className,
+    className: varian
+      ? getClassNameVarian(varian) + ' ' + className
+      : className,
     scaleScreen,
   });
+
   const timerDebounceRef = useRef<any>();
 
   //handle multiple click
@@ -53,7 +65,19 @@ const Button = (props: ButtonComponentProps) => {
 
   const styleCard = StyleSheet.compose(stylesCustom, style);
 
-  return <TouchableOpacity onPress={handlePress} style={styleCard} {...rest} />;
+  return (
+    <TouchableOpacity onPress={handlePress} style={styleCard} {...rest}>
+      {title ? (
+        <Text
+          className={`${
+            varian === 'outline' && 'text-blue-500'
+          } text-white flex-1 text-center ${classNameText}`}>
+          {title}
+        </Text>
+      ) : null}
+      {children}
+    </TouchableOpacity>
+  );
 };
 
 export default Button;
