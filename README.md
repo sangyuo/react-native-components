@@ -1,6 +1,6 @@
 # react-native-box-lite
 
-![components-demo]https://github.com/sangyuo/react-native-components/blob/main/src/example/example-1.png
+![components-demo](https://github.com/sangyuo/react-native-components/blob/main/src/example/example-1.png)
 
 ## Installation
 
@@ -16,18 +16,58 @@ To use suggestion for className, you need to install extension [react-native-com
 
 ```js
 import {Box, Button, Text} from 'react-native-box-lite';
-<Box className="bg-amber-200 h-12 w-12">
-   <Text className="text-white font-bold text-md">
-      Demo rn component
-   </Text>
-</Box>
-<Text className="text-green-500 font-bold text-base">
-   Demo rn component
-</Text>
-<Button className="w-10 h-5 bg-amber-500">
-   <Text className="text-white font-bold text-center">Button</Text>
-</Button>
+import {View, TouchableOpacity} from 'react-native';
+
+const test =()=>{
+   const containerStyle = useClassName({
+      className: "flex-1 bg-white p-4"
+   })
+
+   const containerHeaderStyle = useClassName({
+      className: "bg-black p-4 h-10 w-screen"
+   })
+
+   const buttonOutLineStyle = useClassName({
+      className: "w-full h-10 rounded-xl border-success bg-white"
+   })
+
+   return (
+      <View style={containerStyles}>
+         <Box style={containerHeaderStyle}>
+            <Text className="text-white font-bold text-xl">
+               Title
+            </Text>
+         </Box>
+         <Box className="bg-amber-200 h-12 w-12">
+            <Text className="text-white font-bold text-md">
+               Demo rn component
+            </Text>
+         </Box>
+         <Text className="text-green-500 font-bold text-base">
+            Demo rn component
+         </Text>
+         <Button className="w-10 h-5 bg-amber-500">
+            <Text className="text-white font-bold text-center">Button</Text>
+         </Button>
+         <Button style={buttonOutLineStyle}>
+            <Text className="text-green-400 font-bold text-center">Button outline</Text>
+         </Button>
+         <TouchableOpacity style={buttonOutLineStyle}>
+            <Text className="text-green-400 font-bold text-center">Button outline</Text>
+         </TouchableOpacity>
+      <View>
+   )
+}
+
 ```
+
+## HOOK: useClassName
+
+| Prop              | Description                         | Default |
+| ----------------- | ----------------------------------- | ------- |
+| **`className`**   | class of component as:`w-1 h-1`     | `null`  |
+| **`scaleScreen`** | Active use scale by width of screen | `true`  |
+
 
 ## Box
 
