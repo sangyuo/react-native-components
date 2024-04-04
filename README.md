@@ -5,8 +5,6 @@
 ## Installation
 
 `$ npm install react-native-box-lite`
-or
-`$ yarn add react-native-box-lite`
 
 ### Extension for react-native-box-lite
 
@@ -61,13 +59,32 @@ const test =()=>{
 
 ```
 
+## Usage custom styles
+
+- use passed number in `[]` as `w-[200]` => width: 200
+- scale you can use function horizontalScale fontSize,... `[${horizontalScale(30)}]`
+
+```js
+import {Box, Text} from 'react-native-box-lite';
+
+return (
+   <Box className="w-[200] h-[350] bg-white center">
+      <Text className="text-white font-bold text-xl">
+         Title
+      </Text>
+   </Box>
+   <Text className="text-[22] text-green-500 font-bold">
+      Demo rn component
+   </Text>
+)
+```
+
 ## HOOK: useClassName
 
 | Prop              | Description                         | Default |
 | ----------------- | ----------------------------------- | ------- |
 | **`className`**   | class of component as:`w-1 h-1`     | `null`  |
 | **`scaleScreen`** | Active use scale by width of screen | `true`  |
-
 
 ## Box
 
@@ -93,3 +110,13 @@ const test =()=>{
 | ----------------- | ----------------------------------- | ------- |
 | **`className`**   | class styles of component           | `null`  |
 | **`scaleScreen`** | Active use scale by width of screen | `true`  |
+| **`rest`**        | extents from TextProps              |         |
+
+## scale screen
+
+| function              | Description                                                    | parameter |
+| --------------------- | -------------------------------------------------------------- | --------- |
+| **`horizontalScale`** | scale by ratio width device default guidelineBaseWidth = 375   | `number`  |
+| **`verticalScale`**   | scale by ratio height device default guidelineBaseHeight = 812 | `number`  |
+| **`moderateScale`**   | scale by ratio width and height                                | `number`  |
+| **`fontSize`**        | scale by ratio width and height                                | `number`  |

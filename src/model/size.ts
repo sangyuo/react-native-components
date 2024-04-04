@@ -1,6 +1,7 @@
 export type SizeType = WidthType | MinWidthType | HeightType;
 
 type WidthType =
+  | 'w'
   | 'w-0'
   | 'w-0.5'
   | 'w-1'
@@ -48,6 +49,7 @@ type WidthType =
   | 'w-screen';
 
 type MinWidthType =
+  | 'min-w'
   | 'min-w-0'
   | 'min-w-0.5'
   | 'min-w-1'

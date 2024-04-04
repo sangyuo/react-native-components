@@ -1,6 +1,6 @@
 {
   "name": "react-native-box-lite",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
@@ -43,6 +43,8 @@
     "src/"
   ],
   "keywords": [
+    "react-native-box",
+    "react-native-box-lite",
     "react-native-components",
     "react-native-styles",
     "react-native-className",
