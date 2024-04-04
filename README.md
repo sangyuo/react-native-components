@@ -1,21 +1,21 @@
-# rn-components
+# react-native-box-lite
 
 ![components-demo]https://github.com/sangyuo/react-native-components/blob/main/src/example/example-1.png
 
 ## Installation
 
-`$ npm install rn-components`
+`$ npm install react-native-box-lite`
 or
-`$ yarn add rn-components`
+`$ yarn add react-native-box-lite`
 
-### Extension for rn-components
+### Extension for react-native-box-lite
 
 To use suggestion for className, you need to install extension [react-native-components-intellisense](https://marketplace.visualstudio.com/items?itemName=SangYuo.react-native-components-intellisense) in your vscode.
 
 ## Usage
 
 ```js
-import {Box, Button, Text} from 'rn-components';
+import {Box, Button, Text} from 'react-native-box-lite';
 <Box className="bg-amber-200 h-12 w-12">
    <Text className="text-white font-bold text-md">
       Demo rn component
