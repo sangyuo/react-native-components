@@ -1,6 +1,6 @@
 {
   "name": "react-native-box-lite",
-  "version": "0.0.1",
+  "version": "0.0.4",
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
@@ -29,10 +29,7 @@
     "react-test-renderer": "18.2.0",
     "typescript": "5.0.4"
   },
-  "engines": {
-    "node": ">=18"
-  },
-  "description": "This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).",
+  "description": "Package React Native Bot lite for React Native, It's good for web developers to move to mobile developers",
   "main": "src/index.ts",
   "types": "src/index.d.ts",
   "repository": {
@@ -43,9 +40,11 @@
     "src/"
   ],
   "keywords": [
+    "react-native-box",
+    "react-native-box-lite",
+    "react-native-className",
     "react-native-components",
     "react-native-styles",
-    "react-native-className",
     "react-native-button",
     "react-native-text"
   ],

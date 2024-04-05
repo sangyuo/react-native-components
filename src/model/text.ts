@@ -1,5 +1,5 @@
 export type TextAlign = 'center' | 'left' | 'right' | 'auto' | 'justify';
-export type TextType = TextColorType;
+export type TextType = TextColorType | TextAlign | FontWeight;
 
 export type FontWeight =
   | 'thin'

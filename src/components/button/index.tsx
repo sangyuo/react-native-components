@@ -5,13 +5,21 @@ import {
   TouchableOpacity,
   TouchableOpacityProps,
 } from 'react-native';
-import {useClassName} from '../../hook';
+import {
+  useClassName,
+  useClassNameButton,
+  useClassNameTextButton,
+} from '../../hook';
+import Text from '../text';
 
 export interface ButtonComponentProps extends TouchableOpacityProps {
   scaleScreen?: boolean;
   className?: string;
+  classNameText?: string;
   isDebounce?: boolean;
   delayDebounce?: number;
+  varian?: 'primary' | 'outline';
+  title?: string;
 }
 const Button = (props: ButtonComponentProps) => {
   const {
@@ -19,16 +27,19 @@ const Button = (props: ButtonComponentProps) => {
     scaleScreen,
     isDebounce,
     delayDebounce,
-    onPress,
     className,
+    classNameText,
+    varian,
+    title,
+    children,
+    onPress,
     ...rest
   } = props;
-
-  const stylesCustom = useClassName({
-    className,
-    scaleScreen,
-  });
   const timerDebounceRef = useRef<any>();
+  const classButton = useClassNameButton({className: className, varian});
+  const classText = useClassNameTextButton({className: classNameText, varian});
+  const stylesCustom = useClassName({className: classButton, scaleScreen});
+  const styleCard = StyleSheet.compose(stylesCustom, style);
 
   //handle multiple click
   const handler = useCallback(
@@ -51,9 +62,12 @@ const Button = (props: ButtonComponentProps) => {
     }
   };
 
-  const styleCard = StyleSheet.compose(stylesCustom, style);
-
-  return <TouchableOpacity onPress={handlePress} style={styleCard} {...rest} />;
+  return (
+    <TouchableOpacity onPress={handlePress} style={styleCard} {...rest}>
+      {title ? <Text className={classText}>{title}</Text> : null}
+      {children}
+    </TouchableOpacity>
+  );
 };
 
 export default Button;
