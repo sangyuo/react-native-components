@@ -14,26 +14,21 @@ To use suggestion for className, you need to install extension [react-native-com
 
 ```js
 import {Box, Button, Text} from 'react-native-box-lite';
-import {View, TouchableOpacity} from 'react-native';
+import {View} from 'react-native';
 
 const test =()=>{
    const containerStyle = useClassName({
       className: "flex-1 bg-white p-4"
    })
-
    const containerHeaderStyle = useClassName({
       className: "bg-black p-4 h-10 w-screen"
-   })
-
-   const buttonOutLineStyle = useClassName({
-      className: "w-full h-10 rounded-xl border-success bg-white"
    })
 
    return (
       <View style={containerStyles}>
          <Box style={containerHeaderStyle}>
             <Text className="text-white font-bold text-xl">
-               Title
+               Title Demo rn component
             </Text>
          </Box>
          <Box className="bg-amber-200 h-12 w-12">
@@ -41,22 +36,12 @@ const test =()=>{
                Demo rn component
             </Text>
          </Box>
-         <Text className="text-green-500 font-bold text-base">
-            Demo rn component
-         </Text>
-         <Button className="w-10 h-5 bg-amber-500">
-            <Text className="text-white font-bold text-center">Button</Text>
-         </Button>
-         <Button style={buttonOutLineStyle}>
-            <Text className="text-green-400 font-bold text-center">Button outline</Text>
-         </Button>
-         <TouchableOpacity style={buttonOutLineStyle}>
-            <Text className="text-green-400 font-bold text-center">Button outline</Text>
-         </TouchableOpacity>
+         <Button title="Demo Button Default" />
+         <Button varian="outline" title="Demo Button Outline" />
+         <Button varian="primary" title="Demo Button Primary" />
       <View>
    )
 }
-
 ```
 
 ## Usage custom styles
@@ -67,16 +52,16 @@ const test =()=>{
 ```js
 import {Box, Text} from 'react-native-box-lite';
 
-return (
-   <Box className="w-[200] h-[350] bg-white center">
-      <Text className="text-white font-bold text-xl">
-         Title
+const customStyles = () => {
+  return (
+    <Box>
+      <Box className="w-[200] h-[350] bg-white center" />
+      <Text className="text-[22] text-green-500 font-bold">
+        Demo rn component
       </Text>
-   </Box>
-   <Text className="text-[22] text-green-500 font-bold">
-      Demo rn component
-   </Text>
-)
+    </Box>
+  );
+};
 ```
 
 ## HOOK: useClassName
@@ -94,15 +79,39 @@ return (
 | **`scaleScreen`** | Active use scale by width of screen | `true`  |
 | **`rest`**        | extents from ViewProps              |         |
 
+```js
+import {Box} from 'react-native-box-lite';
+
+<Box className="row gap-2">
+  <Box className="w-10 h-10 bg-red-400" />
+  <Box className="w-10 h-10 bg-green-400" />
+  <Box className="w-10 h-10 bg-yellow-400" />
+</Box>;
+```
+
+![example](https://github.com/sangyuo/react-native-components/blob/main/src/example/example-box.png)
+
 ## Button
 
 | Prop                | Description                         | Default |
 | ------------------- | ----------------------------------- | ------- |
+| **`varian`**        | type of `primary, outline `         | `null`  |
 | **`className`**     | class styles of component           | `null`  |
 | **`scaleScreen`**   | Active use scale by width of screen | `true`  |
 | **`isDebounce`**    | Active debounce when press          | `false` |
 | **`delayDebounce`** | time debounce when press            | `500`   |
 | **`rest`**          | extents from TouchableOpacityProps  |         |
+
+```js
+import {Button} from 'react-native-box-lite';
+
+<Button title="Demo Button Default" />
+<Button varian="outline" title="Demo Button Outline" />
+<Button varian="primary" title="Demo Button Primary" />
+
+```
+
+![example](https://github.com/sangyuo/react-native-components/blob/main/src/example/example-button.png)
 
 ## Text
 
@@ -111,6 +120,15 @@ return (
 | **`className`**   | class styles of component           | `null`  |
 | **`scaleScreen`** | Active use scale by width of screen | `true`  |
 | **`rest`**        | extents from TextProps              |         |
+
+```js
+import {Text} from 'react-native-box-lite';
+
+<Text className="font-bold text-xl text-black">Text xl</Text>
+<Text className="font-normal text-xl text-black">Font normal</Text>
+```
+
+![example](https://github.com/sangyuo/react-native-components/blob/main/src/example/example-text.png)
 
 ## scale screen
 
