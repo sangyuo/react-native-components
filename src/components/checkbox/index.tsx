@@ -2,8 +2,11 @@ import React from 'react';
 import Box from '../box';
 import Text from '../text';
 import Button from '../button';
+import {Image, ImageSourcePropType} from 'react-native';
+import {horizontalScale} from '../..';
+import Checked from '../../assets/image/checked.png';
 
-export interface RadioButtonBox<ItemT = any> {
+export interface CheckBoxProps<ItemT = any> {
   className?: string;
   classNameParent?: string;
   classNameChildren?: string;
@@ -16,11 +19,12 @@ export interface RadioButtonBox<ItemT = any> {
   value?: ItemT;
   label?: string;
   size?: number;
+  iconChecked?: ImageSourcePropType;
   sizeChildren?: number;
   onPress?: (value?: ItemT) => void;
 }
 
-function RadioButton<ItemT = any>(props: RadioButtonBox<ItemT>) {
+function RadioButton<ItemT = any>(props: CheckBoxProps<ItemT>) {
   const {
     className,
     size,
@@ -29,14 +33,14 @@ function RadioButton<ItemT = any>(props: RadioButtonBox<ItemT>) {
     sizeChildren,
     classNameLabel,
     classNameParent,
-    classNameChildren,
+    iconChecked,
     color,
   } = props;
 
   return (
     <Button className={`row-center gap-2 ${className || ''}`}>
       <Box
-        className={`rounded-full border-md border-gray-300 center ${
+        className={`rounded border-md border-gray-300 center ${
           size ? `w-[${size}] h-[${size}]` : 'w-5 h-5'
         } ${checked && 'border-blue-500'} ${classNameParent || ''}`}
         style={[
@@ -44,15 +48,16 @@ function RadioButton<ItemT = any>(props: RadioButtonBox<ItemT>) {
           color?.default && !checked ? {borderColor: color?.default} : {},
         ]}>
         {checked && (
-          <Box
-            className={`${
+          <Image
+            source={iconChecked || Checked}
+            width={
               sizeChildren
-                ? `w-[${sizeChildren}] h-[${sizeChildren}]`
+                ? sizeChildren
                 : size
-                ? `w-[${size * 0.5}] h-[${size * 0.5}]`
-                : 'w-2 h-2'
-            }  bg-blue-500 rounded-full ${classNameChildren || ''}`}
-            style={color?.checked ? {backgroundColor: color?.checked} : {}}
+                ? size * 0.5
+                : horizontalScale(12)
+            }
+            tintColor={color?.checked}
           />
         )}
       </Box>
