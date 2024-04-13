@@ -1,16 +1,9 @@
 {
   "name": "react-native-box-lite",
-  "version": "0.0.4",
+  "version": "0.0.5-beta.3",
   "scripts": {
-    "android": "react-native run-android",
-    "ios": "react-native run-ios",
     "lint": "eslint .",
-    "start": "react-native start",
     "test": "jest"
-  },
-  "dependencies": {
-    "react": "18.2.0",
-    "react-native": "0.73.6"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
@@ -21,12 +14,10 @@
     "@react-native/metro-config": "0.73.5",
     "@react-native/typescript-config": "0.73.1",
     "@types/react": "^18.2.6",
-    "@types/react-test-renderer": "^18.0.0",
     "babel-jest": "^29.6.3",
     "eslint": "^8.19.0",
     "jest": "^29.6.3",
     "prettier": "2.8.8",
-    "react-test-renderer": "18.2.0",
     "typescript": "5.0.4"
   },
   "description": "Package React Native Bot lite for React Native, It's good for web developers to move to mobile developers",
@@ -40,6 +31,9 @@
     "src/"
   ],
   "keywords": [
+    "react-native",
+    "react-native-radioButton",
+    "react-native-checkbox",
     "react-native-box",
     "react-native-box-lite",
     "react-native-className",

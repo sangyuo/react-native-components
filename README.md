@@ -71,6 +71,23 @@ const customStyles = () => {
 | **`className`**   | class of component as:`w-1 h-1`     | `null`  |
 | **`scaleScreen`** | Active use scale by width of screen | `true`  |
 
+## RadioButton
+
+| Prop                    | Description                                                           | Default |
+| ----------------------- | --------------------------------------------------------------------- | ------- |
+| **`checked`**           | state checked                                                         | `false` |
+| **`value`**             | state parameter when press                                            | `null`  |
+| **`label`**             | label of radio                                                        | `null`  |
+| **`size`**              | size of radio                                                         | `20`    |
+| **`sizeChildren`**      | size of state checked if has `size && sizeChildren = null => size/2 ` | `8`     |
+| **`className`**         | class styles of container                                             | `null`  |
+| **`classNameParent`**   | class styles of Parent                                                | `null`  |
+| **`classNameChildren`** | class styles of Children                                              | `null`  |
+| **`classNameLabel`**    | class styles of Label                                                 | `null`  |
+| **`isDebounce`**        | Active debounce when press                                            | `false` |
+| **`delayDebounce`**     | time debounce when press                                              | `500`   |
+| **`rest`**              | extents from TouchableOpacityProps                                    |         |
+
 ## Box
 
 | Prop              | Description                         | Default |

@@ -17,6 +17,8 @@ export interface RadioButtonBox<ItemT = any> {
   label?: string;
   size?: number;
   sizeChildren?: number;
+  isDebounce?: boolean;
+  delayDebounce?: number;
   onPress?: (value?: ItemT) => void;
 }
 
@@ -31,10 +33,20 @@ function RadioButton<ItemT = any>(props: RadioButtonBox<ItemT>) {
     classNameParent,
     classNameChildren,
     color,
+    delayDebounce,
+    isDebounce,
+    value,
+    onPress,
   } = props;
 
   return (
-    <Button className={`row-center gap-2 ${className || ''}`}>
+    <Button
+      isDebounce={isDebounce}
+      delayDebounce={delayDebounce}
+      onPress={() => {
+        onPress && onPress(value);
+      }}
+      className={`row-center gap-2 ${className || ''}`}>
       <Box
         className={`rounded-full border-md border-gray-300 center ${
           size ? `w-[${size}] h-[${size}]` : 'w-5 h-5'
