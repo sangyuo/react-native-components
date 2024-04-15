@@ -1,6 +1,6 @@
 {
   "name": "react-native-box-lite",
-  "version": "0.0.5-beta.3",
+  "version": "0.0.5",
   "scripts": {
     "lint": "eslint .",
     "test": "jest"
@@ -20,7 +20,7 @@
     "prettier": "2.8.8",
     "typescript": "5.0.4"
   },
-  "description": "Package React Native Bot lite for React Native, It's good for web developers to move to mobile developers",
+  "description": "Box lite for React Native, It's good for web developer to move to mobile developer",
   "main": "src/index.ts",
   "types": "src/index.d.ts",
   "repository": {
@@ -32,20 +32,23 @@
   ],
   "keywords": [
     "react-native",
-    "react-native-radioButton",
-    "react-native-checkbox",
     "react-native-box",
     "react-native-box-lite",
-    "react-native-className",
     "react-native-components",
     "react-native-styles",
     "react-native-button",
-    "react-native-text"
+    "react-native-text",
+    "radio button",
+    "checkbox",
+    "className"
   ],
   "author": "SangYuo",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/sangyuo/react-native-components/issues"
   },
-  "homepage": "https://github.com/sangyuo/react-native-components#readme"
+  "homepage": "https://github.com/sangyuo/react-native-components#readme",
+  "engines": {
+    "node": ">=18"
+  }
 }

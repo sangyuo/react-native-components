@@ -64,6 +64,10 @@ const customStyles = () => {
 };
 ```
 
+## Note
+
+**`Type class Gap: support react-native version >= 0.71`**
+
 ## HOOK: useClassName
 
 | Prop              | Description                         | Default |
@@ -71,22 +75,78 @@ const customStyles = () => {
 | **`className`**   | class of component as:`w-1 h-1`     | `null`  |
 | **`scaleScreen`** | Active use scale by width of screen | `true`  |
 
+## Checkbox
+
+| Prop                    | Description                                                       | Default                          |
+| ----------------------- | ----------------------------------------------------------------- | -------------------------------- |
+| **`checked`**           | state checked                                                     | `false`                          |
+| **`value`**             | state parameter when event press                                  | `null`                           |
+| **`label`**             | label of checkbox                                                 | `null`                           |
+| **`color`**             | properties `checked` and `default`                                | `checked: blue`,` default: gray` |
+| **`size`**              | size of checkbox                                                  | `20`                             |
+| **`sizeChildren`**      | size of state checked if has `size && (!sizeChildren) => size/2 ` | `10`                             |
+| **`iconChecked`**       | custom icon checked, type: `ImageSourcePropType`                  | `null`                           |
+| **`renderIconChecked`** | function render icon checked                                      | `null`                           |
+| **`className`**         | class styles of container                                         | `null`                           |
+| **`classNameParent`**   | class styles of Parent                                            | `null`                           |
+| **`classNameChildren`** | class styles of Children                                          | `null`                           |
+| **`classNameLabel`**    | class styles of Label                                             | `null`                           |
+| **`isDebounce`**        | Active debounce when event press                                  | `false`                          |
+| **`delayDebounce`**     | time debounce of debounce                                         | `500`                            |
+
+```js
+import {Checkbox} from 'react-native-box-lite';
+
+<Checkbox label="Label" />
+<Checkbox checked label="Checked" />
+<Checkbox
+   size={28}
+   checked
+   color={{checked: 'green'}}
+   label="Custom color and size"
+/>
+ <Checkbox
+   size={28}
+   checked
+   iconChecked={Add}
+   color={{checked: 'green'}}
+   label="Custom icon"
+/>
+```
+
+![example](https://github.com/sangyuo/react-native-components/blob/main/src/example/checkbox.png)
+
 ## RadioButton
 
-| Prop                    | Description                                                           | Default |
-| ----------------------- | --------------------------------------------------------------------- | ------- |
-| **`checked`**           | state checked                                                         | `false` |
-| **`value`**             | state parameter when press                                            | `null`  |
-| **`label`**             | label of radio                                                        | `null`  |
-| **`size`**              | size of radio                                                         | `20`    |
-| **`sizeChildren`**      | size of state checked if has `size && sizeChildren = null => size/2 ` | `8`     |
-| **`className`**         | class styles of container                                             | `null`  |
-| **`classNameParent`**   | class styles of Parent                                                | `null`  |
-| **`classNameChildren`** | class styles of Children                                              | `null`  |
-| **`classNameLabel`**    | class styles of Label                                                 | `null`  |
-| **`isDebounce`**        | Active debounce when press                                            | `false` |
-| **`delayDebounce`**     | time debounce when press                                              | `500`   |
-| **`rest`**              | extents from TouchableOpacityProps                                    |         |
+| Prop                    | Description                                                       | Default                         |
+| ----------------------- | ----------------------------------------------------------------- | ------------------------------- |
+| **`checked`**           | state checked                                                     | `false`                         |
+| **`value`**             | state parameter when press                                        | `null`                          |
+| **`label`**             | label of radio                                                    | `null`                          |
+| **`color`**             | properties `checked` and `default`                                | `checked: blue`,`default: gray` |
+| **`size`**              | size of radio                                                     | `20`                            |
+| **`sizeChildren`**      | size of state checked if has `size && (!sizeChildren) => size/2 ` | `8`                             |
+| **`className`**         | class styles of container                                         | `null`                          |
+| **`classNameParent`**   | class styles of Parent                                            | `null`                          |
+| **`classNameChildren`** | class styles of Children                                          | `null`                          |
+| **`classNameLabel`**    | class styles of Label                                             | `null`                          |
+| **`isDebounce`**        | Active debounce when press                                        | `false`                         |
+| **`delayDebounce`**     | time debounce of debounce                                         | `500`                           |
+
+```js
+import {RadioButton} from 'react-native-box-lite';
+
+<RadioButton label="Label" />
+<RadioButton checked label="Checked" />
+<RadioButton
+   size={28}
+   checked
+   color={{checked: 'green'}}
+   label="Custom color and size"
+/>
+```
+
+![example](https://github.com/sangyuo/react-native-components/blob/main/src/example/radio-button.png)
 
 ## Box
 
@@ -116,7 +176,7 @@ import {Box} from 'react-native-box-lite';
 | **`className`**     | class styles of component           | `null`  |
 | **`scaleScreen`**   | Active use scale by width of screen | `true`  |
 | **`isDebounce`**    | Active debounce when press          | `false` |
-| **`delayDebounce`** | time debounce when press            | `500`   |
+| **`delayDebounce`** | time debounce of debounce           | `500`   |
 | **`rest`**          | extents from TouchableOpacityProps  |         |
 
 ```js

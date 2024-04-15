@@ -2,7 +2,7 @@ import React, {ReactNode} from 'react';
 import Box from '../box';
 import Text from '../text';
 import Button from '../button';
-import {Image, ImageSourcePropType} from 'react-native';
+import {Image, ImageSourcePropType, ImageResizeMode} from 'react-native';
 import {horizontalScale} from '../..';
 import Checked from '../../assets/image/checked.png';
 
@@ -23,6 +23,7 @@ export interface CheckBoxProps<ItemT = any> {
   sizeChildren?: number;
   isDebounce?: boolean;
   delayDebounce?: number;
+  resizeMode?: ImageResizeMode;
   renderIconChecked?: () => ReactNode;
   onPress?: (value?: ItemT) => void;
 }
@@ -40,7 +41,9 @@ function RadioButton<ItemT = any>(props: CheckBoxProps<ItemT>) {
     color,
     delayDebounce,
     isDebounce,
+    resizeMode,
     renderIconChecked,
+    onPress,
   } = props;
 
   const renderChecked = () => {
@@ -58,10 +61,15 @@ function RadioButton<ItemT = any>(props: CheckBoxProps<ItemT>) {
             ? sizeChildren
             : size
             ? size * 0.5
-            : horizontalScale(12),
+            : horizontalScale(10),
+          height: sizeChildren
+            ? sizeChildren
+            : size
+            ? size * 0.5
+            : horizontalScale(10),
           tintColor: color?.checked,
         }}
-        resizeMode="contain"
+        resizeMode={resizeMode || 'contain'}
       />
     );
   };
