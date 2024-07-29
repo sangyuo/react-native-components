@@ -1,8 +1,8 @@
 import React from 'react';
-import {SafeAreaView, useColorScheme} from 'react-native';
+import {SafeAreaView, ScrollView, useColorScheme} from 'react-native';
 
 import {Colors} from 'react-native/Libraries/NewAppScreen';
-import {Box, Button, Text} from './src';
+import {Box, Text} from './src/components';
 
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -12,9 +12,32 @@ function App(): React.JSX.Element {
 
   return (
     <SafeAreaView style={backgroundStyle}>
-      <Box className="bg-amber-300 h-1/5 bg" />
-      <Button className="h-1/5 bg-pink-600" isDebounce />
-      <Text className="text-amber-600 font-bold">hahaha</Text>
+      <ScrollView>
+        <Box className="bg-dark">
+          <Text className="text-dark font-bold">hahaha</Text>
+        </Box>
+        <Box className="bg-light">
+          <Text className="text-light font-bold">hahaha</Text>
+        </Box>
+        <Box className="bg-primary-light bg">
+          <Text className="text-primary font-bold">hahaha</Text>
+        </Box>
+        <Box className="bg-primary bg">
+          <Text className="text-primary-dark font-bold">hahaha</Text>
+        </Box>
+        <Box className="bg-primary-dark bg">
+          <Text className="text-primary-dark font-bold">hahaha</Text>
+        </Box>
+        <Box className="bg-secondary-dark bg">
+          <Text className="text-secondary font-bold">hahaha</Text>
+        </Box>
+        <Box className="bg-secondary bg">
+          <Text className="text-secondary-light font-bold">hahaha</Text>
+        </Box>
+        <Box className="bg-secondary-light">
+          <Text className="text-secondary font-bold">hahaha</Text>
+        </Box>
+      </ScrollView>
     </SafeAreaView>
   );
 }

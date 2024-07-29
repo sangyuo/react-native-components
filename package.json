@@ -1,5 +1,5 @@
 {
-  "name": "react-native-components",
+  "name": "box",
   "version": "0.0.1",
   "scripts": {
     "android": "react-native run-android",
