@@ -7,3 +7,5 @@ export * from './padding';
 export * from './size';
 export * from './text';
 export * from './background';
+
+export type Varian = 'primary' | 'outline';
