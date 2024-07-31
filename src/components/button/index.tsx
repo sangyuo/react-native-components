@@ -5,26 +5,22 @@ import {
   TouchableOpacity,
   TouchableOpacityProps,
 } from 'react-native';
-import {
-  useClassName,
-  useClassNameButton,
-  useClassNameTextButton,
-} from '../../hook';
-import Text from '../text';
+import {useClassName, useClassNameButton} from '../../hook';
+import {Text} from '..';
+import {Varian} from '../../model';
+import {classNames} from '../../utils';
 
 export interface ButtonComponentProps extends TouchableOpacityProps {
-  scaleScreen?: boolean;
   className?: string;
   classNameText?: string;
   isDebounce?: boolean;
   delayDebounce?: number;
-  varian?: 'primary' | 'outline';
+  varian?: Varian;
   title?: string;
 }
 const Button = (props: ButtonComponentProps) => {
   const {
     style,
-    scaleScreen,
     isDebounce,
     delayDebounce,
     className,
@@ -36,9 +32,10 @@ const Button = (props: ButtonComponentProps) => {
     ...rest
   } = props;
   const timerDebounceRef = useRef<any>();
-  const classButton = useClassNameButton({className: className, varian});
-  const classText = useClassNameTextButton({className: classNameText, varian});
-  const stylesCustom = useClassName({className: classButton, scaleScreen});
+  const classButton = useClassNameButton(varian);
+  const stylesCustom = useClassName(
+    classNames(classButton.container, className || ''),
+  );
   const styleCard = StyleSheet.compose(stylesCustom, style);
 
   //handle multiple click
@@ -64,7 +61,11 @@ const Button = (props: ButtonComponentProps) => {
 
   return (
     <TouchableOpacity onPress={handlePress} style={styleCard} {...rest}>
-      {title ? <Text className={classText}>{title}</Text> : null}
+      {title ? (
+        <Text className={classNames(classButton.text, classNameText || '')}>
+          {title}
+        </Text>
+      ) : null}
       {children}
     </TouchableOpacity>
   );
