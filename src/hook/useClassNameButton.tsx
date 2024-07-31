@@ -1,15 +1,35 @@
 import {useMemo} from 'react';
 import {Varian} from '../model';
-import {getClassNameVarian} from '../utils';
 
-type PropsClass = {
-  varian?: Varian;
-  className?: string;
-};
-
-export default function useClassNameButton({className, varian}: PropsClass) {
+export default function useClassNameButton(varian?: Varian) {
   const classCustom = useMemo(() => {
-    return `${getClassNameVarian(varian)} ${className || ''}`;
-  }, [className, varian]);
+    switch (varian) {
+      case 'dark':
+        return {
+          container: 'bg-dark px-4 py-2 center',
+          text: 'text-light font-bold',
+        };
+      case 'light':
+        return {
+          container: 'bg-light px-4 py-2 center',
+          text: 'text-dark font-bold',
+        };
+      case 'outline':
+        return {
+          container: 'rounded border border-primary px-4 py-2 center',
+          text: 'text-primary font-bold',
+        };
+      case 'primary':
+        return {
+          container: 'rounded bg-primary px-4 py-2 center',
+          text: 'text-black font-bold',
+        };
+      default:
+        return {
+          container: '',
+          text: 'text-black font-bold',
+        };
+    }
+  }, [varian]);
   return classCustom;
 }

@@ -1,5 +1,7 @@
-export * from './box';
-export * from './text';
-export * from './button';
-export * from './radioButton';
-export * from './checkbox';
+import Text from './text';
+import Button from './button';
+import Box from './box';
+import RadioButton from './radioButton';
+import Checkbox from './checkbox';
+import ImageBox from './image';
+export {Text, Button, Box, RadioButton, Checkbox, ImageBox};

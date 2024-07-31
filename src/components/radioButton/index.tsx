@@ -2,6 +2,7 @@ import React from 'react';
 import Box from '../box';
 import Text from '../text';
 import Button from '../button';
+import {classNames} from '../../utils';
 
 export interface RadioButtonBox<ItemT = any> {
   className?: string;
@@ -9,10 +10,6 @@ export interface RadioButtonBox<ItemT = any> {
   classNameChildren?: string;
   classNameLabel?: string;
   checked?: boolean;
-  color?: {
-    default?: string;
-    checked?: string;
-  };
   value?: ItemT;
   label?: string;
   size?: number;
@@ -32,7 +29,6 @@ function RadioButton<ItemT = any>(props: RadioButtonBox<ItemT>) {
     classNameLabel,
     classNameParent,
     classNameChildren,
-    color,
     delayDebounce,
     isDebounce,
     value,
@@ -46,31 +42,44 @@ function RadioButton<ItemT = any>(props: RadioButtonBox<ItemT>) {
       onPress={() => {
         onPress && onPress(value);
       }}
-      className={`row-center gap-2 ${className || ''}`}>
+      className={classNames('row-center gap-2', className || '')}>
       <Box
-        className={`rounded-full border-md border-gray-300 center ${
-          size ? `w-[${size}] h-[${size}]` : 'w-5 h-5'
-        } ${checked && 'border-blue-500'} ${classNameParent || ''}`}
-        style={[
-          color?.checked && checked ? {borderColor: color?.checked} : {},
-          color?.default && !checked ? {borderColor: color?.default} : {},
-        ]}>
+        className={classNames(
+          'rounded-full border-2 center',
+          size ? `w-[${size}] h-[${size}]` : 'w-6 h-6',
+          checked ? 'border-checked' : 'border-unchecked',
+          classNameParent || '',
+        )}>
         {checked && (
           <Box
-            className={`${
+            className={classNames(
+              ' bg-checked rounded-full',
               sizeChildren
                 ? `w-[${sizeChildren}] h-[${sizeChildren}]`
                 : size
                 ? `w-[${size * 0.5}] h-[${size * 0.5}]`
-                : 'w-2 h-2'
-            }  bg-blue-500 rounded-full ${classNameChildren || ''}`}
-            style={color?.checked ? {backgroundColor: color?.checked} : {}}
+                : 'w-3 h-3',
+              classNameChildren || '',
+            )}
           />
         )}
       </Box>
-      <Text className={`font-semibold ${classNameLabel}`}>{label}</Text>
+      <Text
+        className={classNames(
+          'text-black font-semibold text-md',
+          classNameLabel || '',
+        )}>
+        {label}
+      </Text>
     </Button>
   );
 }
+
+RadioButton.defaultProps = {
+  checked: false,
+  classNameParent: '',
+  classNameLabel: '',
+  classNameChildren: '',
+};
 
 export default RadioButton;

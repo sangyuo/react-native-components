@@ -4,20 +4,10 @@ import {useClassName} from '../../hook';
 
 export interface TextComponentProps extends TextProps {
   className?: string;
-  scaleScreen?: boolean;
 }
 
-const TextComponent = ({
-  className,
-  scaleScreen,
-  style,
-  ...rest
-}: TextComponentProps) => {
-  const stylesCustom = useClassName({
-    className,
-    scaleScreen,
-  });
-
+const TextComponent = ({className, style, ...rest}: TextComponentProps) => {
+  const stylesCustom = useClassName(className);
   const styleText = StyleSheet.compose(stylesCustom, style);
 
   return <Text style={styleText} {...rest} />;

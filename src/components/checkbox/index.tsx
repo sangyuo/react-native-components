@@ -2,9 +2,11 @@ import React, {ReactNode} from 'react';
 import Box from '../box';
 import Text from '../text';
 import Button from '../button';
-import {Image, ImageSourcePropType, ImageResizeMode} from 'react-native';
-import {horizontalScale} from '../..';
+import {ImageSourcePropType, ImageResizeMode} from 'react-native';
+import {classNames, ImageBox} from '../..';
 import Checked from '../../assets/image/checked.png';
+import {VarianCheckbox} from '../../model';
+import {useVarianCheckbox} from '../../hook';
 
 export interface CheckBoxProps<ItemT = any> {
   className?: string;
@@ -12,40 +14,47 @@ export interface CheckBoxProps<ItemT = any> {
   classNameChildren?: string;
   classNameLabel?: string;
   checked?: boolean;
-  color?: {
-    default?: string;
-    checked?: string;
-  };
   value?: ItemT;
   label?: string;
   size?: number;
+  iconColor?: string;
   iconChecked?: ImageSourcePropType;
-  sizeChildren?: number;
+  iconSize?: number;
   isDebounce?: boolean;
   delayDebounce?: number;
   resizeMode?: ImageResizeMode;
-  renderIconChecked?: () => ReactNode;
+  varian?: VarianCheckbox;
+  renderIconChecked?: (checked?: boolean) => ReactNode;
   onPress?: (value?: ItemT) => void;
 }
 
-function RadioButton<ItemT = any>(props: CheckBoxProps<ItemT>) {
+CheckboxComponent.defaultProps = {
+  checked: false,
+  classNameParent: '',
+  classNameLabel: '',
+  classNameChildren: '',
+};
+
+function CheckboxComponent<ItemT = any>(props: CheckBoxProps<ItemT>) {
   const {
     className,
     size,
     label,
     checked,
-    sizeChildren,
+    iconSize,
     classNameLabel,
     classNameParent,
     iconChecked,
-    color,
+    iconColor,
     delayDebounce,
     isDebounce,
     resizeMode,
+    value,
+    varian,
     renderIconChecked,
     onPress,
   } = props;
-
+  const classCustom = useVarianCheckbox({varian});
   const renderChecked = () => {
     if (!checked) {
       return null;
@@ -53,21 +62,19 @@ function RadioButton<ItemT = any>(props: CheckBoxProps<ItemT>) {
     if (renderIconChecked) {
       return renderIconChecked();
     }
+
     return (
-      <Image
+      <ImageBox
         source={iconChecked || Checked}
+        className={
+          iconSize
+            ? `w-${iconSize} h-${iconSize}`
+            : size
+            ? `w-${size * 0.5} h-${size * 0.5}`
+            : 'w-3 h-3'
+        }
         style={{
-          width: sizeChildren
-            ? sizeChildren
-            : size
-            ? size * 0.5
-            : horizontalScale(10),
-          height: sizeChildren
-            ? sizeChildren
-            : size
-            ? size * 0.5
-            : horizontalScale(10),
-          tintColor: color?.checked,
+          tintColor: iconColor ?? classCustom.iconColor,
         }}
         resizeMode={resizeMode || 'contain'}
       />
@@ -81,20 +88,24 @@ function RadioButton<ItemT = any>(props: CheckBoxProps<ItemT>) {
       onPress={() => {
         onPress && onPress(value);
       }}
-      className={`row-center gap-2 ${className || ''}`}>
+      className={classNames('row-center gap-2', className || '')}>
       <Box
-        className={`rounded border-md border-gray-300 center ${
-          size ? `w-[${size}] h-[${size}]` : 'w-5 h-5'
-        } ${checked && 'border-blue-500'} ${classNameParent || ''}`}
-        style={[
-          color?.checked && checked ? {borderColor: color?.checked} : {},
-          color?.default && !checked ? {borderColor: color?.default} : {},
-        ]}>
+        className={classNames(
+          'rounded center',
+          size ? `w-[${size}] h-[${size}]` : 'w-6 h-6',
+          checked ? classCustom.checked : 'border-2 border-unchecked',
+          classNameParent || '',
+        )}>
         {renderChecked()}
       </Box>
-      <Text className={`font-semibold ${classNameLabel}`}>{label}</Text>
+      <Text
+        className={classNames(
+          'text-black font-semibold text-md',
+          classNameLabel || '',
+        )}>
+        {label}
+      </Text>
     </Button>
   );
 }
-
-export default RadioButton;
+export default CheckboxComponent;

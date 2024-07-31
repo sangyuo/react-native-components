@@ -1,5 +1,5 @@
 import useClassName from './useClassName';
 import useClassNameButton from './useClassNameButton';
-import useClassNameTextButton from './useClassNameTextButton';
+import useVarianCheckbox from './useVarianCheckbox';
 
-export {useClassName, useClassNameButton, useClassNameTextButton};
+export {useClassName, useClassNameButton, useVarianCheckbox};
