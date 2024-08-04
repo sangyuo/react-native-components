@@ -3,21 +3,7 @@ import Box from '../box';
 import Text from '../text';
 import Button from '../button';
 import {classNames} from '../../utils';
-
-export interface RadioButtonBox<ItemT = any> {
-  className?: string;
-  classNameParent?: string;
-  classNameChildren?: string;
-  classNameLabel?: string;
-  checked?: boolean;
-  value?: ItemT;
-  label?: string;
-  size?: number;
-  sizeChildren?: number;
-  isDebounce?: boolean;
-  delayDebounce?: number;
-  onPress?: (value?: ItemT) => void;
-}
+import {RadioButtonBox} from '../../model';
 
 function RadioButton<ItemT = any>(props: RadioButtonBox<ItemT>) {
   const {

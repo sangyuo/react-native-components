@@ -1,4 +1,5 @@
 export * from './classStyle';
+export * from './component';
 
 export type Varian = 'primary' | 'outline' | 'dark' | 'light';
 

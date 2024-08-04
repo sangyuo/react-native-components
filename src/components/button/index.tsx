@@ -3,21 +3,12 @@ import {
   GestureResponderEvent,
   StyleSheet,
   TouchableOpacity,
-  TouchableOpacityProps,
 } from 'react-native';
 import {useClassName, useClassNameButton} from '../../hook';
 import {Text} from '..';
-import {Varian} from '../../model';
 import {classNames} from '../../utils';
+import {ButtonComponentProps} from '../../model';
 
-export interface ButtonComponentProps extends TouchableOpacityProps {
-  className?: string;
-  classNameText?: string;
-  isDebounce?: boolean;
-  delayDebounce?: number;
-  varian?: Varian;
-  title?: string;
-}
 const Button = (props: ButtonComponentProps) => {
   const {
     style,

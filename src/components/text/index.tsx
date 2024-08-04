@@ -1,10 +1,7 @@
 import React from 'react';
-import {StyleSheet, Text, TextProps} from 'react-native';
+import {StyleSheet, Text} from 'react-native';
 import {useClassName} from '../../hook';
-
-export interface TextComponentProps extends TextProps {
-  className?: string;
-}
+import {TextComponentProps} from '../../model';
 
 const TextComponent = ({className, style, ...rest}: TextComponentProps) => {
   const stylesCustom = useClassName(className);
