@@ -1,12 +1,9 @@
 import React from 'react';
-import {StyleSheet, View, ViewProps} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {useClassName} from '../../hook';
+import {BoxProps} from '../../model';
 
-export interface PropsBox extends ViewProps {
-  className?: string;
-}
-
-const Box = (props: PropsBox) => {
+const Box = (props: BoxProps) => {
   const {style, className, ...rest} = props;
   const stylesCustom = useClassName(className);
   const styleCard = StyleSheet.compose(stylesCustom, style);

@@ -1,32 +1,11 @@
-import React, {ReactNode} from 'react';
+import React from 'react';
 import Box from '../box';
 import Text from '../text';
 import Button from '../button';
-import {ImageSourcePropType, ImageResizeMode} from 'react-native';
 import {classNames, ImageBox} from '../..';
 import Checked from '../../assets/image/checked.png';
-import {VarianCheckbox} from '../../model';
+import {CheckBoxProps} from '../../model';
 import {useVarianCheckbox} from '../../hook';
-
-export interface CheckBoxProps<ItemT = any> {
-  className?: string;
-  classNameParent?: string;
-  classNameChildren?: string;
-  classNameLabel?: string;
-  checked?: boolean;
-  value?: ItemT;
-  label?: string;
-  size?: number;
-  iconColor?: string;
-  iconChecked?: ImageSourcePropType;
-  iconSize?: number;
-  isDebounce?: boolean;
-  delayDebounce?: number;
-  resizeMode?: ImageResizeMode;
-  varian?: VarianCheckbox;
-  renderIconChecked?: (checked?: boolean) => ReactNode;
-  onPress?: (value?: ItemT) => void;
-}
 
 CheckboxComponent.defaultProps = {
   checked: false,

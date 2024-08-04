@@ -7,24 +7,17 @@ import {
   StyleSheet,
 } from 'react-native';
 import {useClassName} from '../../hook';
-import {ImageType} from '../../model';
-import FastImage, {ResizeMode, Source} from 'react-native-fast-image';
+import {ImageBoxProps, ImageType} from '../../model';
+import FastImage, {ResizeMode} from 'react-native-fast-image';
 import {classNames} from '../../utils';
 
-interface Props {
-  source: ImageRequireSource | Source;
-  className: string;
-  imageType?: ImageType;
-  style?: StyleProp<ImageStyle>;
-  resizeMode?: ImageStyle['resizeMode'];
-}
 function ImageComponent({
   className,
   imageType,
   source,
   style,
   resizeMode,
-}: Props) {
+}: ImageBoxProps) {
   const stylesCustom = useClassName(classNames('w-full h-full', className));
   const styleCard: StyleProp<ImageStyle> = StyleSheet.compose(
     stylesCustom,
