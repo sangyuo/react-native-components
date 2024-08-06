@@ -1,21 +1,19 @@
 import {flexStyles} from './Flex.styles';
 import {classBorderStyles} from './Border.styles';
-import {classSizeStyle} from './Size.styles';
+import {sizeRatioStyles} from './Size.styles';
 import {textStyles} from './Text.styles';
 import {styleConfig} from './Theme.styles';
 import {ColorStyles} from './Colors.styles';
-import {spaceStyles} from './Space.styles';
 import {positionStyles} from './Position.styles';
 import {createSizeCustomStyles} from '../utils/styles';
 
 const classStyles = {
-  positionStyles,
+  ...sizeRatioStyles,
+  ...positionStyles,
   ...ColorStyles,
   ...styleConfig,
   ...flexStyles,
-  ...spaceStyles,
   ...classBorderStyles,
-  ...classSizeStyle,
   ...textStyles,
 };
 

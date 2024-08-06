@@ -1,22 +1,7 @@
+import {BORDER_RADIUS, LINE_HEIGHT_SIZE, SIZE_SPACE, TEXT_SIZE} from './Spaces';
+
 interface DefaultTheme {
-  colors: {
-    dark: string;
-    light: string;
-    primary: string;
-    secondary: string;
-    danger: string;
-    warning: string;
-    success: string;
-    'primary-light': string;
-    'secondary-light': string;
-    'danger-light': string;
-    'warning-light': string;
-    'success-light': string;
-    'primary-dark': string;
-    'secondary-dark': string;
-    checked: string;
-    unchecked: string;
-  };
+  colors: {[key: string]: string};
   scaleOptions: {
     default: number;
     options: {
@@ -51,6 +36,12 @@ interface DefaultTheme {
       'rounded-b'?: number;
     };
   };
+  space: {
+    size: {[key: string]: number};
+    text: {[key: string]: number};
+    'line-height': {[key: string]: number};
+    rounded: {[key: string]: number};
+  };
 }
 
 const DEFAULT_THEME: DefaultTheme = {
@@ -69,12 +60,16 @@ const DEFAULT_THEME: DefaultTheme = {
     'success-light': '#4ADE80',
     'primary-dark': '#D7E8FD',
     'secondary-dark': '#DDD6FE',
-    checked: '#60A5FA',
-    unchecked: '#BDBDBD',
   },
   scaleOptions: {
     default: 0,
     options: {},
+  },
+  space: {
+    size: SIZE_SPACE,
+    text: TEXT_SIZE,
+    'line-height': LINE_HEIGHT_SIZE,
+    rounded: BORDER_RADIUS,
   },
 };
 
@@ -89,6 +84,24 @@ export const getThemeConfig = (): DefaultTheme => {
       scaleOptions: {
         ...DEFAULT_THEME.scaleOptions,
         ...config?.theme?.scaleOptions,
+      },
+      space: {
+        size: {
+          ...DEFAULT_THEME.space.size,
+          ...config?.theme?.space?.size,
+        },
+        text: {
+          ...DEFAULT_THEME.space.text,
+          ...config?.theme?.space?.text,
+        },
+        'line-height': {
+          ...DEFAULT_THEME.space['line-height'],
+          ...config?.theme?.space?.['line-height'],
+        },
+        rounded: {
+          ...DEFAULT_THEME.space.rounded,
+          ...config?.theme?.space?.rounded,
+        },
       },
     };
   } catch (error) {

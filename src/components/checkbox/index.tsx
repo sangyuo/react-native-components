@@ -23,6 +23,7 @@ function CheckboxComponent<ItemT = any>(props: CheckBoxProps<ItemT>) {
     iconSize,
     classNameLabel,
     classNameParent,
+    classNameStatus,
     iconChecked,
     iconColor,
     delayDebounce,
@@ -60,6 +61,10 @@ function CheckboxComponent<ItemT = any>(props: CheckBoxProps<ItemT>) {
     );
   };
 
+  const colorChecked = classNameStatus?.checked || classCustom.checked;
+  const colorUnchecked =
+    classNameStatus?.unchecked || 'border-2 border-gray-400';
+
   return (
     <Button
       isDebounce={isDebounce}
@@ -72,14 +77,14 @@ function CheckboxComponent<ItemT = any>(props: CheckBoxProps<ItemT>) {
         className={classNames(
           'rounded center',
           size ? `w-[${size}] h-[${size}]` : 'w-6 h-6',
-          checked ? classCustom.checked : 'border-2 border-unchecked',
+          checked ? colorChecked : colorUnchecked,
           classNameParent || '',
         )}>
         {renderChecked()}
       </Box>
       <Text
         className={classNames(
-          'text-black font-semibold text-md',
+          'text-black font-semibold',
           classNameLabel || '',
         )}>
         {label}
