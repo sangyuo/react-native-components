@@ -3,7 +3,13 @@ export * from './component';
 
 export type Varian = 'primary' | 'outline' | 'dark' | 'light';
 
-export type VarianCheckbox = 'primary' | 'outline';
+export type VarianCheckbox =
+  | 'primary'
+  | 'outline-primary'
+  | 'secondary'
+  | 'outline-secondary';
+
+export type VarianColor = 'primary' | 'secondary';
 
 export enum ImageType {
   Image,

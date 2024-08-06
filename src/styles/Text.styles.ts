@@ -1,6 +1,4 @@
 import {StyleSheet} from 'react-native';
-import {LINE_HEIGHT_SIZE, TEXT_SIZE} from '../config/Spaces';
-import {createSpaceStyles} from '../utils/styles';
 
 const textFontStyle = StyleSheet.create({
   'text-center': {
@@ -80,10 +78,4 @@ const textFontStyle = StyleSheet.create({
 
 export const textStyles = {
   ...textFontStyle,
-  ...createSpaceStyles(TEXT_SIZE, {
-    text: 'fontSize',
-  }),
-  ...createSpaceStyles(LINE_HEIGHT_SIZE, {
-    'line-height': 'lineHeight',
-  }),
 };

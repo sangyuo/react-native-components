@@ -4,6 +4,7 @@ import Text from '../text';
 import Button from '../button';
 import {classNames} from '../../utils';
 import {RadioButtonBox} from '../../model';
+import {useVarianColor} from '../../hook';
 
 function RadioButton<ItemT = any>(props: RadioButtonBox<ItemT>) {
   const {
@@ -18,8 +19,14 @@ function RadioButton<ItemT = any>(props: RadioButtonBox<ItemT>) {
     delayDebounce,
     isDebounce,
     value,
+    varian,
+    classNameStatus,
     onPress,
   } = props;
+
+  const styleCustom = useVarianColor({varian});
+  const colorChecked = classNameStatus?.borderChecked || styleCustom.border;
+  const colorUnchecked = classNameStatus?.unchecked || 'border-gray-400';
 
   return (
     <Button
@@ -33,13 +40,14 @@ function RadioButton<ItemT = any>(props: RadioButtonBox<ItemT>) {
         className={classNames(
           'rounded-full border-2 center',
           size ? `w-[${size}] h-[${size}]` : 'w-6 h-6',
-          checked ? 'border-checked' : 'border-unchecked',
+          checked ? colorChecked : colorUnchecked,
           classNameParent || '',
         )}>
         {checked && (
           <Box
             className={classNames(
-              ' bg-checked rounded-full',
+              classNameStatus?.checked || styleCustom.bg,
+              'rounded-full',
               sizeChildren
                 ? `w-[${sizeChildren}] h-[${sizeChildren}]`
                 : size
@@ -52,7 +60,7 @@ function RadioButton<ItemT = any>(props: RadioButtonBox<ItemT>) {
       </Box>
       <Text
         className={classNames(
-          'text-black font-semibold text-md',
+          'text-black font-semibold',
           classNameLabel || '',
         )}>
         {label}

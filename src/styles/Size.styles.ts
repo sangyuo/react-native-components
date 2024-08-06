@@ -1,7 +1,7 @@
 import {StyleSheet} from 'react-native';
 import {device} from '../utils';
 
-const widthRatioStyles = StyleSheet.create({
+export const sizeRatioStyles = StyleSheet.create({
   'w-1/2': {width: '50%'},
   'w-1/3': {width: '33.333333%'},
   'w-2/3': {width: '66.666667%'},
@@ -35,9 +35,6 @@ const widthRatioStyles = StyleSheet.create({
   'max-w-4/5': {maxWidth: '80%'},
   'max-w-full': {maxWidth: '100%'},
   'max-w-screen': {maxWidth: device.width},
-});
-
-const heightRatioStyles = StyleSheet.create({
   'h-1/2': {height: '50%'},
   'h-1/3': {height: '33.333333%'},
   'h-2/3': {height: '66.666667%'},
@@ -72,8 +69,3 @@ const heightRatioStyles = StyleSheet.create({
   'max-h-full': {maxHeight: '100%'},
   'max-h-screen': {maxHeight: device.height},
 });
-
-export const classSizeStyle = {
-  ...heightRatioStyles,
-  ...widthRatioStyles,
-};

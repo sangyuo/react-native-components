@@ -1,7 +1,6 @@
 import {CONFIG_BOX} from '../config';
 import {ScaleType} from '../model';
-import {roundedStylesType} from '../styles/Border.styles';
-import {sizeStylesType} from '../styles/Space.styles';
+import {roundedStylesType, sizeStylesType} from '../styles/Theme.styles';
 import {
   fontSize,
   horizontalScale,
@@ -93,6 +92,41 @@ export const createSizeCustomStyles = (value: number, keyStyle: string) => {
     styles = {
       [keyCustom]: value,
     };
+  }
+  return styles;
+};
+
+export const createBaseStyles = (
+  stylesOptions: {[key: string]: string},
+  propertiesOptions: {[key: string]: string},
+  hasSlice?: boolean,
+) => {
+  const styles: {[key: string]: {[key: string]: string}} = {};
+  for (const options in stylesOptions) {
+    const value = stylesOptions[options];
+    for (const property in propertiesOptions) {
+      const styleProperty =
+        options === 'default' ? property : `${property}-${options}`;
+      const keyStyle = propertiesOptions[property]?.toString();
+      if (hasSlice) {
+        const keysStyle = keyStyle.split(' ');
+        if (keysStyle.length > 1) {
+          keysStyle.forEach(item => {
+            styles[styleProperty] = {
+              [item]: value,
+            };
+          });
+        } else {
+          styles[styleProperty] = {
+            [keyStyle]: value,
+          };
+        }
+      } else {
+        styles[styleProperty] = {
+          [keyStyle]: value,
+        };
+      }
+    }
   }
   return styles;
 };
