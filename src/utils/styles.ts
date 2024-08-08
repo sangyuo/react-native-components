@@ -67,6 +67,7 @@ export const createSizeCustomStyles = (value: number, keyStyle: string) => {
     'border-b': 'borderBottomWidth',
     'border-x': 'borderLeftWidth borderRightWidth',
     'border-y': 'borderTopWidth borderBottomWidth',
+    'line-height': 'lineHeight',
   };
   let styles: {[key: string]: number} = {};
   const scaleType: ScaleType =
