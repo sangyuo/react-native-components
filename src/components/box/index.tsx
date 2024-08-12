@@ -11,4 +11,8 @@ const Box = (props: BoxProps) => {
   return <View style={styleCard} {...rest} />;
 };
 
+Box.defaultProps = {
+  className: '',
+};
+
 export default Box;
