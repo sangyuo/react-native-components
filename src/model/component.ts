@@ -17,7 +17,7 @@ interface checkedType {
   unchecked?: string;
 }
 export interface BoxProps extends ViewProps {
-  className?: string;
+  className: string;
 }
 
 export interface ButtonComponentProps extends TouchableOpacityProps {
@@ -79,4 +79,25 @@ export interface ImageBoxProps {
 
 export interface TextComponentProps extends TextProps {
   className?: string;
+}
+
+interface ProgressBaseProps extends BoxProps {
+  value: number;
+  label?: string;
+  varian: VarianColor;
+  showLabel?: boolean;
+  classLabel: string;
+  renderLabel?: (value: number) => ReactNode;
+}
+
+export interface ProgressBarProps extends ProgressBaseProps {
+  classBox: string;
+  classProgress: string;
+}
+
+export interface ProgressCircleProps extends ProgressBaseProps {
+  size: number;
+  strokeWidth: number;
+  colorProgress?: string;
+  colorBackground?: string;
 }

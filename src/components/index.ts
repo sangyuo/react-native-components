@@ -5,5 +5,17 @@ import RadioButton from './radioButton';
 import Checkbox from './checkbox';
 import ImageBox from './image';
 import SwitchBox from './switch';
+import ProgressBar from './progressBar';
+import ProgressCircle from './progressCircle';
 
-export {Text, Button, Box, RadioButton, Checkbox, ImageBox, SwitchBox};
+export {
+  Text,
+  Button,
+  RadioButton,
+  Checkbox,
+  ImageBox,
+  Box,
+  SwitchBox,
+  ProgressBar,
+  ProgressCircle,
+};
