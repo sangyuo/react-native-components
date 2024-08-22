@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react';
+import React from 'react';
 import Box from '../box';
 import {
   classNames,
@@ -7,9 +7,10 @@ import {
   useCircleSpecs,
   useVarianColor,
 } from '../..';
-import {Animated, Easing} from 'react-native';
+import {Animated} from 'react-native';
 import {Circle, G, Svg} from 'react-native-svg';
 import {COLORS} from '../../config/Colors';
+import useAnimationProgress from '../../hook/useAnimationProgress';
 
 const ProgressCircle = ({
   value,
@@ -25,21 +26,15 @@ const ProgressCircle = ({
   renderLabel,
   ...rest
 }: ProgressCircleProps) => {
-  const progress = useRef(new Animated.Value(0));
+  const progress = useAnimationProgress({
+    toValue: value,
+    useNativeDriver: false,
+  });
   const AnimatedCircle = Animated.createAnimatedComponent(Circle);
   const {radius, circumference, strokeDasharray} = useCircleSpecs({
     size,
     strokeWidth,
   });
-
-  useEffect(() => {
-    Animated.timing(progress.current, {
-      toValue: value,
-      duration: 200,
-      easing: Easing.linear,
-      useNativeDriver: false,
-    }).start();
-  }, [value]);
 
   const classVarian = useVarianColor({varian});
 
@@ -85,7 +80,7 @@ const ProgressCircle = ({
             strokeWidth={strokeWidth}
             fill="none"
             strokeDasharray={strokeDasharray}
-            strokeDashoffset={progress.current.interpolate({
+            strokeDashoffset={progress.interpolate({
               inputRange: [0, 100],
               outputRange: [circumference, 0],
               extrapolate: 'clamp',

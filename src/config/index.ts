@@ -53,6 +53,7 @@ const DEFAULT_THEME: DefaultTheme = {
     danger: '#F87171',
     warning: '#FACC15',
     success: '#4ADE80',
+    overlay: 'rgba(0, 0, 0, 0.22)',
     'primary-light': '#AFD1FC',
     'secondary-light': '#E1BEE7',
     'danger-light': '#F87171',

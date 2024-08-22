@@ -3,6 +3,8 @@ import {
   ImageResizeMode,
   ImageSourcePropType,
   ImageStyle,
+  NativeScrollEvent,
+  ScrollViewProps,
   StyleProp,
   TextProps,
   TouchableOpacityProps,
@@ -23,7 +25,7 @@ export interface BoxProps extends ViewProps {
 export interface ButtonComponentProps extends TouchableOpacityProps {
   className?: string;
   classNameText?: string;
-  isDebounce?: boolean;
+  enableDebounce?: boolean;
   delayDebounce?: number;
   varian?: Varian;
   title?: string;
@@ -42,7 +44,7 @@ export interface CheckBoxProps<ItemT = any> {
   iconColor?: string;
   iconChecked?: ImageSourcePropType;
   iconSize?: number;
-  isDebounce?: boolean;
+  enableDebounce?: boolean;
   delayDebounce?: number;
   resizeMode?: ImageResizeMode;
   varian?: VarianCheckbox;
@@ -63,7 +65,7 @@ export interface RadioButtonBox<ItemT = any> {
   label?: string;
   size?: number;
   sizeChildren?: number;
-  isDebounce?: boolean;
+  enableDebounce?: boolean;
   delayDebounce?: number;
   varian?: VarianColor;
   onPress?: (value?: ItemT) => void;
@@ -100,4 +102,33 @@ export interface ProgressCircleProps extends ProgressBaseProps {
   strokeWidth: number;
   colorProgress?: string;
   colorBackground?: string;
+}
+
+export interface SliderBoxProps<ItemT = any> extends ScrollViewProps {
+  classBox: string;
+  classSlider: string;
+  classSliderItem: string;
+  classPageItem: string;
+  classPagination: string;
+  data: ItemT[];
+  showPagination: boolean;
+  currentIndex: number;
+  width?: number;
+  itemWidth?: number;
+  sliderWidth?: number;
+  enableAnimation: boolean;
+  enableControl: boolean;
+  space: number;
+  iconNext?: ReactNode;
+  iconPrev?: ReactNode;
+  iconColor?: string;
+  renderSliderItem: (item: ItemT, index: number) => ReactNode;
+  renderPageItem?: (item: ItemT, index: number) => ReactNode;
+  onIndexChanged?: (index: number) => void;
+  onEndReached?: () => void;
+}
+export interface OnEndReachedProps extends NativeScrollEvent {
+  space: number;
+  itemWidth: number;
+  horizontal?: boolean | null;
 }
