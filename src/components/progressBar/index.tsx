@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react';
+import React from 'react';
 import Box from '../box';
 import {
   classNames,
@@ -7,7 +7,8 @@ import {
   useClassName,
   useVarianColor,
 } from '../..';
-import {Animated, Easing} from 'react-native';
+import {Animated} from 'react-native';
+import useAnimationProgress from '../../hook/useAnimationProgress';
 
 const ProgressBar = ({
   value,
@@ -21,16 +22,10 @@ const ProgressBar = ({
   renderLabel,
   ...rest
 }: ProgressBarProps) => {
-  const progress = useRef(new Animated.Value(0));
-
-  useEffect(() => {
-    Animated.timing(progress.current, {
-      toValue: value,
-      duration: 200,
-      easing: Easing.linear,
-      useNativeDriver: false,
-    }).start();
-  }, [value]);
+  const progress = useAnimationProgress({
+    toValue: value,
+    useNativeDriver: false,
+  });
 
   const classVarian = useVarianColor({varian});
   const stylesProgress = useClassName(
@@ -56,12 +51,12 @@ const ProgressBar = ({
   return (
     <Box className={classNames('column gap-1', classBox)} {...rest}>
       {showLabel && renderCustomLabel()}
-      <Box className={classNames('h-2 flex-1 bg-gray-400 rounded', className)}>
+      <Box className={classNames('h-2 bg-gray-400 rounded', className)}>
         <Animated.View
           style={[
             stylesProgress,
             {
-              width: progress.current.interpolate({
+              width: progress.interpolate({
                 inputRange: [0, value],
                 outputRange: ['0%', `${value}%`],
               }),

@@ -17,7 +17,7 @@ function RadioButton<ItemT = any>(props: RadioButtonBox<ItemT>) {
     classNameParent,
     classNameChildren,
     delayDebounce,
-    isDebounce,
+    enableDebounce,
     value,
     varian,
     classNameStatus,
@@ -30,7 +30,7 @@ function RadioButton<ItemT = any>(props: RadioButtonBox<ItemT>) {
 
   return (
     <Button
-      isDebounce={isDebounce}
+      enableDebounce={enableDebounce}
       delayDebounce={delayDebounce}
       onPress={() => {
         onPress && onPress(value);
