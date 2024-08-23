@@ -27,7 +27,7 @@ function CheckboxComponent<ItemT = any>(props: CheckBoxProps<ItemT>) {
     iconChecked,
     iconColor,
     delayDebounce,
-    isDebounce,
+    enableDebounce,
     resizeMode,
     value,
     varian,
@@ -67,7 +67,7 @@ function CheckboxComponent<ItemT = any>(props: CheckBoxProps<ItemT>) {
 
   return (
     <Button
-      isDebounce={isDebounce}
+      enableDebounce={enableDebounce}
       delayDebounce={delayDebounce}
       onPress={() => {
         onPress && onPress(value);

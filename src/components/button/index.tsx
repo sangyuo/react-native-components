@@ -12,7 +12,7 @@ import {ButtonComponentProps} from '../../model';
 const Button = (props: ButtonComponentProps) => {
   const {
     style,
-    isDebounce,
+    enableDebounce,
     delayDebounce,
     className,
     classNameText,
@@ -43,7 +43,7 @@ const Button = (props: ButtonComponentProps) => {
   );
 
   const handlePress = (e: GestureResponderEvent) => {
-    if (isDebounce) {
+    if (enableDebounce) {
       handler(e);
     } else {
       onPress && onPress(e);

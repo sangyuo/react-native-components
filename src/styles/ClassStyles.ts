@@ -17,7 +17,7 @@ const classStyles = {
   ...textStyles,
 };
 
-export const getClassNameStyles = (className: string) => {
+export const getClassNameStyles = (className: string): Object => {
   try {
     if (className.length > 0) {
       const listClass = className?.split(' ');
