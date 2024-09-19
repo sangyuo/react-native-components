@@ -10,7 +10,7 @@ interface Props {
   defaultIndex: number;
 }
 
-export default function useActionSliderBox({
+export default function useActionSwipeBox({
   sliderItemWidth,
   spaceItem,
   horizontal,

@@ -3,10 +3,10 @@ import Box from '../box';
 import Text from '../text';
 import Button from '../button';
 import {classNames} from '../../utils';
-import {RadioButtonBox} from '../../model';
+import {RadioButtonProps} from '../../model';
 import {useVarianColor} from '../../hook';
 
-function RadioButton<ItemT = any>(props: RadioButtonBox<ItemT>) {
+function RadioButton<ItemT = any>(props: RadioButtonProps<ItemT>) {
   const {
     className,
     size,
@@ -14,7 +14,7 @@ function RadioButton<ItemT = any>(props: RadioButtonBox<ItemT>) {
     checked,
     sizeChildren,
     classNameLabel,
-    classNameParent,
+    classNameBox,
     classNameChildren,
     delayDebounce,
     enableDebounce,
@@ -35,13 +35,13 @@ function RadioButton<ItemT = any>(props: RadioButtonBox<ItemT>) {
       onPress={() => {
         onPress && onPress(value);
       }}
-      className={classNames('row-center gap-2', className || '')}>
+      className={classNames('row-center gap-2', className)}>
       <Box
         className={classNames(
           'rounded-full border-2 center',
           size ? `w-[${size}] h-[${size}]` : 'w-6 h-6',
           checked ? colorChecked : colorUnchecked,
-          classNameParent || '',
+          classNameBox,
         )}>
         {checked && (
           <Box
@@ -53,16 +53,12 @@ function RadioButton<ItemT = any>(props: RadioButtonBox<ItemT>) {
                 : size
                 ? `w-[${size * 0.5}] h-[${size * 0.5}]`
                 : 'w-3 h-3',
-              classNameChildren || '',
+              classNameChildren,
             )}
           />
         )}
       </Box>
-      <Text
-        className={classNames(
-          'text-black font-semibold',
-          classNameLabel || '',
-        )}>
+      <Text className={classNames('text-black font-semibold', classNameLabel)}>
         {label}
       </Text>
     </Button>
@@ -71,7 +67,7 @@ function RadioButton<ItemT = any>(props: RadioButtonBox<ItemT>) {
 
 RadioButton.defaultProps = {
   checked: false,
-  classNameParent: '',
+  classNameBox: '',
   classNameLabel: '',
   classNameChildren: '',
 };

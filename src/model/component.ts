@@ -1,5 +1,4 @@
 import {
-  ImageRequireSource,
   ImageResizeMode,
   ImageSourcePropType,
   ImageStyle,
@@ -10,9 +9,8 @@ import {
   TouchableOpacityProps,
   ViewProps,
 } from 'react-native';
-import {ImageType, Varian, VarianCheckbox, VarianColor} from '.';
+import {ImageModuleType, Varian, VarianCheckbox, VarianColor} from '.';
 import {ReactNode} from 'react';
-import {Source} from 'react-native-fast-image';
 
 interface checkedType {
   checked?: string;
@@ -31,50 +29,46 @@ export interface ButtonComponentProps extends TouchableOpacityProps {
   title?: string;
 }
 
-export interface CheckBoxProps<ItemT = any> {
+interface CheckboxItemBaseProps {
   className?: string;
-  classNameParent?: string;
+  classNameBox?: string;
   classNameChildren?: string;
   classNameLabel?: string;
   classNameStatus?: checkedType;
-  checked?: boolean;
-  value?: ItemT;
-  label?: string;
   size?: number;
-  iconColor?: string;
-  iconChecked?: ImageSourcePropType;
-  iconSize?: number;
   enableDebounce?: boolean;
   delayDebounce?: number;
   resizeMode?: ImageResizeMode;
   varian?: VarianCheckbox;
+}
+
+export interface CheckboxProps<ItemT = any> extends CheckboxItemBaseProps {
+  checked?: boolean;
+  value?: ItemT;
+  label?: string;
+  iconColor?: string;
+  iconChecked?: ImageSourcePropType;
+  iconSize?: number;
   renderIconChecked?: (checked?: boolean) => ReactNode;
   onPress?: (value?: ItemT) => void;
 }
 
-export interface RadioButtonBox<ItemT = any> {
-  className?: string;
-  classNameParent?: string;
-  classNameChildren?: string;
-  classNameLabel?: string;
+export interface RadioButtonProps<ItemT = any> extends CheckboxItemBaseProps {
   classNameStatus?: checkedType & {
     borderChecked?: string;
   };
   checked?: boolean;
   value?: ItemT;
   label?: string;
-  size?: number;
   sizeChildren?: number;
-  enableDebounce?: boolean;
-  delayDebounce?: number;
   varian?: VarianColor;
   onPress?: (value?: ItemT) => void;
 }
 
 export interface ImageBoxProps {
-  source: ImageRequireSource | Source;
+  source: ImageSourcePropType;
   className: string;
-  imageType?: ImageType;
+  imageModuleType?: ImageModuleType;
   style?: StyleProp<ImageStyle>;
   resizeMode?: ImageStyle['resizeMode'];
 }
@@ -104,7 +98,7 @@ export interface ProgressCircleProps extends ProgressBaseProps {
   colorBackground?: string;
 }
 
-export interface SliderBoxProps<ItemT = any> extends ScrollViewProps {
+export interface SwipeBoxProps<ItemT = any> extends ScrollViewProps {
   classBox: string;
   classSlider: string;
   classSliderItem: string;
@@ -131,4 +125,30 @@ export interface OnEndReachedProps extends NativeScrollEvent {
   space: number;
   itemWidth: number;
   horizontal?: boolean | null;
+}
+
+interface GroupPropsBase<ItemT = any> {
+  data: ItemT[];
+  classBox?: string;
+  pickKey?: keyof ItemT;
+  pickLabel?: keyof ItemT;
+  onPress?: (value?: ItemT) => void;
+}
+
+export interface RadioGroupProps extends GroupPropsBase {
+  value?: number | string;
+  radioItem?: CheckboxItemBaseProps & {
+    size?: number;
+    sizeChildren?: number;
+    varian?: VarianColor;
+  };
+}
+
+export interface CheckBoxGroupProps extends GroupPropsBase {
+  value?: (number | string)[];
+  checkBoxItem?: CheckboxItemBaseProps & {
+    iconColor?: string;
+    iconChecked?: ImageSourcePropType;
+    iconSize?: number;
+  };
 }
