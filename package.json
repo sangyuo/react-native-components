@@ -9,9 +9,9 @@
     "test": "jest"
   },
   "dependencies": {
+    "@d11/react-native-fast-image": "^8.6.12",
     "react": "18.2.0",
     "react-native": "0.73.6",
-    "react-native-fast-image": "^8.6.3",
     "react-native-svg": "^15.5.0"
   },
   "devDependencies": {

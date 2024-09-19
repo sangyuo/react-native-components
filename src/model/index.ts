@@ -11,7 +11,7 @@ export type VarianCheckbox =
 
 export type VarianColor = 'primary' | 'secondary';
 
-export enum ImageType {
+export enum ImageModuleType {
   Image,
   FastImage,
 }

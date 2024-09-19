@@ -4,7 +4,7 @@ import {
   Button,
   classNames,
   isEndReachedScroll,
-  SliderBoxProps,
+  SwipeBoxProps,
   useClassName,
 } from '../..';
 import {
@@ -14,11 +14,11 @@ import {
   ScrollView,
 } from 'react-native';
 import {Path, Svg} from 'react-native-svg';
-import useSpecsSliderBox from '../../hook/useSpecsSliderBox';
-import useActionSliderBox from '../../hook/useActionSliderBox';
+import useSpecsSwipeBox from '../../hook/useSpecsSwipeBox';
+import useActionSwipeBox from '../../hook/useActionSwipeBox';
 import {CONFIG_BOX} from '../../config';
 
-const SliderBox = ({
+const SwipeBox = ({
   data,
   classBox,
   horizontal,
@@ -42,7 +42,7 @@ const SliderBox = ({
   onScroll,
   onEndReached,
   ...rest
-}: SliderBoxProps) => {
+}: SwipeBoxProps) => {
   const [sliderOffset, setSliderOffset] = useState({
     sliderWidth: width ?? 0,
     sliderHeight: 0,
@@ -53,7 +53,7 @@ const SliderBox = ({
   const classControl =
     'absolute top-0 bottom-0 w-8 h-10 bg-overlay rounded center';
 
-  const {sliderItemWidth, spaceItem} = useSpecsSliderBox({
+  const {sliderItemWidth, spaceItem} = useSpecsSwipeBox({
     itemWidth,
     sliderWidth: sliderOffset.sliderWidth,
     pagingEnabled,
@@ -62,7 +62,7 @@ const SliderBox = ({
   });
 
   const {activeIndex, sliderRef, maxIndex, handleControl, setActiveIndex} =
-    useActionSliderBox({
+    useActionSwipeBox({
       sliderItemWidth,
       spaceItem,
       horizontal,
@@ -242,7 +242,7 @@ const SliderBox = ({
   );
 };
 
-SliderBox.defaultProps = {
+SwipeBox.defaultProps = {
   currentIndex: 0,
   space: 0,
   spaceEndReach: 0,
@@ -261,4 +261,4 @@ SliderBox.defaultProps = {
   centerContent: true,
 };
 
-export default SliderBox;
+export default SwipeBox;

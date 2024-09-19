@@ -1,19 +1,13 @@
 import React from 'react';
-import {
-  Image,
-  ImageRequireSource,
-  ImageStyle,
-  StyleProp,
-  StyleSheet,
-} from 'react-native';
+import {Image, ImageStyle, StyleProp, StyleSheet} from 'react-native';
 import {useClassName} from '../../hook';
-import {ImageBoxProps, ImageType} from '../../model';
-import FastImage, {ResizeMode} from 'react-native-fast-image';
+import {ImageBoxProps, ImageModuleType} from '../../model';
 import {classNames} from '../../utils';
+import useLoadModuleFastImage from '../../hook/useLoadModuleFastImage';
 
 function ImageComponent({
   className,
-  imageType,
+  imageModuleType,
   source,
   style,
   resizeMode,
@@ -24,27 +18,19 @@ function ImageComponent({
     style,
   );
 
-  if (imageType === ImageType.FastImage) {
+  const FastImage: any = useLoadModuleFastImage(imageModuleType);
+
+  if (FastImage) {
     return (
-      <FastImage
-        style={styleCard as never}
-        source={source}
-        resizeMode={resizeMode as ResizeMode}
-      />
+      <FastImage style={styleCard} source={source} resizeMode={resizeMode} />
     );
   }
 
-  return (
-    <Image
-      style={styleCard}
-      source={source as ImageRequireSource}
-      resizeMode={resizeMode}
-    />
-  );
+  return <Image style={styleCard} source={source} resizeMode={resizeMode} />;
 }
 ImageComponent.defaultProps = {
   className: '',
-  imageType: ImageType.Image,
+  imageType: ImageModuleType.Image,
   resizeMode: 'contain',
 };
 export default ImageComponent;

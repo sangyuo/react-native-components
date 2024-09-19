@@ -4,17 +4,17 @@ import Text from '../text';
 import Button from '../button';
 import {classNames, ImageBox} from '../..';
 import Checked from '../../assets/image/checked.png';
-import {CheckBoxProps} from '../../model';
+import {CheckboxProps} from '../../model';
 import {useVarianCheckbox} from '../../hook';
 
-CheckboxComponent.defaultProps = {
+Checkbox.defaultProps = {
   checked: false,
-  classNameParent: '',
+  classNameBox: '',
   classNameLabel: '',
   classNameChildren: '',
 };
 
-function CheckboxComponent<ItemT = any>(props: CheckBoxProps<ItemT>) {
+function Checkbox<ItemT = any>(props: CheckboxProps<ItemT>) {
   const {
     className,
     size,
@@ -22,7 +22,7 @@ function CheckboxComponent<ItemT = any>(props: CheckBoxProps<ItemT>) {
     checked,
     iconSize,
     classNameLabel,
-    classNameParent,
+    classNameBox,
     classNameStatus,
     iconChecked,
     iconColor,
@@ -72,24 +72,20 @@ function CheckboxComponent<ItemT = any>(props: CheckBoxProps<ItemT>) {
       onPress={() => {
         onPress && onPress(value);
       }}
-      className={classNames('row-center gap-2', className || '')}>
+      className={classNames('row-center gap-2', className)}>
       <Box
         className={classNames(
           'rounded center',
           size ? `w-[${size}] h-[${size}]` : 'w-6 h-6',
           checked ? colorChecked : colorUnchecked,
-          classNameParent || '',
+          classNameBox,
         )}>
         {renderChecked()}
       </Box>
-      <Text
-        className={classNames(
-          'text-black font-semibold',
-          classNameLabel || '',
-        )}>
+      <Text className={classNames('text-black font-semibold', classNameLabel)}>
         {label}
       </Text>
     </Button>
   );
 }
-export default CheckboxComponent;
+export default Checkbox;
