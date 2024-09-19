@@ -8,7 +8,7 @@ interface Props {
   centerContent?: boolean;
 }
 
-export default function useSpecsSliderBox({
+export default function useSpecsSwipeBox({
   itemWidth,
   sliderWidth,
   pagingEnabled,

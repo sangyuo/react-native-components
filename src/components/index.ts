@@ -7,7 +7,8 @@ import ImageBox from './image';
 import SwitchBox from './switch';
 import ProgressBar from './progressBar';
 import ProgressCircle from './progressCircle';
-import SliderBox from './sliderBox';
+import SwipeBox from './swipeBox';
+export * from './groups';
 
 export {
   Text,
@@ -19,5 +20,5 @@ export {
   SwitchBox,
   ProgressBar,
   ProgressCircle,
-  SliderBox,
+  SwipeBox,
 };

@@ -25,7 +25,7 @@ const Button = (props: ButtonComponentProps) => {
   const timerDebounceRef = useRef<any>();
   const classButton = useClassNameButton(varian);
   const stylesCustom = useClassName(
-    classNames(classButton.container, className || ''),
+    classNames(classButton.container, className),
   );
   const styleCard = StyleSheet.compose(stylesCustom, style);
 
@@ -53,7 +53,7 @@ const Button = (props: ButtonComponentProps) => {
   return (
     <TouchableOpacity onPress={handlePress} style={styleCard} {...rest}>
       {title ? (
-        <Text className={classNames(classButton.text, classNameText || '')}>
+        <Text className={classNames(classButton.text, classNameText)}>
           {title}
         </Text>
       ) : null}
