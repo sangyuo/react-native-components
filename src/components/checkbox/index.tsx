@@ -7,13 +7,6 @@ import Checked from '../../assets/image/checked.png';
 import {CheckboxProps} from '../../model';
 import {useVarianCheckbox} from '../../hook';
 
-Checkbox.defaultProps = {
-  checked: false,
-  classNameBox: '',
-  classNameLabel: '',
-  classNameChildren: '',
-};
-
 function Checkbox<ItemT = any>(props: CheckboxProps<ItemT>) {
   const {
     className,
@@ -32,7 +25,7 @@ function Checkbox<ItemT = any>(props: CheckboxProps<ItemT>) {
     value,
     varian,
     renderIconChecked,
-    onPress,
+    onChange,
   } = props;
   const classCustom = useVarianCheckbox({varian});
   const renderChecked = () => {
@@ -70,7 +63,7 @@ function Checkbox<ItemT = any>(props: CheckboxProps<ItemT>) {
       enableDebounce={enableDebounce}
       delayDebounce={delayDebounce}
       onPress={() => {
-        onPress && onPress(value);
+        onChange && onChange(value);
       }}
       className={classNames('row-center gap-2', className)}>
       <Box

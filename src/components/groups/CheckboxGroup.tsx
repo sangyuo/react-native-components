@@ -11,7 +11,7 @@ export default function CheckboxGroup({
   pickKey = 'id',
   pickLabel = 'name',
   value,
-  onPress,
+  onChange,
 }: CheckBoxGroupProps) {
   const renderItem = () => {
     return data.map(item => (
@@ -20,7 +20,7 @@ export default function CheckboxGroup({
         key={item?.[pickKey]}
         value={item}
         checked={value?.includes(item?.[pickKey])}
-        onPress={onPress}
+        onChange={onChange}
         label={item?.[pickLabel] ?? ''}
       />
     ));

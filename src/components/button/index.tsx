@@ -19,6 +19,7 @@ const Button = (props: ButtonComponentProps) => {
     varian,
     title,
     children,
+    numberOfLines,
     onPress,
     ...rest
   } = props;
@@ -53,7 +54,9 @@ const Button = (props: ButtonComponentProps) => {
   return (
     <TouchableOpacity onPress={handlePress} style={styleCard} {...rest}>
       {title ? (
-        <Text className={classNames(classButton.text, classNameText)}>
+        <Text
+          className={classNames(classButton.text, classNameText)}
+          numberOfLines={numberOfLines}>
           {title}
         </Text>
       ) : null}
