@@ -11,8 +11,8 @@ import {Animated} from 'react-native';
 import useAnimationProgress from '../../hook/useAnimationProgress';
 
 const ProgressBar = ({
-  value,
-  varian,
+  value = 0,
+  varian = 'primary',
   label,
   classBox,
   className,
@@ -66,15 +66,6 @@ const ProgressBar = ({
       </Box>
     </Box>
   );
-};
-
-ProgressBar.defaultProps = {
-  value: 0,
-  className: '',
-  classProgress: '',
-  varian: 'primary',
-  classLabel: '',
-  classBox: '',
 };
 
 export default ProgressBar;
