@@ -18,7 +18,7 @@ import useActionSwipeBox from '../../hook/useActionSwipeBox';
 import {ArrowLeft} from '../svgBox/ArrowLeft';
 import {ArrowRight} from '../svgBox/ArrowRight';
 
-const SwipeBox = ({
+export default function SwipeBox<ItemT = any>({
   data,
   classBox,
   horizontal = true,
@@ -45,7 +45,7 @@ const SwipeBox = ({
   onEndReached,
   renderControl,
   ...rest
-}: SwipeBoxProps) => {
+}: SwipeBoxProps<ItemT>) {
   const [sliderOffset, setSliderOffset] = useState({
     sliderWidth: width ?? 0,
     sliderHeight: 0,
@@ -141,7 +141,7 @@ const SwipeBox = ({
           return (
             <Box
               className={classNames(classCustomItem, classSliderItem)}
-              key={item.id + index}
+              key={index}
               style={[{width: sliderItemWidth}]}>
               {renderSliderItem(item, index)}
             </Box>
@@ -161,7 +161,7 @@ const SwipeBox = ({
         }
         return (
           <Box
-            key={item.id + index}
+            key={index}
             className={classNames(
               'w-2 h-2 bg-gray-400 rounded-full',
               classPageItem,
@@ -236,6 +236,4 @@ const SwipeBox = ({
       {renderControlItem()}
     </Box>
   );
-};
-
-export default SwipeBox;
+}

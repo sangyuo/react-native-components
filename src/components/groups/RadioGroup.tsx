@@ -4,23 +4,23 @@ import RadioButton from '../radioButton';
 import {RadioGroupProps} from '../../model';
 import {classNames} from '../../utils';
 
-export default function RadioGroup({
+export default function RadioGroup<ItemT = any>({
   data,
   classBox,
   radioItem,
-  pickKey = 'id',
-  pickLabel = 'name',
+  pickKey = 'id' as keyof ItemT,
+  pickLabel = 'name' as keyof ItemT,
   value,
   onChange,
-}: RadioGroupProps) {
+}: RadioGroupProps<ItemT>) {
   const renderItem = () => {
     return data.map(item => (
       <RadioButton
         {...radioItem}
         value={item}
-        checked={item[pickKey] === value}
+        checked={item?.[pickKey] === value}
         onChange={onChange}
-        label={item[pickLabel]}
+        label={item?.[pickLabel] as string}
       />
     ));
   };
