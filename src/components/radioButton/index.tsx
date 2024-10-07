@@ -21,7 +21,7 @@ function RadioButton<ItemT = any>(props: RadioButtonProps<ItemT>) {
     value,
     varian,
     classNameStatus,
-    onPress,
+    onChange,
   } = props;
 
   const styleCustom = useVarianColor({varian});
@@ -33,7 +33,7 @@ function RadioButton<ItemT = any>(props: RadioButtonProps<ItemT>) {
       enableDebounce={enableDebounce}
       delayDebounce={delayDebounce}
       onPress={() => {
-        onPress && onPress(value);
+        onChange && onChange(value);
       }}
       className={classNames('row-center gap-2', className)}>
       <Box
@@ -64,12 +64,5 @@ function RadioButton<ItemT = any>(props: RadioButtonProps<ItemT>) {
     </Button>
   );
 }
-
-RadioButton.defaultProps = {
-  checked: false,
-  classNameBox: '',
-  classNameLabel: '',
-  classNameChildren: '',
-};
 
 export default RadioButton;

@@ -5,6 +5,7 @@ import {
   NativeScrollEvent,
   ScrollViewProps,
   StyleProp,
+  TextInputProps,
   TextProps,
   TouchableOpacityProps,
   ViewProps,
@@ -17,7 +18,7 @@ interface checkedType {
   unchecked?: string;
 }
 export interface BoxProps extends ViewProps {
-  className: string;
+  className?: string;
 }
 
 export interface ButtonComponentProps extends TouchableOpacityProps {
@@ -27,6 +28,7 @@ export interface ButtonComponentProps extends TouchableOpacityProps {
   delayDebounce?: number;
   varian?: Varian;
   title?: string;
+  numberOfLines?: number;
 }
 
 interface CheckboxItemBaseProps {
@@ -50,7 +52,7 @@ export interface CheckboxProps<ItemT = any> extends CheckboxItemBaseProps {
   iconChecked?: ImageSourcePropType;
   iconSize?: number;
   renderIconChecked?: (checked?: boolean) => ReactNode;
-  onPress?: (value?: ItemT) => void;
+  onChange?: (value?: ItemT) => void;
 }
 
 export interface RadioButtonProps<ItemT = any> extends CheckboxItemBaseProps {
@@ -62,12 +64,12 @@ export interface RadioButtonProps<ItemT = any> extends CheckboxItemBaseProps {
   label?: string;
   sizeChildren?: number;
   varian?: VarianColor;
-  onPress?: (value?: ItemT) => void;
+  onChange?: (value?: ItemT) => void;
 }
 
 export interface ImageBoxProps {
   source: ImageSourcePropType;
-  className: string;
+  className?: string;
   imageModuleType?: ImageModuleType;
   style?: StyleProp<ImageStyle>;
   resizeMode?: ImageStyle['resizeMode'];
@@ -82,42 +84,43 @@ interface ProgressBaseProps extends BoxProps {
   label?: string;
   varian: VarianColor;
   showLabel?: boolean;
-  classLabel: string;
+  classLabel?: string;
   renderLabel?: (value: number) => ReactNode;
 }
 
 export interface ProgressBarProps extends ProgressBaseProps {
-  classBox: string;
-  classProgress: string;
+  classBox?: string;
+  classProgress?: string;
 }
 
 export interface ProgressCircleProps extends ProgressBaseProps {
-  size: number;
-  strokeWidth: number;
+  size?: number;
+  strokeWidth?: number;
   colorProgress?: string;
   colorBackground?: string;
 }
 
 export interface SwipeBoxProps<ItemT = any> extends ScrollViewProps {
-  classBox: string;
-  classSlider: string;
-  classSliderItem: string;
-  classPageItem: string;
-  classPagination: string;
+  classBox?: string;
+  classSlider?: string;
+  classSliderItem?: string;
+  classPageItem?: string;
+  classPagination?: string;
   data: ItemT[];
-  showPagination: boolean;
-  currentIndex: number;
+  showPagination?: boolean;
+  currentIndex?: number;
   width?: number;
   itemWidth?: number;
   sliderWidth?: number;
-  enableAnimation: boolean;
-  enableControl: boolean;
-  space: number;
+  enableAnimation?: boolean;
+  enableControl?: boolean;
+  space?: number;
   iconNext?: ReactNode;
   iconPrev?: ReactNode;
   iconColor?: string;
   renderSliderItem: (item: ItemT, index: number) => ReactNode;
   renderPageItem?: (item: ItemT, index: number) => ReactNode;
+  renderControl?: () => ReactNode;
   onIndexChanged?: (index: number) => void;
   onEndReached?: () => void;
 }
@@ -132,7 +135,7 @@ interface GroupPropsBase<ItemT = any> {
   classBox?: string;
   pickKey?: keyof ItemT;
   pickLabel?: keyof ItemT;
-  onPress?: (value?: ItemT) => void;
+  onChange?: (value?: ItemT) => void;
 }
 
 export interface RadioGroupProps extends GroupPropsBase {
@@ -151,4 +154,37 @@ export interface CheckBoxGroupProps extends GroupPropsBase {
     iconChecked?: ImageSourcePropType;
     iconSize?: number;
   };
+}
+
+export interface TextInputBoxProps extends TextInputProps {
+  leftContent?: ReactNode;
+  rightContent?: ReactNode;
+  classInput?: string;
+  classInputBase?: string;
+  classBox?: string;
+  label?: string;
+  classLabel?: string;
+}
+
+export interface SwitchBoxProps {
+  value?: boolean;
+  varian?: VarianColor;
+  className?: string;
+  classThumb?: string;
+  classLabel?: string;
+  disabled?: boolean;
+  label?: {
+    on?: string;
+    off?: string;
+  };
+  renderLabel?: (value: boolean) => ReactNode;
+  renderThumb?: (value: boolean) => ReactNode;
+  onChange?: (value: boolean) => void;
+}
+
+export interface SvgProps {
+  children: ReactNode;
+  width?: string;
+  height?: string;
+  viewBox?: string;
 }

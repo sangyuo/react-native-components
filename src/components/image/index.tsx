@@ -8,9 +8,9 @@ import useLoadModuleFastImage from '../../hook/useLoadModuleFastImage';
 function ImageComponent({
   className,
   imageModuleType,
-  source,
+  source = ImageModuleType.Image,
   style,
-  resizeMode,
+  resizeMode = 'contain',
 }: ImageBoxProps) {
   const stylesCustom = useClassName(classNames('w-full h-full', className));
   const styleCard: StyleProp<ImageStyle> = StyleSheet.compose(
@@ -28,9 +28,5 @@ function ImageComponent({
 
   return <Image style={styleCard} source={source} resizeMode={resizeMode} />;
 }
-ImageComponent.defaultProps = {
-  className: '',
-  imageType: ImageModuleType.Image,
-  resizeMode: 'contain',
-};
+
 export default ImageComponent;
