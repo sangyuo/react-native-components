@@ -13,34 +13,37 @@ import {
   NativeSyntheticEvent,
   ScrollView,
 } from 'react-native';
-import {Path, Svg} from 'react-native-svg';
 import useSpecsSwipeBox from '../../hook/useSpecsSwipeBox';
 import useActionSwipeBox from '../../hook/useActionSwipeBox';
-import {CONFIG_BOX} from '../../config';
+import {ArrowLeft} from '../svgBox/ArrowLeft';
+import {ArrowRight} from '../svgBox/ArrowRight';
 
 const SwipeBox = ({
   data,
   classBox,
-  horizontal,
-  showPagination,
+  horizontal = true,
+  showPagination = true,
   classPageItem,
   classPagination,
   classSliderItem,
   itemWidth,
-  enableAnimation,
+  enableAnimation = true,
   classSlider,
   width,
   style,
-  currentIndex,
+  currentIndex = 0,
   enableControl,
-  pagingEnabled,
-  space,
-  centerContent,
+  pagingEnabled = true,
+  space = 0,
+  centerContent = true,
+  showsHorizontalScrollIndicator = false,
+  showsVerticalScrollIndicator = false,
   renderPageItem,
   renderSliderItem,
   onIndexChanged,
   onScroll,
   onEndReached,
+  renderControl,
   ...rest
 }: SwipeBoxProps) => {
   const [sliderOffset, setSliderOffset] = useState({
@@ -180,7 +183,10 @@ const SwipeBox = ({
     return null;
   };
 
-  const renderControl = () => {
+  const renderControlItem = () => {
+    if (renderControl) {
+      return renderControl();
+    }
     if (enableControl) {
       return (
         <>
@@ -192,13 +198,7 @@ const SwipeBox = ({
             }}
             onPress={() => handleControl('prev')}
             className={classNames(classControl, 'left-2')}>
-            <Svg width="19" height="34" viewBox="0 0 19 34" fill="none">
-              <Path
-                d="M17 32L3 17L17 1.99999"
-                stroke={CONFIG_BOX.colors.primary}
-                strokeWidth="4"
-              />
-            </Svg>
+            <ArrowLeft />
           </Button>
           <Button
             enableDebounce
@@ -208,13 +208,7 @@ const SwipeBox = ({
               transform: [{translateY: sliderOffset.sliderHeight / 2 - 20}],
             }}
             className={classNames(classControl, 'right-2')}>
-            <Svg width="19" height="34" viewBox="0 0 19 34" fill="none">
-              <Path
-                d="M2 2L16 17L2 32"
-                stroke={CONFIG_BOX.colors.primary}
-                strokeWidth="4"
-              />
-            </Svg>
+            <ArrowRight />
           </Button>
         </>
       );
@@ -233,32 +227,15 @@ const SwipeBox = ({
         style={[styleSlider, style]}
         horizontal={horizontal}
         onScroll={onScrollListener}
+        showsHorizontalScrollIndicator={showsHorizontalScrollIndicator}
+        showsVerticalScrollIndicator={showsVerticalScrollIndicator}
         pagingEnabled={pagingEnabled}>
         {renderItem()}
       </ScrollView>
       {renderPagination()}
-      {renderControl()}
+      {renderControlItem()}
     </Box>
   );
-};
-
-SwipeBox.defaultProps = {
-  currentIndex: 0,
-  space: 0,
-  spaceEndReach: 0,
-  classBox: '',
-  classSlider: '',
-  classSliderItem: '',
-  classPageItem: '',
-  classPagination: '',
-  horizontal: true,
-  enableAnimation: true,
-  showPagination: true,
-  showsHorizontalScrollIndicator: false,
-  showsVerticalScrollIndicator: false,
-  enableControl: false,
-  pagingEnabled: true,
-  centerContent: true,
 };
 
 export default SwipeBox;

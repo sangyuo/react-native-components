@@ -2,6 +2,7 @@ import {StyleSheet} from 'react-native';
 import {device} from '../utils';
 
 export const sizeRatioStyles = StyleSheet.create({
+  'w-auto': {width: 'auto'},
   'w-1/2': {width: '50%'},
   'w-1/3': {width: '33.333333%'},
   'w-2/3': {width: '66.666667%'},
@@ -13,6 +14,7 @@ export const sizeRatioStyles = StyleSheet.create({
   'w-4/5': {width: '80%'},
   'w-full': {width: '100%'},
   'w-screen': {width: device.width},
+  'min-w-auto': {minWidth: 'auto'},
   'min-w-1/2': {minWidth: '50%'},
   'min-w-1/3': {minWidth: '33.333333%'},
   'min-w-2/3': {minWidth: '66.666667%'},
@@ -24,6 +26,7 @@ export const sizeRatioStyles = StyleSheet.create({
   'min-w-4/5': {minWidth: '80%'},
   'min-w-full': {minWidth: '100%'},
   'min-w-screen': {minWidth: device.width},
+  'max-w-auto': {maxWidth: 'auto'},
   'max-w-1/2': {maxWidth: '50%'},
   'max-w-1/3': {maxWidth: '33.333333%'},
   'max-w-2/3': {maxWidth: '66.666667%'},
@@ -35,6 +38,7 @@ export const sizeRatioStyles = StyleSheet.create({
   'max-w-4/5': {maxWidth: '80%'},
   'max-w-full': {maxWidth: '100%'},
   'max-w-screen': {maxWidth: device.width},
+  'h-auto': {height: 'auto'},
   'h-1/2': {height: '50%'},
   'h-1/3': {height: '33.333333%'},
   'h-2/3': {height: '66.666667%'},
@@ -46,6 +50,7 @@ export const sizeRatioStyles = StyleSheet.create({
   'h-4/5': {height: '80%'},
   'h-full': {height: '100%'},
   'h-screen': {height: device.height},
+  'min-h-auto': {minHeight: 'auto'},
   'min-h-1/2': {minHeight: '50%'},
   'min-h-1/3': {minHeight: '33.333333%'},
   'min-h-2/3': {minHeight: '66.666667%'},
@@ -57,6 +62,7 @@ export const sizeRatioStyles = StyleSheet.create({
   'min-h-4/5': {minHeight: '80%'},
   'min-h-full': {minHeight: '100%'},
   'min-h-screen': {minHeight: device.height},
+  'max-h-auto': {maxHeight: 'auto'},
   'max-h-1/2': {maxHeight: '50%'},
   'max-h-1/3': {maxHeight: '33.333333%'},
   'max-h-2/3': {maxHeight: '66.666667%'},

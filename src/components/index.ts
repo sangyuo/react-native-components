@@ -9,6 +9,7 @@ import ProgressBar from './progressBar';
 import ProgressCircle from './progressCircle';
 import SwipeBox from './swipeBox';
 export * from './groups';
+export * from './textInput';
 
 export {
   Text,

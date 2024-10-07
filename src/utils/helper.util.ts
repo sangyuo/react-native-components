@@ -17,3 +17,5 @@ export const isEndReachedScroll = ({
   const content = horizontal ? contentSize.width : contentSize.height;
   return layoutSize + offset >= content - space;
 };
+
+export const isNumber = (value: any) => typeof value === 'number';

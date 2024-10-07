@@ -13,16 +13,16 @@ import {COLORS} from '../../config/Colors';
 import useAnimationProgress from '../../hook/useAnimationProgress';
 
 const ProgressCircle = ({
-  value,
-  varian,
+  value = 0,
+  varian = 'primary',
   label,
   className,
   classLabel,
   showLabel,
-  size,
+  size = 50,
   colorBackground,
   colorProgress,
-  strokeWidth,
+  strokeWidth = 8,
   renderLabel,
   ...rest
 }: ProgressCircleProps) => {
@@ -90,15 +90,6 @@ const ProgressCircle = ({
       </Svg>
     </Box>
   );
-};
-
-ProgressCircle.defaultProps = {
-  value: 0,
-  className: '',
-  varian: 'primary',
-  classLabel: '',
-  size: 50,
-  strokeWidth: 8,
 };
 
 export default ProgressCircle;

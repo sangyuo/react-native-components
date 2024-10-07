@@ -11,7 +11,7 @@ export default function RadioGroup({
   pickKey = 'id',
   pickLabel = 'name',
   value,
-  onPress,
+  onChange,
 }: RadioGroupProps) {
   const renderItem = () => {
     return data.map(item => (
@@ -19,7 +19,7 @@ export default function RadioGroup({
         {...radioItem}
         value={item}
         checked={item[pickKey] === value}
-        onPress={onPress}
+        onChange={onChange}
         label={item[pickLabel]}
       />
     ));

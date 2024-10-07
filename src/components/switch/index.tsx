@@ -1,27 +1,12 @@
-import React, {ReactNode, useState} from 'react';
+import React from 'react';
 import Button from '../button';
 import Box from '../box';
-import {classNames, Text, useVarianColor, VarianColor} from '../..';
+import {classNames, SwitchBoxProps, Text, useVarianColor} from '../..';
 
-interface Props {
-  value: boolean;
-  varian: VarianColor;
-  className: string;
-  classThumb: string;
-  classLabel: string;
-  disabled?: boolean;
-  label?: {
-    on?: string;
-    off?: string;
-  };
-  renderLabel?: (value: boolean) => ReactNode;
-  renderThumb?: (value: boolean) => ReactNode;
-  onChange?: (value: boolean) => void;
-}
 const SwitchBox = ({
-  value,
+  value = false,
   label,
-  varian,
+  varian = 'primary',
   classThumb,
   className,
   classLabel,
@@ -29,13 +14,11 @@ const SwitchBox = ({
   renderThumb,
   renderLabel,
   onChange,
-}: Props) => {
-  const [active, setActive] = useState(value);
+}: SwitchBoxProps) => {
   const classVarian = useVarianColor({varian});
 
   const toggleActive = () => {
-    onChange && onChange(!active);
-    setActive(pre => !pre);
+    onChange && onChange(!value);
   };
 
   const renderCustomLabel = () => {
@@ -43,23 +26,23 @@ const SwitchBox = ({
       return (
         <Text
           className={classNames(
-            active ? 'text-white' : 'text-black',
+            value ? 'text-white' : 'text-black',
             'text-center flex-1 text-sm',
             classLabel,
           )}>
-          {active ? label?.on : label?.off}
+          {value ? label?.on : label?.off}
         </Text>
       );
     }
     if (renderLabel) {
-      return renderLabel(active);
+      return renderLabel(value);
     }
     return null;
   };
 
   const renderCustomThumb = () => {
     if (renderThumb) {
-      return renderThumb(active);
+      return renderThumb(value);
     }
     return (
       <Box
@@ -77,9 +60,9 @@ const SwitchBox = ({
         disabled={disabled}
         onPress={toggleActive}
         className={classNames(
-          active ? classVarian.bg : 'row-center bg-gray-400',
-          active ? 'row-reverse' : '',
-          'h-7 w-14 items-center px-1 rounded-full',
+          value ? classVarian.bg : 'row-center bg-gray-400',
+          value ? 'row-reverse' : '',
+          'h-7 w-12 items-center px-1 rounded-full',
           className,
         )}>
         {renderCustomThumb()}
@@ -87,14 +70,6 @@ const SwitchBox = ({
       </Button>
     </>
   );
-};
-
-SwitchBox.defaultProps = {
-  value: false,
-  className: '',
-  varian: 'primary',
-  classThumb: '',
-  classLabel: '',
 };
 
 export default SwitchBox;

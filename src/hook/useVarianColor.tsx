@@ -1,12 +1,14 @@
 import {useMemo} from 'react';
 import {VarianColor} from '../model';
 import {CONFIG_BOX} from '../config';
+import {COLORS} from '../config/Colors';
 
 type Props = {
   varian?: VarianColor;
+  enableNull?: boolean;
 };
 
-export default function useVarianColor({varian}: Props) {
+export default function useVarianColor({varian, enableNull}: Props) {
   const styleDirection = useMemo(() => {
     if (varian === 'secondary') {
       return {
@@ -16,12 +18,22 @@ export default function useVarianColor({varian}: Props) {
         color: CONFIG_BOX.colors.secondary,
       };
     }
+
+    if (varian === 'primary' || !enableNull) {
+      return {
+        border: 'border-primary',
+        bg: 'bg-primary',
+        text: 'text-primary',
+        color: CONFIG_BOX.colors.primary,
+      };
+    }
+
     return {
-      border: 'border-primary',
-      bg: 'bg-primary',
-      text: 'text-primary',
-      color: CONFIG_BOX.colors.primary,
+      border: 'border-black',
+      bg: 'bg-black',
+      text: 'text-black',
+      color: COLORS.black,
     };
-  }, [varian]);
+  }, [varian, enableNull]);
   return styleDirection;
 }
