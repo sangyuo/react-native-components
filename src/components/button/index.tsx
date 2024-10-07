@@ -20,6 +20,8 @@ const Button = (props: ButtonComponentProps) => {
     title,
     children,
     numberOfLines,
+    leftContent,
+    rightContent,
     onPress,
     ...rest
   } = props;
@@ -53,6 +55,7 @@ const Button = (props: ButtonComponentProps) => {
 
   return (
     <TouchableOpacity onPress={handlePress} style={styleCard} {...rest}>
+      {leftContent}
       {title ? (
         <Text
           className={classNames(classButton.text, classNameText)}
@@ -61,6 +64,7 @@ const Button = (props: ButtonComponentProps) => {
         </Text>
       ) : null}
       {children}
+      {rightContent}
     </TouchableOpacity>
   );
 };

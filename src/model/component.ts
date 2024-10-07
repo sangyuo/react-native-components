@@ -29,6 +29,8 @@ export interface ButtonComponentProps extends TouchableOpacityProps {
   varian?: Varian;
   title?: string;
   numberOfLines?: number;
+  leftContent?: ReactNode;
+  rightContent?: ReactNode;
 }
 
 interface CheckboxItemBaseProps {
@@ -138,7 +140,7 @@ interface GroupPropsBase<ItemT = any> {
   onChange?: (value?: ItemT) => void;
 }
 
-export interface RadioGroupProps extends GroupPropsBase {
+export interface RadioGroupProps<ItemT = any> extends GroupPropsBase<ItemT> {
   value?: number | string;
   radioItem?: CheckboxItemBaseProps & {
     size?: number;
@@ -147,7 +149,7 @@ export interface RadioGroupProps extends GroupPropsBase {
   };
 }
 
-export interface CheckBoxGroupProps extends GroupPropsBase {
+export interface CheckBoxGroupProps<ItemT = any> extends GroupPropsBase<ItemT> {
   value?: (number | string)[];
   checkBoxItem?: CheckboxItemBaseProps & {
     iconColor?: string;
@@ -187,4 +189,86 @@ export interface SvgProps {
   width?: string;
   height?: string;
   viewBox?: string;
+}
+
+interface OffsetType {
+  top?: number;
+  left?: number;
+  right?: number;
+  width?: number;
+  height?: number;
+}
+
+export interface RenderButtonProps {
+  onPress: () => void;
+}
+
+export interface RenderOptionItem<ItemT = any> {
+  selected?: boolean;
+  index: number;
+  item: ItemT;
+}
+
+interface DropDownBaseProps<ItemT = any> {
+  data: ItemT[];
+  offset?: OffsetType;
+  buttonDropdown?: ButtonComponentProps & {
+    hidden?: boolean;
+    placeholder?: string;
+    classPlaceholderColor?: string;
+    classValueColor?: string;
+  };
+  maxWidthOption?: number;
+  classBox?: string;
+  classOption?: string;
+  classOptionItem?: string;
+  classOptionItemSelected?: string;
+  classOptionLabel?: string;
+  classOptionLabelSelected?: string;
+  enableRightToLeft?: boolean;
+  enableSearch?: boolean;
+  height?: number;
+  width?: number;
+  pickKey?: keyof ItemT;
+  pickLabel?: keyof ItemT;
+  enableScroll?: boolean;
+  varian?: VarianColor;
+  iconColor?: string;
+  numberOfLinesOption?: number;
+  saveKeywordType?: 'none' | 'auto' | 'submit';
+  searchType?: 'auto' | 'submit';
+  iconSelected?: ReactNode;
+  iconSelectedColor?: string;
+  styleSelectType?: 'none' | 'icon' | 'color';
+  inputSearch?: {
+    value?: string;
+    classInput?: string;
+    leftContent?: ReactNode;
+    rightContent?: ReactNode;
+    placeholder?: string;
+    onSearch?: (keyword: string) => void;
+  };
+
+  renderOptionItem?: (props: RenderOptionItem) => ReactNode;
+  onChange?: (value: ItemT) => void;
+}
+
+export interface DropDownProps<ItemT = any> extends DropDownBaseProps<ItemT> {
+  value?: number | string;
+  renderButtonAction?: (
+    params: RenderButtonProps & {
+      dataSelected: ItemT | null;
+    },
+  ) => ReactNode;
+}
+
+export interface MultiDropDownProps<ItemT = any>
+  extends DropDownBaseProps<ItemT> {
+  value?: Array<number | string>;
+  onPressSelectedItem?: (item: ItemT) => void;
+  renderButtonAction?: (
+    params: RenderButtonProps & {
+      dataSelected: ItemT[] | null;
+    },
+  ) => ReactNode;
 }
