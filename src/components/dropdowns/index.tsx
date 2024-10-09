@@ -1,8 +1,8 @@
-import React, {ReactNode, useEffect, useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import Box from '../box';
 import {ScrollView, TouchableWithoutFeedback} from 'react-native';
 import Button from '../button';
-import {ButtonComponentProps, VarianColor} from '../../model';
+import {DropDownProps} from '../../model';
 import {classNames, device, isNumber} from '../../utils';
 import useClassNameDropdown from '../../hook/useClassNameDropdown';
 import {useStateVisible, useVarianColor} from '../../hook';
@@ -10,70 +10,7 @@ import {ArrowDown} from '../svgBox/ArrowDown';
 import {TextInputBox} from '../..';
 import {IconSearch} from '../svgBox/IconSearch';
 import {IconClose} from '../svgBox/IconClose';
-
-interface OffsetType {
-  top?: number;
-  left?: number;
-  right?: number;
-  width?: number;
-  height?: number;
-}
-
-interface RenderButtonProps {
-  selected?: boolean;
-  label?: string | number;
-  onClose?: () => void;
-  onOpen?: () => void;
-}
-
-interface RenderOptionItem {
-  selected: boolean;
-  index: number;
-}
-
-interface Props<ItemT = any> {
-  data: ItemT[];
-  offset?: OffsetType;
-  buttonDropdown?: ButtonComponentProps & {
-    hidden?: boolean;
-    placeholder?: string;
-    classPlaceholderColor?: string;
-    classValueColor?: string;
-  };
-  maxWidthOption?: number;
-  classBox?: string;
-  classOption?: string;
-  classOptionItem?: string;
-  classOptionLabel?: string;
-  enableRightToLeft?: boolean;
-  enableSearch?: boolean;
-  height?: number;
-  width?: number;
-  value?: number | string;
-  pickKey?: keyof ItemT;
-  pickLabel?: keyof ItemT;
-  enableScroll?: boolean;
-  varian?: VarianColor;
-  iconColor?: string;
-  numberOfLinesOption?: number;
-  saveKeywordType?: 'none' | 'auto' | 'submit';
-  searchType?: 'auto' | 'submit';
-  inputSearch?: {
-    value?: string;
-    classInput?: string;
-    leftContent?: ReactNode;
-    rightContent?: ReactNode;
-    placeholder?: string;
-    onSearch?: (keyword: string) => void;
-  };
-  renderButtonAction?: (params: RenderButtonProps) => ReactNode;
-  renderOptionItem?: (
-    props: RenderOptionItem & {
-      item: ItemT;
-    },
-  ) => ReactNode;
-  onChange?: (value: ItemT) => void;
-}
+import {Tick} from '../svgBox/Tick';
 
 export default function DropdownBox<ItemT = any>({
   data,
@@ -98,11 +35,16 @@ export default function DropdownBox<ItemT = any>({
   inputSearch,
   saveKeywordType = 'auto',
   searchType = 'auto',
+  classOptionItemSelected,
+  classOptionLabelSelected,
+  styleSelectType = 'color',
+  iconSelected,
+  iconSelectedColor,
   renderButtonAction,
   renderOptionItem,
   onChange,
-}: Props<ItemT>) {
-  const {isVisible, onClose, onOpen, setVisible} = useStateVisible();
+}: DropDownProps<ItemT>) {
+  const {isVisible, onClose, setVisible} = useStateVisible();
   const [keyword, setKeyword] = useState('');
   const [dataFilter, setDataFilter] = useState<ItemT[]>([]);
   const theme = useVarianColor({varian, enableNull: true});
@@ -127,8 +69,6 @@ export default function DropdownBox<ItemT = any>({
   const refTimeUpdate = useRef<ReturnType<typeof setTimeout>>();
   const refTimeMaxContent = useRef<ReturnType<typeof setTimeout>>();
   const refKw = useRef('');
-
-  const offsetOption = useRef(0);
 
   const classDropOption = useClassNameDropdown({
     classOption,
@@ -168,8 +108,9 @@ export default function DropdownBox<ItemT = any>({
     }
     let titleBtn = placeholder ?? 'Select data';
     let classTitle = classPlaceholderColor ?? 'text-gray-400';
+    let itemSelect: ItemT | null = null;
     if (value || isNumber(value)) {
-      const itemSelect = data?.find(x => x?.[pickKey] === value);
+      itemSelect = data?.find(x => x?.[pickKey] === value) ?? null;
       if (itemSelect) {
         titleBtn = itemSelect[pickLabel] as string;
         classTitle = classValueColor ?? 'text-black';
@@ -177,10 +118,10 @@ export default function DropdownBox<ItemT = any>({
     }
     if (renderButtonAction) {
       return renderButtonAction({
-        label: titleBtn,
-        selected: value ? true : false,
-        onClose,
-        onOpen,
+        dataSelected: itemSelect,
+        onPress: () => {
+          setVisible(pre => !pre);
+        },
       });
     }
 
@@ -211,17 +152,32 @@ export default function DropdownBox<ItemT = any>({
         <Button
           key={(item?.[pickKey] ?? index) as string | number}
           className={classNames(
-            'w-full px-4 py-2',
+            'w-full px-4 py-2 row-center space-between',
             classOptionItem,
-            selected ? 'bg-light-blue-100' : '',
+            selected
+              ? classNames(
+                  styleSelectType === 'color' ? theme.bg : '',
+                  classOptionItemSelected,
+                )
+              : '',
           )}
-          classNameText={classNames('font-medium', classOptionLabel)}
+          classNameText={classNames(
+            'font-medium',
+            classOptionLabel,
+            selected ? classOptionLabelSelected : '',
+          )}
           title={item?.[pickLabel] as string}
           onPress={() => {
             onChange && onChange(item);
-            onClose();
           }}
           numberOfLines={numberOfLinesOption}
+          rightContent={
+            selected && styleSelectType === 'icon'
+              ? iconSelected ?? (
+                  <Tick width={16} fill={iconSelectedColor || theme.color} />
+                )
+              : null
+          }
         />
       );
     });
@@ -257,6 +213,9 @@ export default function DropdownBox<ItemT = any>({
       (item[pickLabel] as string).toLowerCase()?.includes(kw.toLowerCase()),
     );
     setDataFilter(result);
+    if (searchType === 'submit') {
+      refKw.current = kw;
+    }
   };
 
   const handleClear = () => {
@@ -282,7 +241,7 @@ export default function DropdownBox<ItemT = any>({
               left: Math.floor(nativeEvent.layout.x),
               top: Math.floor(nativeEvent.layout.y + nativeEvent.layout.height),
             });
-          }, 250);
+          }, 0);
         }}>
         {renderButton()}
       </Box>
@@ -299,25 +258,11 @@ export default function DropdownBox<ItemT = any>({
                   height: Math.floor(nativeEvent.layout.height),
                   width: Math.floor(nativeEvent.layout.width),
                 });
-              }, 250);
+              }, 0);
             }}>
             <Box className="absolute w-full h-full z-9" />
           </TouchableWithoutFeedback>
-          <Box
-            onLayout={({nativeEvent}) => {
-              if (!offsetOption.current) {
-                if (refTimeUpdate.current) {
-                  clearTimeout(refTimeUpdate.current);
-                }
-                refTimeUpdate.current = setTimeout(() => {
-                  offsetOption.current = Math.floor(nativeEvent.layout.width);
-                }, 250);
-              }
-            }}
-            className={classNames(
-              classDropOption,
-              offsetOption.current ? `w-[${offsetOption.current + 1}]` : '',
-            )}>
+          <Box className={classNames(classDropOption)}>
             {enableSearch && (
               <TextInputBox
                 value={inputSearch?.value ?? keyword}
