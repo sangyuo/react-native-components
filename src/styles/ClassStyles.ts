@@ -6,6 +6,7 @@ import {styleConfig} from './Theme.styles';
 import {ColorStyles} from './Colors.styles';
 import {positionStyles} from './Position.styles';
 import {createSizeCustomStyles} from '../utils/styles';
+import {StyleProp} from 'react-native';
 
 const classStyles = {
   ...sizeRatioStyles,
@@ -17,7 +18,7 @@ const classStyles = {
   ...textStyles,
 };
 
-export const getClassNameStyles = (className: string): Object => {
+export const getClassNameStyles = (className: string): StyleProp<any> => {
   try {
     if (className.length > 0) {
       const listClass = className?.split(' ');

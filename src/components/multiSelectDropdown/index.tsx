@@ -1,15 +1,15 @@
 import React from 'react';
-import Button from '../button';
 import {
   MultiDropDownProps,
   RenderButtonProps,
   RenderOptionItem,
 } from '../../model';
 import {classNames} from '../../utils';
-import {useVarianColor} from '../../hook';
+import {useClassVirtualizedList, useVarianColor} from '../../hook';
 import {ArrowDown} from '../svgBox/ArrowDown';
-import {Box, DropdownBox, ScrollViewBox, Text} from '../..';
+import {Box, ButtonBox, DropdownBox, TextBox} from '../..';
 import {Tick} from '../svgBox/Tick';
+import {ScrollView} from 'react-native';
 
 export default function MultiSelectDropdown<ItemT = any>({
   data,
@@ -23,6 +23,7 @@ export default function MultiSelectDropdown<ItemT = any>({
   styleSelectType = 'icon',
   iconSelected,
   iconSelectedColor,
+  classContentSelected,
   onPressSelectedItem,
   renderButtonAction,
   onChange,
@@ -45,7 +46,11 @@ export default function MultiSelectDropdown<ItemT = any>({
     pickLabel = 'name' as keyof ItemT,
   } = rest;
 
-  const theme = useVarianColor({varian, enableNull: true});
+  const theme = useVarianColor({varian, enableNull: true, isDropdown: true});
+  const styleScroll = useClassVirtualizedList({
+    ...classContentSelected,
+    classContent: classNames('gap-2', classContentSelected?.classContent),
+  });
 
   const renderButtonActionMulti = ({onPress}: RenderButtonProps) => {
     if (buttonDropdown?.hidden) {
@@ -68,7 +73,7 @@ export default function MultiSelectDropdown<ItemT = any>({
     }
 
     return (
-      <Button
+      <ButtonBox
         {...restButton}
         className={classNames(
           'w-full px-2 h-10 row-center space-between border gap-1',
@@ -82,23 +87,23 @@ export default function MultiSelectDropdown<ItemT = any>({
         onPress={onPress}>
         <Box className="row-center flex-1">
           {itemSelect?.length && (
-            <ScrollViewBox horizontal classContent="gap-2">
+            <ScrollView horizontal {...styleScroll}>
               {itemSelect.map(item => (
-                <Button
+                <ButtonBox
                   key={'selected' + item?.[pickKey]}
                   className="px-2 py-1 bg-primary rounded -z-1"
                   onPress={() =>
                     onPressSelectedItem && onPressSelectedItem(item)
                   }>
-                  <Text className={classNames(classTitle)}>
+                  <TextBox className={classNames(classTitle)}>
                     {item?.[pickLabel] as string}
-                  </Text>
-                </Button>
+                  </TextBox>
+                </ButtonBox>
               ))}
-            </ScrollViewBox>
+            </ScrollView>
           )}
         </Box>
-      </Button>
+      </ButtonBox>
     );
   };
 
@@ -108,7 +113,7 @@ export default function MultiSelectDropdown<ItemT = any>({
       return renderOptionItem({index, item, selected});
     }
     return (
-      <Button
+      <ButtonBox
         key={(item?.[pickKey] ?? index) as string | number}
         className={classNames(
           'w-full px-4 py-2 row-center space-between',

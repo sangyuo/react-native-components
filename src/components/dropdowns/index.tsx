@@ -1,13 +1,11 @@
 import React, {useEffect, useRef, useState} from 'react';
-import Box from '../box';
 import {ScrollView, TouchableWithoutFeedback} from 'react-native';
-import Button from '../button';
 import {DropDownProps} from '../../model';
 import {classNames, device, isNumber} from '../../utils';
 import useClassNameDropdown from '../../hook/useClassNameDropdown';
 import {useStateVisible, useVarianColor} from '../../hook';
 import {ArrowDown} from '../svgBox/ArrowDown';
-import {TextInputBox} from '../..';
+import {Box, ButtonBox, TextInputBox} from '../..';
 import {IconSearch} from '../svgBox/IconSearch';
 import {IconClose} from '../svgBox/IconClose';
 import {Tick} from '../svgBox/Tick';
@@ -47,7 +45,7 @@ export default function DropdownBox<ItemT = any>({
   const {isVisible, onClose, setVisible} = useStateVisible();
   const [keyword, setKeyword] = useState('');
   const [dataFilter, setDataFilter] = useState<ItemT[]>([]);
-  const theme = useVarianColor({varian, enableNull: true});
+  const theme = useVarianColor({varian, enableNull: true, isDropdown: true});
   const {
     className,
     title,
@@ -126,7 +124,7 @@ export default function DropdownBox<ItemT = any>({
     }
 
     return (
-      <Button
+      <ButtonBox
         {...rest}
         className={classNames(
           'w-full px-2 h-10 row-center space-between border',
@@ -138,7 +136,7 @@ export default function DropdownBox<ItemT = any>({
         title={titleBtn ?? title}
         onPress={() => setVisible(pre => !pre)}>
         <ArrowDown width={16} fill={iconColor ?? theme.color} />
-      </Button>
+      </ButtonBox>
     );
   };
 
@@ -149,7 +147,7 @@ export default function DropdownBox<ItemT = any>({
         return renderOptionItem({item, selected, index});
       }
       return (
-        <Button
+        <ButtonBox
           key={(item?.[pickKey] ?? index) as string | number}
           className={classNames(
             'w-full px-4 py-2 row-center space-between',
@@ -277,20 +275,20 @@ export default function DropdownBox<ItemT = any>({
                   inputSearch?.rightContent ?? (
                     <Box className="row-center gap-1 px-2">
                       {keyword ? (
-                        <Button
+                        <ButtonBox
                           className="p-2 rounded-full bg-gray-300 center"
                           onPress={handleClear}>
                           <IconClose width={14} />
-                        </Button>
+                        </ButtonBox>
                       ) : null}
-                      <Button
+                      <ButtonBox
                         className="p-1 border rounded"
                         onPress={() => {
                           handleSearch(keyword);
                         }}
                         disabled={saveKeywordType !== 'submit'}>
                         <IconSearch width={16} />
-                      </Button>
+                      </ButtonBox>
                     </Box>
                   )
                 }
