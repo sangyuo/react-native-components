@@ -24,6 +24,11 @@ export default function useClassNameButton(varian?: Varian) {
           container: 'rounded bg-primary px-4 py-2 center',
           text: 'text-black font-bold',
         };
+      case 'secondary':
+        return {
+          container: 'rounded bg-secondary px-4 py-2 center',
+          text: 'text-light font-bold',
+        };
       default:
         return {
           container: '',

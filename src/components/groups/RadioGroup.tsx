@@ -1,8 +1,8 @@
 import React from 'react';
-import Box from '../box';
 import RadioButton from '../radioButton';
 import {RadioGroupProps} from '../../model';
 import {classNames} from '../../utils';
+import {Box} from '../box';
 
 export default function RadioGroup<ItemT = any>({
   data,
@@ -19,7 +19,7 @@ export default function RadioGroup<ItemT = any>({
         {...radioItem}
         value={item}
         checked={item?.[pickKey] === value}
-        onChange={onChange}
+        onChange={() => onChange && onChange(item)}
         label={item?.[pickLabel] as string}
       />
     ));

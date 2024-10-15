@@ -1,8 +1,8 @@
 import React from 'react';
-import Box from '../box';
 import {CheckBoxGroupProps} from '../../model';
 import Checkbox from '../checkbox';
 import {classNames} from '../../utils';
+import {Box} from '../..';
 
 export default function CheckboxGroup<ItemT = any>({
   data,
@@ -20,7 +20,7 @@ export default function CheckboxGroup<ItemT = any>({
         key={item?.[pickKey] as string}
         value={item}
         checked={value?.includes(item?.[pickKey] as string | number)}
-        onChange={onChange}
+        onChange={() => onChange && onChange(item)}
         label={(item?.[pickLabel] as string) ?? ''}
       />
     ));
