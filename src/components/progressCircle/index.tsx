@@ -1,11 +1,11 @@
 import React from 'react';
-import Box from '../box';
 import {
   classNames,
   ProgressCircleProps,
   Text,
   useCircleSpecs,
   useVarianColor,
+  Box,
 } from '../..';
 import {Animated} from 'react-native';
 import {Circle, G, Svg} from 'react-native-svg';

@@ -1,5 +1,4 @@
 import React, {useEffect, useRef, useState} from 'react';
-import Box from '../box';
 import {ScrollView, TouchableWithoutFeedback} from 'react-native';
 import Button from '../button';
 import {DropDownProps} from '../../model';
@@ -7,7 +6,7 @@ import {classNames, device, isNumber} from '../../utils';
 import useClassNameDropdown from '../../hook/useClassNameDropdown';
 import {useStateVisible, useVarianColor} from '../../hook';
 import {ArrowDown} from '../svgBox/ArrowDown';
-import {TextInputBox} from '../..';
+import {Box, TextInputBox} from '../..';
 import {IconSearch} from '../svgBox/IconSearch';
 import {IconClose} from '../svgBox/IconClose';
 import {Tick} from '../svgBox/Tick';

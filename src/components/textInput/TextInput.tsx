@@ -1,8 +1,7 @@
 import React from 'react';
 import {TextInput} from 'react-native';
-import Box from '../box';
 import {classNames} from '../../utils';
-import {Text, TextInputBoxProps, useClassName} from '../..';
+import {Box, Text, TextInputBoxProps, useClassName} from '../..';
 
 export default function TextInputBox({
   leftContent,

@@ -1,7 +1,6 @@
 import React from 'react';
 import Button from '../button';
-import Box from '../box';
-import {classNames, SwitchBoxProps, Text, useVarianColor} from '../..';
+import {Box, classNames, SwitchBoxProps, Text, useVarianColor} from '../..';
 
 const SwitchBox = ({
   value = false,

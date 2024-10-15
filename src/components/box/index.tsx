@@ -1,14 +1,5 @@
-import React from 'react';
-import {StyleSheet, View} from 'react-native';
-import {useClassName} from '../../hook';
-import {BoxProps} from '../../model';
+import {Text as TextNative, TextProps, View, ViewProps} from 'react-native';
+import {withElementBox} from '../../hoc';
 
-const Box = (props: BoxProps) => {
-  const {style, className, ...rest} = props;
-  const stylesCustom = useClassName(className);
-  const styleCard = StyleSheet.compose(stylesCustom, style);
-
-  return <View style={styleCard} {...rest} />;
-};
-
-export default Box;
+export const Box = withElementBox<ViewProps>(View);
+export const Text = withElementBox<TextProps>(TextNative);

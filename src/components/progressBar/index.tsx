@@ -1,6 +1,6 @@
 import React from 'react';
-import Box from '../box';
 import {
+  Box,
   classNames,
   ProgressBarProps,
   Text,

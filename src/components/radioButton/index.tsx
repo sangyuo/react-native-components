@@ -1,10 +1,9 @@
 import React from 'react';
-import Box from '../box';
-import Text from '../text';
 import Button from '../button';
 import {classNames} from '../../utils';
 import {RadioButtonProps} from '../../model';
 import {useVarianColor} from '../../hook';
+import {Box, Text} from '../..';
 
 function RadioButton<ItemT = any>(props: RadioButtonProps<ItemT>) {
   const {

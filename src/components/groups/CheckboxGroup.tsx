@@ -1,8 +1,8 @@
 import React from 'react';
-import Box from '../box';
 import {CheckBoxGroupProps} from '../../model';
 import Checkbox from '../checkbox';
 import {classNames} from '../../utils';
+import {Box} from '../..';
 
 export default function CheckboxGroup<ItemT = any>({
   data,

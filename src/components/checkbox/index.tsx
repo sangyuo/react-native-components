@@ -1,8 +1,6 @@
 import React from 'react';
-import Box from '../box';
-import Text from '../text';
 import Button from '../button';
-import {classNames, ImageBox} from '../..';
+import {Box, classNames, ImageBox, Text} from '../..';
 import Checked from '../../assets/image/checked.png';
 import {CheckboxProps} from '../../model';
 import {useVarianCheckbox} from '../../hook';
