@@ -20,7 +20,7 @@ export default function CheckboxGroup<ItemT = any>({
         key={item?.[pickKey] as string}
         value={item}
         checked={value?.includes(item?.[pickKey] as string | number)}
-        onChange={onChange}
+        onChange={() => onChange && onChange(item)}
         label={(item?.[pickLabel] as string) ?? ''}
       />
     ));

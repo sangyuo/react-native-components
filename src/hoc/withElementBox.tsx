@@ -1,21 +1,22 @@
-import React from 'react';
+import React, {forwardRef} from 'react';
 import {useClassName} from '../hook';
 
-const withElementBox = <T extends any>(
+const withElementBox = <T extends any, R>(
   WrappedComponent: React.JSXElementConstructor<any>,
 ) => {
-  const WithElementBox: React.FC<
+  return forwardRef<
+    R,
     T & {
       style?: any;
       className?: string;
     }
-  > = props => {
+  >((props, ref) => {
     const {style, className, ...rest} = props;
     const stylesCustom = useClassName(className);
-    return <WrappedComponent style={[stylesCustom, style]} {...rest} />;
-  };
-
-  return WithElementBox;
+    return (
+      <WrappedComponent ref={ref} style={[stylesCustom, style]} {...rest} />
+    );
+  });
 };
 
 export default withElementBox;

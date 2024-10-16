@@ -8,7 +8,7 @@ import {
 import {classNames} from '../../utils';
 import {useVarianColor} from '../../hook';
 import {ArrowDown} from '../svgBox/ArrowDown';
-import {Box, DropdownBox, ScrollViewBox, Text} from '../..';
+import {Box, DropdownBox, ScrollBox, Text} from '../..';
 import {Tick} from '../svgBox/Tick';
 
 export default function MultiSelectDropdown<ItemT = any>({
@@ -82,7 +82,7 @@ export default function MultiSelectDropdown<ItemT = any>({
         onPress={onPress}>
         <Box className="row-center flex-1">
           {itemSelect?.length && (
-            <ScrollViewBox horizontal classContent="gap-2">
+            <ScrollBox horizontal classContent="gap-2">
               {itemSelect.map(item => (
                 <Button
                   key={'selected' + item?.[pickKey]}
@@ -95,7 +95,7 @@ export default function MultiSelectDropdown<ItemT = any>({
                   </Text>
                 </Button>
               ))}
-            </ScrollViewBox>
+            </ScrollBox>
           )}
         </Box>
       </Button>

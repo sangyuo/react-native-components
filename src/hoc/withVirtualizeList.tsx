@@ -11,11 +11,10 @@ interface Props {
   showsHorizontalScrollIndicator?: boolean;
 }
 
-function withVirtualizeList<T extends any>(
+function withVirtualizeList<T extends any, R>(
   WrappedComponent: React.JSXElementConstructor<any>,
 ) {
-  // Use forwardRef to allow ref forwarding to the WrappedComponent
-  const WithVirtualizeList = forwardRef<any, T & Props>((props, ref) => {
+  return forwardRef<R, T & Props>((props, ref) => {
     const {
       style,
       className,
@@ -41,7 +40,6 @@ function withVirtualizeList<T extends any>(
       />
     );
   });
-  return WithVirtualizeList;
 }
 
 export default withVirtualizeList;

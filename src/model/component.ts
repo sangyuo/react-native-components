@@ -137,7 +137,7 @@ interface GroupPropsBase<ItemT = any> {
   classBox?: string;
   pickKey?: keyof ItemT;
   pickLabel?: keyof ItemT;
-  onChange?: (value?: ItemT) => void;
+  onChange?: (value: ItemT) => void;
 }
 
 export interface RadioGroupProps<ItemT = any> extends GroupPropsBase<ItemT> {
