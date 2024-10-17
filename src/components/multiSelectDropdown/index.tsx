@@ -1,5 +1,4 @@
 import React from 'react';
-import Button from '../button';
 import {
   MultiDropDownProps,
   RenderButtonProps,
@@ -8,7 +7,7 @@ import {
 import {classNames} from '../../utils';
 import {useVarianColor} from '../../hook';
 import {ArrowDown} from '../svgBox/ArrowDown';
-import {Box, DropdownBox, ScrollBox, Text} from '../..';
+import {Box, ButtonBox, DropdownBox, ScrollBox, TextBox} from '../..';
 import {Tick} from '../svgBox/Tick';
 
 export default function MultiSelectDropdown<ItemT = any>({
@@ -68,7 +67,7 @@ export default function MultiSelectDropdown<ItemT = any>({
     }
 
     return (
-      <Button
+      <ButtonBox
         {...restButton}
         className={classNames(
           'w-full px-2 h-10 row-center space-between border gap-1',
@@ -84,21 +83,21 @@ export default function MultiSelectDropdown<ItemT = any>({
           {itemSelect?.length && (
             <ScrollBox horizontal classContent="gap-2">
               {itemSelect.map(item => (
-                <Button
+                <ButtonBox
                   key={'selected' + item?.[pickKey]}
                   className="px-2 py-1 bg-primary rounded -z-1"
                   onPress={() =>
                     onPressSelectedItem && onPressSelectedItem(item)
                   }>
-                  <Text className={classNames(classTitle)}>
+                  <TextBox className={classNames(classTitle)}>
                     {item?.[pickLabel] as string}
-                  </Text>
-                </Button>
+                  </TextBox>
+                </ButtonBox>
               ))}
             </ScrollBox>
           )}
         </Box>
-      </Button>
+      </ButtonBox>
     );
   };
 
@@ -108,7 +107,7 @@ export default function MultiSelectDropdown<ItemT = any>({
       return renderOptionItem({index, item, selected});
     }
     return (
-      <Button
+      <ButtonBox
         key={(item?.[pickKey] ?? index) as string | number}
         className={classNames(
           'w-full px-4 py-2 row-center space-between',

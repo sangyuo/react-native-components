@@ -1,6 +1,12 @@
 import React from 'react';
-import Button from '../button';
-import {Box, classNames, SwitchBoxProps, Text, useVarianColor} from '../..';
+import {
+  Box,
+  ButtonBox,
+  classNames,
+  SwitchBoxProps,
+  TextBox,
+  useVarianColor,
+} from '../..';
 
 const SwitchBox = ({
   value = false,
@@ -23,14 +29,14 @@ const SwitchBox = ({
   const renderCustomLabel = () => {
     if (label) {
       return (
-        <Text
+        <TextBox
           className={classNames(
             value ? 'text-white' : 'text-black',
             'text-center flex-1 text-sm',
             classLabel,
           )}>
           {value ? label?.on : label?.off}
-        </Text>
+        </TextBox>
       );
     }
     if (renderLabel) {
@@ -55,7 +61,7 @@ const SwitchBox = ({
 
   return (
     <>
-      <Button
+      <ButtonBox
         disabled={disabled}
         onPress={toggleActive}
         className={classNames(
@@ -66,7 +72,7 @@ const SwitchBox = ({
         )}>
         {renderCustomThumb()}
         {renderCustomLabel()}
-      </Button>
+      </ButtonBox>
     </>
   );
 };

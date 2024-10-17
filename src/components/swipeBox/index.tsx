@@ -1,7 +1,7 @@
 import React, {useMemo, useRef, useState} from 'react';
 import {
   Box,
-  Button,
+  ButtonBox,
   classNames,
   isEndReachedScroll,
   ScrollBox,
@@ -191,7 +191,7 @@ export default function SwipeBox<ItemT = any>({
     if (enableControl) {
       return (
         <>
-          <Button
+          <ButtonBox
             enableDebounce
             disabled={activeIndex === 0}
             style={{
@@ -200,8 +200,8 @@ export default function SwipeBox<ItemT = any>({
             onPress={() => handleControl('prev')}
             className={classNames(classControl, 'left-2')}>
             <ArrowLeft />
-          </Button>
-          <Button
+          </ButtonBox>
+          <ButtonBox
             enableDebounce
             disabled={activeIndex === maxIndex}
             onPress={() => handleControl('next')}
@@ -210,7 +210,7 @@ export default function SwipeBox<ItemT = any>({
             }}
             className={classNames(classControl, 'right-2')}>
             <ArrowRight />
-          </Button>
+          </ButtonBox>
         </>
       );
     }

@@ -1,4 +1,3 @@
-import Button from './button';
 import RadioButton from './radioButton';
 import Checkbox from './checkbox';
 import ImageBox from './image';
@@ -12,8 +11,8 @@ export * from './groups';
 export * from './textInput';
 export * from './box';
 export * from './virtualizedList';
+export * from './button';
 export {
-  Button,
   RadioButton,
   Checkbox,
   ImageBox,

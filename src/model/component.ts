@@ -1,4 +1,5 @@
 import {
+  GestureResponderEvent,
   ImageResizeMode,
   ImageSourcePropType,
   ImageStyle,
@@ -7,8 +8,8 @@ import {
   StyleProp,
   TextInputProps,
   TextProps,
-  TouchableOpacityProps,
   ViewProps,
+  ViewStyle,
 } from 'react-native';
 import {ImageModuleType, Varian, VarianCheckbox, VarianColor} from '.';
 import {ReactNode} from 'react';
@@ -21,7 +22,8 @@ export interface BoxProps extends ViewProps {
   className?: string;
 }
 
-export interface ButtonComponentProps extends TouchableOpacityProps {
+export interface ButtonComponentProps {
+  style?: StyleProp<ViewStyle>;
   className?: string;
   classNameText?: string;
   enableDebounce?: boolean;
@@ -31,6 +33,8 @@ export interface ButtonComponentProps extends TouchableOpacityProps {
   numberOfLines?: number;
   leftContent?: ReactNode;
   rightContent?: ReactNode;
+  children?: ReactNode;
+  onPress?: (e: GestureResponderEvent) => void;
 }
 
 interface CheckboxItemBaseProps {
