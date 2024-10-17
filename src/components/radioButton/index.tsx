@@ -1,9 +1,8 @@
 import React from 'react';
-import Button from '../button';
 import {classNames} from '../../utils';
 import {RadioButtonProps} from '../../model';
 import {useVarianColor} from '../../hook';
-import {Box, Text} from '../..';
+import {Box, ButtonBox, TextBox} from '../..';
 
 function RadioButton<ItemT = any>(props: RadioButtonProps<ItemT>) {
   const {
@@ -28,7 +27,7 @@ function RadioButton<ItemT = any>(props: RadioButtonProps<ItemT>) {
   const colorUnchecked = classNameStatus?.unchecked || 'border-gray-400';
 
   return (
-    <Button
+    <ButtonBox
       enableDebounce={enableDebounce}
       delayDebounce={delayDebounce}
       onPress={() => {
@@ -57,10 +56,11 @@ function RadioButton<ItemT = any>(props: RadioButtonProps<ItemT>) {
           />
         )}
       </Box>
-      <Text className={classNames('text-black font-semibold', classNameLabel)}>
+      <TextBox
+        className={classNames('text-black font-semibold', classNameLabel)}>
         {label}
-      </Text>
-    </Button>
+      </TextBox>
+    </ButtonBox>
   );
 }
 

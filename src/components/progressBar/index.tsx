@@ -3,7 +3,7 @@ import {
   Box,
   classNames,
   ProgressBarProps,
-  Text,
+  TextBox,
   useClassName,
   useVarianColor,
 } from '../..';
@@ -37,14 +37,14 @@ const ProgressBar = ({
       return renderLabel(value);
     }
     return (
-      <Text
+      <TextBox
         className={classNames(
           'text-sm text-right',
           classVarian.text,
           classLabel,
         )}>
         {label ?? `${value}%`}
-      </Text>
+      </TextBox>
     );
   };
 

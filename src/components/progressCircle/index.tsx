@@ -2,7 +2,7 @@ import React from 'react';
 import {
   classNames,
   ProgressCircleProps,
-  Text,
+  TextBox,
   useCircleSpecs,
   useVarianColor,
   Box,
@@ -43,14 +43,14 @@ const ProgressCircle = ({
       return renderLabel(value);
     }
     return (
-      <Text
+      <TextBox
         className={classNames(
           'text-sm text-center',
           classVarian.text,
           classLabel,
         )}>
         {label ?? `${value}%`}
-      </Text>
+      </TextBox>
     );
   };
 

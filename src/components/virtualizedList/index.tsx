@@ -11,13 +11,17 @@ import {
 import {withVirtualizeList} from '../../hoc';
 import React, {forwardRef, ReactNode} from 'react';
 
-export function FlatListBox<ItemT = any>(props: FlatListProps<ItemT>) {
+export const FlatListBox = forwardRef(function FlatListBox<ItemT>(
+  props: FlatListProps<ItemT> & React.RefAttributes<FlatList<ItemT>>,
+  ref: React.Ref<FlatList<ItemT>>,
+) {
   const FlatListRender = withVirtualizeList<
     FlatListProps<ItemT>,
     FlatList<ItemT>
   >(FlatList);
-  return <FlatListRender {...props} />;
-}
+
+  return <FlatListRender {...props} ref={ref} />;
+});
 
 export const VirtualizedListBox = forwardRef(
   <ItemT,>(
