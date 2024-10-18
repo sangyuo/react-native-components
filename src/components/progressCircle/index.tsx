@@ -1,11 +1,11 @@
 import React from 'react';
-import Box from '../box';
 import {
   classNames,
   ProgressCircleProps,
-  Text,
+  TextBox,
   useCircleSpecs,
   useVarianColor,
+  Box,
 } from '../..';
 import {Animated} from 'react-native';
 import {Circle, G, Svg} from 'react-native-svg';
@@ -43,14 +43,14 @@ const ProgressCircle = ({
       return renderLabel(value);
     }
     return (
-      <Text
+      <TextBox
         className={classNames(
           'text-sm text-center',
           classVarian.text,
           classLabel,
         )}>
         {label ?? `${value}%`}
-      </Text>
+      </TextBox>
     );
   };
 

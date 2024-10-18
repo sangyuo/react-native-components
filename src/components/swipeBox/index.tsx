@@ -1,9 +1,10 @@
 import React, {useMemo, useRef, useState} from 'react';
-import Box from '../box';
 import {
-  Button,
+  Box,
+  ButtonBox,
   classNames,
   isEndReachedScroll,
+  ScrollBox,
   SwipeBoxProps,
   useClassName,
 } from '../..';
@@ -11,7 +12,6 @@ import {
   LayoutChangeEvent,
   NativeScrollEvent,
   NativeSyntheticEvent,
-  ScrollView,
 } from 'react-native';
 import useSpecsSwipeBox from '../../hook/useSpecsSwipeBox';
 import useActionSwipeBox from '../../hook/useActionSwipeBox';
@@ -72,6 +72,7 @@ export default function SwipeBox<ItemT = any>({
       data,
       defaultIndex: currentIndex,
     });
+  console.log('sliderRef', sliderRef);
 
   const onScrollListener = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
     onScroll && onScroll(event);
@@ -190,7 +191,7 @@ export default function SwipeBox<ItemT = any>({
     if (enableControl) {
       return (
         <>
-          <Button
+          <ButtonBox
             enableDebounce
             disabled={activeIndex === 0}
             style={{
@@ -199,8 +200,8 @@ export default function SwipeBox<ItemT = any>({
             onPress={() => handleControl('prev')}
             className={classNames(classControl, 'left-2')}>
             <ArrowLeft />
-          </Button>
-          <Button
+          </ButtonBox>
+          <ButtonBox
             enableDebounce
             disabled={activeIndex === maxIndex}
             onPress={() => handleControl('next')}
@@ -209,7 +210,7 @@ export default function SwipeBox<ItemT = any>({
             }}
             className={classNames(classControl, 'right-2')}>
             <ArrowRight />
-          </Button>
+          </ButtonBox>
         </>
       );
     }
@@ -221,7 +222,7 @@ export default function SwipeBox<ItemT = any>({
       className={classNames('relative', classBox)}
       style={width ? {width} : {}}
       onLayout={onLayoutSlider}>
-      <ScrollView
+      <ScrollBox
         {...rest}
         ref={sliderRef}
         style={[styleSlider, style]}
@@ -231,7 +232,7 @@ export default function SwipeBox<ItemT = any>({
         showsVerticalScrollIndicator={showsVerticalScrollIndicator}
         pagingEnabled={pagingEnabled}>
         {renderItem()}
-      </ScrollView>
+      </ScrollBox>
       {renderPagination()}
       {renderControlItem()}
     </Box>

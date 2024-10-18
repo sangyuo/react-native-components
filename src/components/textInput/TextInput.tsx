@@ -1,8 +1,6 @@
 import React from 'react';
-import {TextInput} from 'react-native';
-import Box from '../box';
 import {classNames} from '../../utils';
-import {Text, TextInputBoxProps, useClassName} from '../..';
+import {Box, TextBox, TextInputBoxBase, TextInputBoxProps} from '../..';
 
 export default function TextInputBox({
   leftContent,
@@ -12,22 +10,19 @@ export default function TextInputBox({
   classBox,
   classLabel,
   label,
-  style,
   ...rest
 }: TextInputBoxProps) {
-  const stylesClassInputBase = useClassName(
-    classNames('text-black px-1 flex-1', classInputBase),
-  );
-
   return (
     <Box className={classNames('column w-full gap-1', classBox)}>
       {label ? (
-        <Text className={classNames('text-black', classLabel)}>{label}</Text>
+        <TextBox className={classNames('text-black', classLabel)}>
+          {label}
+        </TextBox>
       ) : null}
       <Box className={classNames('row-center border', classInput)}>
         {leftContent}
-        <TextInput
-          style={[stylesClassInputBase, style]}
+        <TextInputBoxBase
+          className={classNames('text-black px-1 flex-1', classInputBase)}
           placeholder="Text input"
           {...rest}
         />

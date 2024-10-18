@@ -1,8 +1,5 @@
 import React from 'react';
-import Box from '../box';
-import Text from '../text';
-import Button from '../button';
-import {classNames, ImageBox} from '../..';
+import {Box, ButtonBox, classNames, ImageBox, TextBox} from '../..';
 import Checked from '../../assets/image/checked.png';
 import {CheckboxProps} from '../../model';
 import {useVarianCheckbox} from '../../hook';
@@ -59,7 +56,7 @@ function Checkbox<ItemT = any>(props: CheckboxProps<ItemT>) {
     classNameStatus?.unchecked || 'border-2 border-gray-400';
 
   return (
-    <Button
+    <ButtonBox
       enableDebounce={enableDebounce}
       delayDebounce={delayDebounce}
       onPress={() => {
@@ -75,10 +72,11 @@ function Checkbox<ItemT = any>(props: CheckboxProps<ItemT>) {
         )}>
         {renderChecked()}
       </Box>
-      <Text className={classNames('text-black font-semibold', classNameLabel)}>
+      <TextBox
+        className={classNames('text-black font-semibold', classNameLabel)}>
         {label}
-      </Text>
-    </Button>
+      </TextBox>
+    </ButtonBox>
   );
 }
 export default Checkbox;
