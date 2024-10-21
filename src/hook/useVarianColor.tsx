@@ -6,9 +6,14 @@ import {COLORS} from '../config/Colors';
 type Props = {
   varian?: VarianColor;
   enableNull?: boolean;
+  isDropdown?: boolean;
 };
 
-export default function useVarianColor({varian, enableNull}: Props) {
+export default function useVarianColor({
+  varian,
+  enableNull,
+  isDropdown,
+}: Props) {
   const styleDirection = useMemo(() => {
     if (varian === 'secondary') {
       return {
@@ -30,7 +35,7 @@ export default function useVarianColor({varian, enableNull}: Props) {
 
     return {
       border: 'border-black',
-      bg: 'bg-black',
+      bg: isDropdown ? 'bg-gray-400' : 'bg-black',
       text: 'text-black',
       color: COLORS.black,
     };
