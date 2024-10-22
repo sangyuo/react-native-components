@@ -4,7 +4,6 @@ import {
   ButtonBox,
   classNames,
   isEndReachedScroll,
-  ScrollBox,
   SwipeBoxProps,
   useClassName,
 } from '../..';
@@ -12,6 +11,7 @@ import {
   LayoutChangeEvent,
   NativeScrollEvent,
   NativeSyntheticEvent,
+  ScrollView,
 } from 'react-native';
 import useSpecsSwipeBox from '../../hook/useSpecsSwipeBox';
 import useActionSwipeBox from '../../hook/useActionSwipeBox';
@@ -142,7 +142,7 @@ export default function SwipeBox<ItemT = any>({
           return (
             <Box
               className={classNames(classCustomItem, classSliderItem)}
-              key={index}
+              key={`swipeItem-${index}`}
               style={[{width: sliderItemWidth}]}>
               {renderSliderItem(item, index)}
             </Box>
@@ -162,7 +162,7 @@ export default function SwipeBox<ItemT = any>({
         }
         return (
           <Box
-            key={index}
+            key={`page-${index}`}
             className={classNames(
               'w-2 h-2 bg-gray-400 rounded-full',
               classPageItem,
@@ -222,7 +222,7 @@ export default function SwipeBox<ItemT = any>({
       className={classNames('relative', classBox)}
       style={width ? {width} : {}}
       onLayout={onLayoutSlider}>
-      <ScrollBox
+      <ScrollView
         {...rest}
         ref={sliderRef}
         style={[styleSlider, style]}
@@ -232,7 +232,7 @@ export default function SwipeBox<ItemT = any>({
         showsVerticalScrollIndicator={showsVerticalScrollIndicator}
         pagingEnabled={pagingEnabled}>
         {renderItem()}
-      </ScrollBox>
+      </ScrollView>
       {renderPagination()}
       {renderControlItem()}
     </Box>

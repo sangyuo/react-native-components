@@ -6,28 +6,25 @@ type Props = {
   varian?: VarianCheckbox;
 };
 
-export default function useVarianCheckbox({varian}: Props) {
-  const styleDirection = useMemo(() => {
-    switch (varian) {
-      case 'outline-primary':
-        return {
-          checked: 'border-2 border-primary',
-          iconColor: CONFIG_BOX.colors.primary,
-        };
-      case 'outline-secondary':
-        return {
-          checked: 'border-2 border-secondary',
-          iconColor: CONFIG_BOX.colors.secondary,
-        };
-      case 'secondary':
-        return {
-          checked: 'bg-secondary',
-          iconColor: '#ffffff',
-        };
+const classCustom = {
+  'outline-primary': {
+    checked: 'bg-primary',
+    iconColor: CONFIG_BOX.colors.primary,
+  },
+  'outline-secondary': {
+    checked: 'bg-secondary',
+    iconColor: CONFIG_BOX.colors.secondary,
+  },
+  secondary: {
+    checked: 'bg-secondary',
+    iconColor: '#ffffff',
+  },
+  primary: {
+    checked: 'bg-primary',
+    iconColor: '#ffffff',
+  },
+};
 
-      default:
-        return {checked: 'bg-primary', iconColor: '#ffffff'};
-    }
-  }, [varian]);
-  return styleDirection;
+export default function useVarianCheckbox({varian = 'primary'}: Props) {
+  return useMemo(() => classCustom[varian], [varian]);
 }
