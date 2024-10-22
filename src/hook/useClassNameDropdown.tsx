@@ -31,23 +31,28 @@ export default function useClassNameDropdown({
   maxWidthOption,
   maxContent,
 }: Props) {
-  const className = useMemo(() => {
+  return useMemo(() => {
     const classDefault = 'absolute z-9 bg-white rounded-md border gap-1 py-2';
+
+    // Get width and height
     let width = offset?.width || offsetLayout?.width;
     const heightClass = offset?.height ? `h-[${offset?.height}]` : 'h-auto';
+
+    // Calculate positions
     const positionTop = offset?.top ?? offsetLayout?.top;
+    const positionLeft = offset?.left ?? offsetLayout?.left ?? 0;
     const bottomPositionClass = isNumber(offset?.bottom)
       ? `bottom-[${offset?.bottom}]`
       : '';
+
+    // Max dimensions
     let maxHeight = maxContent?.height || 0;
     let maxWidth = maxContent?.width || 0;
     if (positionTop) {
       maxHeight -= positionTop;
     }
 
-    const positionLeft = offset?.left ?? offsetLayout?.left ?? 0;
-    const positionLeftClass = `left-[${positionLeft}]`;
-
+    // Position for right-to-left layouts
     let positionRight = offset?.right;
     if (enableRightToLeft && !positionRight) {
       positionRight = Math.floor(
@@ -59,15 +64,19 @@ export default function useClassNameDropdown({
     } else {
       maxWidth -= positionLeft;
     }
+
+    // Determine class for left/right positioning
+    const positionLeftClass = `left-[${positionLeft}]`;
     const rightPositionClass = positionRight ? `right-[${positionRight}]` : '';
+
+    // Adjust width based on RTL and full-width option
     if (classOption?.includes('w-full')) {
       classOption = classOption.replace('w-full', '');
-      if (enableRightToLeft && positionRight) {
-        width = maxWidthOption - positionRight;
-      } else {
-        width = maxWidthOption - (positionLeft ?? 0);
-      }
-      width = Math.floor(width);
+      const effectiveWidth =
+        enableRightToLeft && positionRight
+          ? maxWidthOption - positionRight
+          : maxWidthOption - (positionLeft ?? 0);
+      width = Math.floor(effectiveWidth);
     }
 
     return classNames(
@@ -90,6 +99,4 @@ export default function useClassNameDropdown({
     enableRightToLeft,
     maxContent,
   ]);
-
-  return className;
 }

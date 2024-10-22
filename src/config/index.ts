@@ -1,4 +1,6 @@
 import {BORDER_RADIUS, LINE_HEIGHT_SIZE, SIZE_SPACE, TEXT_SIZE} from './Spaces';
+export * from './Spaces';
+export * from './Colors';
 
 interface DefaultTheme {
   colors: {[key: string]: string};

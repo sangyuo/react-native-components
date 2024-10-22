@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 
-const textFontStyle = StyleSheet.create({
+export const textStyles = StyleSheet.create({
   'text-center': {
     textAlign: 'center',
   },
@@ -75,7 +75,3 @@ const textFontStyle = StyleSheet.create({
     textDecorationLine: 'none',
   },
 });
-
-export const textStyles = {
-  ...textFontStyle,
-};

@@ -1,4 +1,5 @@
 export const SIZE_SPACE = {
+  default: 1,
   '0': 0,
   '0.5': 2,
   '1': 4,
