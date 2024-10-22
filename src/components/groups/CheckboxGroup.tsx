@@ -17,7 +17,7 @@ export default function CheckboxGroup<ItemT = any>({
     return data.map(item => (
       <Checkbox
         {...checkBoxItem}
-        key={item?.[pickKey] as string}
+        key={item?.[pickKey]?.toString()}
         value={item}
         checked={value?.includes(item?.[pickKey] as string | number)}
         onChange={() => onChange && onChange(item)}

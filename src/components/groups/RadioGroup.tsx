@@ -17,6 +17,7 @@ export default function RadioGroup<ItemT = any>({
     return data.map(item => (
       <RadioButton
         {...radioItem}
+        key={item?.[pickKey]?.toString()}
         value={item}
         checked={item?.[pickKey] === value}
         onChange={() => onChange && onChange(item)}

@@ -2,31 +2,38 @@ import React from 'react';
 import {Image} from 'react-native';
 import {useClassName} from '../../hook';
 import {ImageBoxProps, ImageModuleType} from '../../model';
-import {classNames} from '../../utils';
+import {classNames, isNumber} from '../../utils';
 import useLoadModuleFastImage from '../../hook/useLoadModuleFastImage';
+import {SvgUri} from 'react-native-svg';
+import {Box} from '../..';
 
 function ImageComponent({
   className,
-  imageModuleType,
-  source = ImageModuleType.Image,
+  imageModuleType = ImageModuleType.Image,
+  source,
   style,
   resizeMode = 'contain',
 }: ImageBoxProps) {
   const stylesCustom = useClassName(classNames('w-full h-full', className));
   const FastImage: any = useLoadModuleFastImage(imageModuleType);
 
-  if (FastImage) {
+  if (
+    imageModuleType === ImageModuleType.SvgUri &&
+    !isNumber(source) &&
+    !Array.isArray(source) &&
+    source?.uri
+  ) {
     return (
-      <FastImage
-        style={[stylesCustom, style]}
-        source={source}
-        resizeMode={resizeMode}
-      />
+      <Box style={[stylesCustom, style]}>
+        <SvgUri uri={source?.uri} />
+      </Box>
     );
   }
 
+  const ImageModule = FastImage || Image;
+
   return (
-    <Image
+    <ImageModule
       style={[stylesCustom, style]}
       source={source}
       resizeMode={resizeMode}
