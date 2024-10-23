@@ -9,36 +9,42 @@ type Props = {
   isDropdown?: boolean;
 };
 
+const classCustom = {
+  default: {
+    border: 'border-black',
+    bg: 'bg-black',
+    text: 'text-black',
+    color: COLORS.black,
+  },
+  primary: {
+    border: 'border-primary',
+    bg: 'bg-primary',
+    text: 'text-primary',
+    color: CONFIG_BOX.colors.primary,
+  },
+  secondary: {
+    border: 'border-secondary',
+    bg: 'bg-secondary',
+    text: 'text-secondary',
+    color: CONFIG_BOX.colors.secondary,
+  },
+};
+
 export default function useVarianColor({
   varian,
   enableNull,
   isDropdown,
 }: Props) {
-  const styleDirection = useMemo(() => {
-    if (varian === 'secondary') {
+  return useMemo(() => {
+    if (varian) {
+      return classCustom[varian];
+    }
+    if (enableNull) {
       return {
-        border: 'border-secondary',
-        bg: 'bg-secondary',
-        text: 'text-secondary',
-        color: CONFIG_BOX.colors.secondary,
+        ...classCustom.default,
+        bg: isDropdown ? 'bg-gray-400' : 'bg-black',
       };
     }
-
-    if (varian === 'primary' || !enableNull) {
-      return {
-        border: 'border-primary',
-        bg: 'bg-primary',
-        text: 'text-primary',
-        color: CONFIG_BOX.colors.primary,
-      };
-    }
-
-    return {
-      border: 'border-black',
-      bg: isDropdown ? 'bg-gray-400' : 'bg-black',
-      text: 'text-black',
-      color: COLORS.black,
-    };
+    return classCustom.primary;
   }, [varian, enableNull]);
-  return styleDirection;
 }

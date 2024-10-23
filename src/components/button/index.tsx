@@ -13,13 +13,14 @@ import {
 } from 'react-native';
 import {withButtonBox} from '../../hoc';
 
-export const ButtonBox = withButtonBox<TouchableOpacityProps, TouchableOpacity>(
-  TouchableOpacity,
-);
+export const ButtonBox = withButtonBox<
+  TouchableOpacityProps,
+  typeof TouchableOpacity
+>(TouchableOpacity);
 
 export const ButtonHighlightBox = withButtonBox<
   TouchableHighlightProps,
-  TouchableHighlight
+  typeof TouchableHighlight
 >(TouchableHighlight);
 
 export const ButtonNativeFeedbackBox = withButtonBox<
