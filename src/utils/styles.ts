@@ -33,19 +33,13 @@ export const createSpaceStyles = (
         value = fnScale[scaleType](value);
       }
       const keyStyle = propertiesOptions[property]?.toString();
-      if (hasSlice) {
-        const keysStyle = keyStyle.split(' ');
-        if (keysStyle.length > 1) {
-          keysStyle.forEach(item => {
-            styles[styleProperty] = {
-              [item]: value,
-            };
-          });
-        } else {
+      const keyStyleSplit = hasSlice ? keyStyle.split(' ') : [];
+      if (keyStyleSplit.length > 1) {
+        keyStyleSplit.forEach(item => {
           styles[styleProperty] = {
-            [keyStyle]: value,
+            [item]: value,
           };
-        }
+        });
       } else {
         styles[styleProperty] = {
           [keyStyle]: value,
@@ -110,19 +104,13 @@ export const createBaseStyles = (
       const styleProperty =
         options === 'default' ? property : `${property}-${options}`;
       const keyStyle = propertiesOptions[property]?.toString();
-      if (hasSlice) {
-        const keysStyle = keyStyle.split(' ');
-        if (keysStyle.length > 1) {
-          keysStyle.forEach(item => {
-            styles[styleProperty] = {
-              [item]: value,
-            };
-          });
-        } else {
+      const keyStyleSplit = hasSlice ? keyStyle.split(' ') : [];
+      if (keyStyleSplit.length > 1) {
+        keyStyleSplit.forEach(item => {
           styles[styleProperty] = {
-            [keyStyle]: value,
+            [item]: value,
           };
-        }
+        });
       } else {
         styles[styleProperty] = {
           [keyStyle]: value,

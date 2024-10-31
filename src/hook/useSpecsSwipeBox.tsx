@@ -17,12 +17,9 @@ export default function useSpecsSwipeBox({
   return useMemo(() => {
     let spaceItem = space ?? 0;
     let sliderItemWidth = itemWidth ?? sliderWidth;
-    if (pagingEnabled) {
+    if (pagingEnabled && itemWidth) {
       if (itemWidth) {
         spaceItem = sliderWidth - itemWidth;
-      }
-      if (space && !itemWidth) {
-        sliderItemWidth -= space;
       }
     } else {
       if (space && !itemWidth) {

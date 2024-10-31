@@ -1,8 +1,8 @@
-import React from 'react';
-import {Box, ButtonBox, classNames, ImageBox, TextBox} from '../..';
-import Checked from '../../assets/image/checked.png';
+import React, {useMemo} from 'react';
+import {Box, ButtonBox, classNames, TextBox} from '../..';
 import {CheckboxProps} from '../../model';
 import {useVarianCheckbox} from '../../hook';
+import {Tick} from '../svgBox/Tick';
 
 function Checkbox<ItemT = any>(props: CheckboxProps<ItemT>) {
   const {
@@ -14,39 +14,38 @@ function Checkbox<ItemT = any>(props: CheckboxProps<ItemT>) {
     classNameLabel,
     classNameBox,
     classNameStatus,
-    iconChecked,
     iconColor,
     delayDebounce,
     enableDebounce,
-    resizeMode,
     value,
     varian,
+    iconChecked,
     renderIconChecked,
     onChange,
   } = props;
   const classCustom = useVarianCheckbox({varian});
+  const width = useMemo(
+    () => (iconSize ? iconSize : size ? size * 0.5 : 12),
+    [size, iconSize],
+  );
+
   const renderChecked = () => {
+    if (renderIconChecked) {
+      return renderIconChecked(checked ?? false);
+    }
+
     if (!checked) {
       return null;
     }
-    if (renderIconChecked) {
-      return renderIconChecked();
-    }
 
+    if (iconChecked) {
+      return iconChecked;
+    }
     return (
-      <ImageBox
-        source={iconChecked || Checked}
-        className={
-          iconSize
-            ? `w-${iconSize} h-${iconSize}`
-            : size
-            ? `w-${size * 0.5} h-${size * 0.5}`
-            : 'w-3 h-3'
-        }
-        style={{
-          tintColor: iconColor ?? classCustom.iconColor,
-        }}
-        resizeMode={resizeMode || 'contain'}
+      <Tick
+        width={width}
+        height={width}
+        fill={iconColor ?? classCustom.iconColor}
       />
     );
   };
