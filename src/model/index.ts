@@ -310,3 +310,34 @@ export interface VirtualListClassProps {
   classHeader?: string;
   classFooter?: string;
 }
+
+export interface AnimationPlaceholderType {
+  animationType?: 'opacity' | 'shine';
+  classShine?: string;
+}
+
+export interface PlaceholderProps extends AnimationPlaceholderType {
+  className?: string;
+  placeholderType?: 'line' | 'media' | 'none';
+  randomWidth?: boolean;
+  disableAnimation?: boolean;
+  children?: ReactNode;
+}
+
+export interface PlaceholderBaseProps {
+  classLine?: string;
+  classCard?: string;
+  classMedia?: string;
+  classContainerLine?: string;
+  numberLine?: number;
+  halfWidth?: boolean;
+  randomWidth?: boolean;
+}
+
+export interface PlaceholderBoxProps extends AnimationPlaceholderType {
+  length?: number;
+  classContainer?: string;
+  placeholderType?: 'line' | 'media' | 'card';
+  placeholderItem?: PlaceholderBaseProps;
+  disableAnimation?: boolean;
+}
