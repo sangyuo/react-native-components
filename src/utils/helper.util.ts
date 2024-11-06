@@ -19,3 +19,6 @@ export const isEndReachedScroll = ({
 };
 
 export const isNumber = (value: any) => typeof value === 'number';
+
+export const randomIndex = (length: number) =>
+  Math.floor(Math.random() * length);

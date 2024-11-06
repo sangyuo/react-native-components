@@ -1,4 +1,4 @@
-import {Dimensions, NativeModules, Platform} from 'react-native';
+import {Dimensions, StatusBar, Platform} from 'react-native';
 
 const {width, height} = Dimensions.get('window');
 const [shortDimension, longDimension] =
@@ -6,8 +6,7 @@ const [shortDimension, longDimension] =
 
 const guidelineBaseWidth = 375;
 const guidelineBaseHeight = 812;
-const {StatusBarManager} = NativeModules;
-const heightStatusbar = StatusBarManager.HEIGHT;
+const heightStatusbar = StatusBar.currentHeight || 0;
 
 const horizontalScale = (size: number) =>
   (shortDimension / guidelineBaseWidth) * size;
