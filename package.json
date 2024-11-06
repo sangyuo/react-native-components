@@ -1,6 +1,6 @@
 {
   "name": "react-native-box-lite",
-  "version": "0.1.3",
+  "version": "0.1.6-beta.2",
   "scripts": {
     "lint": "eslint .",
     "test": "jest"
