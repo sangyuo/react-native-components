@@ -47,7 +47,7 @@ export const DropdownBox = <ItemT,>({
     className,
     title,
     placeholder,
-    classNameText,
+    classText,
     classPlaceholderColor,
     classValueColor,
     ...rest
@@ -128,7 +128,7 @@ export const DropdownBox = <ItemT,>({
           theme.border,
           className,
         )}
-        classNameText={classNames('font-medium', classTitle, classNameText)}
+        classText={classNames('font-medium', classTitle, classText)}
         numberOfLines={1}
         title={titleBtn ?? title}
         onPress={() => setVisible(pre => !pre)}>
@@ -156,7 +156,7 @@ export const DropdownBox = <ItemT,>({
                 )
               : '',
           )}
-          classNameText={classNames(
+          classText={classNames(
             'font-medium',
             classOptionLabel,
             selected ? classOptionLabelSelected : '',
