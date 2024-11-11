@@ -13,7 +13,7 @@ const withButtonBox = <T extends any, R>(
       enableDebounce,
       delayDebounce,
       className,
-      classNameText,
+      classText,
       varian,
       title,
       children,
@@ -71,7 +71,7 @@ const withButtonBox = <T extends any, R>(
         {leftContent}
         {title ? (
           <TextBox
-            className={classNames(classButton.text, classNameText)}
+            className={classNames(classButton.text, classText)}
             numberOfLines={numberOfLines}>
             {title}
           </TextBox>
