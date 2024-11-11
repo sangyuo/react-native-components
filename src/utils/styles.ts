@@ -35,11 +35,12 @@ export const createSpaceStyles = (
       const keyStyle = propertiesOptions[property]?.toString();
       const keyStyleSplit = hasSlice ? keyStyle.split(' ') : [];
       if (keyStyleSplit.length > 1) {
-        keyStyleSplit.forEach(item => {
-          styles[styleProperty] = {
+        styles[styleProperty] = keyStyleSplit.reduce((acc, item) => {
+          return {
+            ...acc,
             [item]: value,
           };
-        });
+        }, styles[styleProperty] || {});
       } else {
         styles[styleProperty] = {
           [keyStyle]: value,
@@ -81,9 +82,15 @@ export const createSizeCustomStyles = (value: number, keyStyle: string) => {
   const keyCustom = customsSpaceKey[keyStyle as keyof typeof customsSpaceKey];
   const keysStyle = keyCustom.split(' ');
   if (keysStyle.length > 1) {
-    keysStyle.forEach(item => {
-      styles[item] = value;
-    });
+    styles = keysStyle.reduce(
+      (acc, item) => {
+        return {
+          ...acc,
+          [item]: value,
+        };
+      },
+      {...styles},
+    );
   } else {
     styles = {
       [keyCustom]: value,
@@ -106,11 +113,12 @@ export const createBaseStyles = (
       const keyStyle = propertiesOptions[property]?.toString();
       const keyStyleSplit = hasSlice ? keyStyle.split(' ') : [];
       if (keyStyleSplit.length > 1) {
-        keyStyleSplit.forEach(item => {
-          styles[styleProperty] = {
+        styles[styleProperty] = keyStyleSplit.reduce((acc, item) => {
+          return {
+            ...acc,
             [item]: value,
           };
-        });
+        }, styles[styleProperty] || {});
       } else {
         styles[styleProperty] = {
           [keyStyle]: value,
