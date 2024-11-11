@@ -22,3 +22,13 @@ export const isNumber = (value: any) => typeof value === 'number';
 
 export const randomIndex = (length: number) =>
   Math.floor(Math.random() * length);
+
+// remove array null
+export const insertObjectArrayIf = (condition: any, element: any) => {
+  return condition?.length > 0 ? element : {};
+};
+
+// remove object null
+export const insertObjectIf = (condition: any, element: any) => {
+  return condition || condition?.length > 0 ? element : {};
+};
