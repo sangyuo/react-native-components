@@ -48,7 +48,7 @@ export interface BoxProps extends ViewProps {
 export interface ButtonComponentProps {
   style?: StyleProp<ViewStyle>;
   className?: string;
-  classNameText?: string;
+  classText?: string;
   enableDebounce?: boolean;
   delayDebounce?: number;
   varian?: Varian;
@@ -340,4 +340,44 @@ export interface PlaceholderBoxProps extends AnimationPlaceholderType {
   placeholderType?: 'line' | 'media' | 'card';
   placeholderItem?: PlaceholderBaseProps;
   disableAnimation?: boolean;
+}
+
+export interface DateFormats {
+  'YYYY-MM': string;
+  'YYYY/MM': string;
+  'YYYY-MM-DD': string;
+  'YYYY/MM/DD': string;
+  'MM/DD/YYYY': string;
+  'DD/MM/YYYY': string;
+  'DD-MM-YYYY': string;
+  'MM-DD-YYYY': string;
+}
+
+export type DateFormatType = keyof DateFormats;
+
+export interface MonthOfYearType {
+  year: number;
+  month: number;
+  days: DayItemType[];
+}
+
+export interface DayItemType {
+  dateString: string;
+  isExtraDay?: boolean;
+  isToday?: boolean;
+  day: number;
+  className?: string;
+  classText?: string;
+  disabled?: boolean;
+}
+
+export interface SelectedDateItemType {
+  classBox?: string;
+  classText?: string;
+  dot?: boolean;
+  classDot?: string;
+}
+
+export interface SelectedDateType {
+  [key: string]: SelectedDateItemType;
 }
