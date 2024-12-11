@@ -72,7 +72,6 @@ export const SwipeBox = <ItemT,>({
       data,
       defaultIndex: currentIndex,
     });
-  console.log('sliderRef', sliderRef);
 
   const onScrollListener = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
     onScroll && onScroll(event);

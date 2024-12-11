@@ -1,31 +1,32 @@
 import React from 'react';
-import {SafeAreaView, ScrollView} from 'react-native';
-
-import {Box, ButtonBox, ProgressBar, ProgressCircle} from './src/components';
+import {SafeAreaView} from 'react-native';
+import {CalendarBox} from './src/atomic/organisms/CalendarBox';
+import {formatDate} from './src/utils/date.util';
 
 function App(): React.JSX.Element {
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState(formatDate('2024-02-02'));
+  const [selectedDates, setSelectedDates] = React.useState<{[key: string]: {}}>(
+    {
+      '2024-11-01': {
+        classBox: 'rounded-l-xl bg-primary',
+        classDot: 'bg-green-400',
+      },
+      '2024-11-02': {classText: 'text-black'},
+      '2024-11-03': {
+        classText: 'text-black',
+      },
+      '2024-11-04': {classBox: 'rounded-r-xl bg-primary'},
+    },
+  );
   return (
-    <SafeAreaView>
-      <ScrollView>
-        <Box className="bg-secondary-light mb-5">
-          <ButtonBox title="Progress up to 100" onPress={() => setValue(100)} />
-        </Box>
-        <Box className="bg-secondary-light h-10 mb-5">
-          <ButtonBox title="Progress up to 25" onPress={() => setValue(25)} />
-        </Box>
-        <Box className="gap-2">
-          <ProgressBar value={value} varian="secondary" />
-        </Box>
-        <Box>
-          <ProgressCircle
-            value={value}
-            varian="primary"
-            showLabel
-            label={`yeu em`}
-          />
-        </Box>
-      </ScrollView>
+    <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
+      <CalendarBox
+        initDate={value}
+        selectedDates={selectedDates}
+        onChangeDate={({dateString}) => {
+          setSelectedDates({[dateString]: {}});
+        }}
+      />
     </SafeAreaView>
   );
 }
