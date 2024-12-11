@@ -2,7 +2,7 @@ import {useMemo} from 'react';
 import {getClassNameStyles} from '../styles';
 import {VirtualListClassProps} from '../model';
 
-export default function useClassName(props?: VirtualListClassProps) {
+export default function useClassVirtualizedList(props?: VirtualListClassProps) {
   const getClassStyles = (classString?: string) =>
     classString ? getClassNameStyles(classString) : undefined;
 

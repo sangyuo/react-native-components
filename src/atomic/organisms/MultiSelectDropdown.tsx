@@ -32,7 +32,7 @@ export const MultiSelectDropdown = <ItemT,>({
     className,
     title,
     placeholder,
-    classNameText,
+    classText,
     classPlaceholderColor,
     classValueColor,
     ...restButton
@@ -78,7 +78,7 @@ export const MultiSelectDropdown = <ItemT,>({
           theme.border,
           className,
         )}
-        classNameText={classNames('font-medium', classTitle, classNameText)}
+        classText={classNames('font-medium', classTitle, classText)}
         numberOfLines={1}
         title={titleBtn ?? title}
         rightContent={<ArrowDown width={16} fill={iconColor ?? theme.color} />}
@@ -123,7 +123,7 @@ export const MultiSelectDropdown = <ItemT,>({
               )
             : '',
         )}
-        classNameText={classNames(
+        classText={classNames(
           'font-medium',
           classOptionLabel,
           selected ? classOptionLabelSelected : '',

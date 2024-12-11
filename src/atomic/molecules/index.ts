@@ -6,3 +6,4 @@ export * from './RadioButton';
 export * from './Checkbox';
 export * from './PlaceholderCard';
 export * from './SwitchBox';
+export {default as CalendarItemBox} from './CalendarItemBox';
