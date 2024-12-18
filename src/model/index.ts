@@ -381,3 +381,59 @@ export interface SelectedDateItemType {
 export interface SelectedDateType {
   [key: string]: SelectedDateItemType;
 }
+
+export interface CalendarBoxProps {
+  format?: DateFormatType;
+  initDate?: string;
+  selectedDates?: SelectedDateType;
+  width?: number;
+  height?: number;
+  hideExtraDays?: boolean;
+  disablePressExtraDays?: boolean;
+  enableSpecialStyleExtraDays?: boolean;
+  classBox?: string;
+  classBoxArrowLeft?: string;
+  classBoxArrowRight?: string;
+  colorArrowLeft?: string;
+  colorArrowRight?: string;
+  classBoxHeader?: string;
+  classToday?: string;
+  classTextToday?: string;
+  classSelected?: string;
+  classTextSelected?: string;
+  classDay?: string;
+  classTextDay?: string;
+  classExtraDay?: string;
+  classTextExtraDay?: string;
+  classTextWeek?: string;
+  classWeek?: string;
+  classTextMonth?: string;
+  classTextYear?: string;
+  horizontal?: boolean;
+  scrollEnabled?: boolean;
+  widthArrow?: number;
+  months?: Array<string | number>;
+  weeks?: Array<string | number>;
+  weekType?: 'short' | 'long';
+  monthType?: 'default' | 'short' | 'long';
+  gap?: number;
+  minYear?: number;
+  maxYear?: number;
+  enableControl?: boolean;
+  firstDay?: number;
+  renderMonth?: (params: {year: number; month: number}) => ReactNode;
+  onChangeDate?: (date: {
+    year: number;
+    month: number;
+    day: number;
+    dateString: string;
+  }) => void;
+  renderHeader?: (params: MonthOfYearType) => ReactNode;
+  renderDateItem?: (params: {
+    date: DayItemType;
+    dot?: boolean;
+    classDot?: string;
+    classBox: string;
+    classText: string;
+  }) => ReactNode;
+}
