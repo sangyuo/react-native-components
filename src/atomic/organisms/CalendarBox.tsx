@@ -6,7 +6,7 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import {Box, ButtonBox, TextBox} from '../atoms';
+import {ArrowLeft, ArrowRight, Box, ButtonBox, TextBox} from '../atoms';
 import {ScrollView} from 'react-native';
 import {getDaysOfYear} from '../../utils/date.util';
 import {
@@ -16,6 +16,8 @@ import {
   SelectedDateType,
 } from '../../model';
 import {CalendarItemBox} from '../molecules';
+import {classNames} from '../../utils';
+import {CALENDAR} from '../../config/Calendar';
 
 interface Props {
   format?: DateFormatType;
@@ -26,6 +28,12 @@ interface Props {
   hideExtraDays?: boolean;
   disablePressExtraDays?: boolean;
   enableSpecialStyleExtraDays?: boolean;
+  classBox?: string;
+  classBoxArrowLeft?: string;
+  classBoxArrowRight?: string;
+  colorArrowLeft?: string;
+  colorArrowRight?: string;
+  classBoxHeader?: string;
   classToday?: string;
   classTextToday?: string;
   classSelected?: string;
@@ -34,13 +42,30 @@ interface Props {
   classTextDay?: string;
   classExtraDay?: string;
   classTextExtraDay?: string;
+  classTextWeek?: string;
+  classWeek?: string;
+  classTextMonth?: string;
+  classTextYear?: string;
   horizontal?: boolean;
+  enableScroll?: boolean;
+  widthArrow?: number;
+  months?: Array<string | number>;
+  weeks?: Array<string | number>;
+  weekType?: 'short' | 'long';
+  monthType?: 'default' | 'short' | 'long';
+  rowGap?: number;
+  minYear?: number;
+  maxYear?: number;
+  enableControl?: boolean;
+  firstDay?: number;
+  renderMonth?: (params: {year: number; month: number}) => ReactNode;
   onChangeDate?: (date: {
     year: number;
     month: number;
     day: number;
     dateString: string;
   }) => void;
+  renderHeader?: (params: MonthOfYearType) => ReactNode;
   renderDateItem?: (params: {
     date: DayItemType;
     dot?: boolean;
@@ -60,16 +85,35 @@ export const CalendarBox = ({
   disablePressExtraDays = true,
   enableSpecialStyleExtraDays,
   horizontal = true,
+  enableScroll = true,
+  weekType = 'short',
+  monthType = 'default',
+  weeks,
+  months,
+  classBox,
+  rowGap = 3,
+  colorArrowLeft = '#000',
+  colorArrowRight = '#000',
+  minYear = 2000,
+  maxYear = 2100,
+  enableControl = false,
+  firstDay = 0,
   onChangeDate,
+  renderMonth,
+  renderHeader,
   ...rest
 }: Props) => {
   const refMonth = useRef<ScrollView>(null);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [offsetWidth, setOffsetWidth] = useState(width);
   const [scrollEnabled, setScrollEnabled] = useState(true);
-  const [months, setMonths] = useState<MonthOfYearType[]>([]);
+  const [monthsData, setMonths] = useState<MonthOfYearType[]>([]);
   const firstRender = useRef(true);
   const refMonthUpdate = useRef<NodeJS.Timeout>();
+  const weekData = useMemo(() => {
+    const days = weeks ? weeks : CALENDAR.week[weekType];
+    return [...days.slice(firstDay), ...days.slice(0, firstDay)];
+  }, [weeks, weekType, firstDay]);
 
   const widthDay: number = useMemo(() => {
     if (offsetWidth > 0) {
@@ -82,20 +126,20 @@ export const CalendarBox = ({
     const initMonths = () => {
       const targetDate = initDate ? new Date(initDate) : new Date();
       const year = targetDate.getFullYear();
-      const currentMonth = getDaysOfYear(year, format);
-      const preMonth = getDaysOfYear(year - 1, format);
-      const nextMonth = getDaysOfYear(year + 1, format);
+      const currentMonth = getDaysOfYear(year, format, firstDay);
+      const preMonth = getDaysOfYear(year - 1, format, firstDay);
+      const nextMonth = getDaysOfYear(year + 1, format, firstDay);
       const monthIndex = targetDate.getMonth();
       setMonths([...preMonth, ...currentMonth, ...nextMonth]);
       setCurrentIndex(12 + monthIndex);
     };
     initMonths();
-  }, [format, initDate]);
+  }, [format, initDate, firstDay]);
 
   useEffect(() => {
     if (
       firstRender.current &&
-      months.length > 0 &&
+      monthsData.length > 0 &&
       offsetWidth > 0 &&
       currentIndex >= 0
     ) {
@@ -104,17 +148,17 @@ export const CalendarBox = ({
       }, 250);
       firstRender.current = false;
     }
-  }, [offsetWidth, months, currentIndex]);
+  }, [offsetWidth, monthsData, currentIndex]);
 
   const getMoreMonth = (type: 'prev' | 'next' = 'next', index = 0) => {
-    const currentMonth = months[index];
+    const currentMonth = monthsData[index];
     if (type === 'next') {
-      const perMonths = getDaysOfYear(currentMonth.year + 1);
-      setMonths([...months, ...perMonths]);
+      const perMonths = getDaysOfYear(currentMonth.year + 1, format, firstDay);
+      setMonths([...monthsData, ...perMonths]);
       return;
     }
-    const perMonths = getDaysOfYear(currentMonth.year - 1);
-    setMonths([...perMonths, ...months]);
+    const perMonths = getDaysOfYear(currentMonth.year - 1, format, firstDay);
+    setMonths([...perMonths, ...monthsData]);
   };
 
   const scrollToIndex = (index: number) => {
@@ -128,31 +172,104 @@ export const CalendarBox = ({
     }, 0);
   };
 
-  const currentMonth = useMemo(() => months?.[currentIndex], [currentIndex]);
+  const controlMonth = (type: 'next' | 'prev') => {
+    if (refMonth.current) {
+      const nextIndex =
+        type === 'next'
+          ? Math.min(currentIndex + 1, monthsData.length - 1)
+          : Math.max(currentIndex - 1, 0);
+      scrollToIndex(nextIndex);
+    }
+  };
+
+  const currentMonth = useMemo(
+    () => monthsData?.[currentIndex],
+    [currentIndex],
+  );
 
   const renderWeek = useCallback(() => {
-    return ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map(item => (
+    return weekData.map(item => (
       <Box
         key={`week-${item}`}
+        className={rest?.classWeek}
         style={{
           width: widthDay,
         }}>
-        <TextBox className="text-center font-bold" key={`week-${item}`}>
+        <TextBox
+          className={classNames('text-center font-bold', rest?.classTextWeek)}
+          key={`week-${item}`}>
           {item}
         </TextBox>
       </Box>
     ));
-  }, [widthDay]);
+  }, [widthDay, rest?.classTextWeek, rest?.classWeek, weekData]);
 
-  const renderMonth = useCallback(
-    () => (
-      <ButtonBox className="row self-center mt-4">
-        <TextBox className="text-center text-black font-bold">
-          {`Month ${currentMonth?.month} ${currentMonth?.year}`}
-        </TextBox>
-      </ButtonBox>
-    ),
-    [offsetWidth, currentMonth],
+  const renderMonthItem = useCallback(
+    () =>
+      renderHeader ? (
+        renderHeader(currentMonth)
+      ) : (
+        <Box
+          className={classNames(
+            'row-center w-full justify-center py-1',
+            rest?.classBoxHeader,
+          )}>
+          {enableControl && (
+            <ButtonBox
+              onPress={() => controlMonth('prev')}
+              className={classNames('absolute left-4', rest.classBoxArrowLeft)}>
+              <ArrowLeft width={16} fill={colorArrowLeft} />
+            </ButtonBox>
+          )}
+          <ButtonBox>
+            {renderMonth ? (
+              renderMonth({
+                year: currentMonth?.year,
+                month: currentMonth?.month,
+              })
+            ) : (
+              <TextBox
+                className={classNames(
+                  'text-center text-black font-bold text-lg',
+                  rest.classTextMonth,
+                )}>
+                {months
+                  ? months[currentMonth?.month - 1]
+                  : monthType === 'default'
+                  ? currentMonth?.month
+                  : CALENDAR.month[monthType][currentMonth?.month - 1]}{' '}
+                /{' '}
+                <TextBox className={rest.classTextYear}>
+                  {currentMonth?.year}
+                </TextBox>
+              </TextBox>
+            )}
+          </ButtonBox>
+          {enableControl && (
+            <ButtonBox
+              onPress={() => controlMonth('next')}
+              className={classNames(
+                'absolute right-4',
+                rest.classBoxArrowRight,
+              )}>
+              <ArrowRight width={16} fill={colorArrowRight} />
+            </ButtonBox>
+          )}
+        </Box>
+      ),
+    [
+      months,
+      offsetWidth,
+      currentMonth,
+      rest?.classTextYear,
+      rest?.classTextMonth,
+      rest?.classBoxHeader,
+      rest?.classBoxArrowRight,
+      rest?.classBoxArrowLeft,
+      colorArrowRight,
+      colorArrowLeft,
+      monthType,
+    ],
   );
 
   const renderDate = useCallback(
@@ -193,16 +310,18 @@ export const CalendarBox = ({
           setOffsetWidth(Number(nativeEvent.layout.width.toFixed(1)));
         }
       }}
-      className="w-full gap-4"
+      className={classNames(`w-full gap-${rowGap}`, classBox)}
       style={{width: offsetWidth || undefined, height}}>
-      {months.length > 0 && (
+      {monthsData.length > 0 && (
         <>
-          {renderMonth()}
+          {renderMonthItem()}
           <Box className="row flex-wrap">{renderWeek()}</Box>
           <ScrollView
             ref={refMonth}
-            scrollEnabled={scrollEnabled}
+            scrollEnabled={scrollEnabled && enableScroll}
             scrollEventThrottle={15}
+            showsHorizontalScrollIndicator={false}
+            showsVerticalScrollIndicator={false}
             onScroll={({nativeEvent}) => {
               if (!firstRender.current) {
                 const index = Math.round(
@@ -213,7 +332,7 @@ export const CalendarBox = ({
                 }
                 refMonthUpdate.current = setTimeout(() => {
                   if (index !== currentIndex) {
-                    if (index < 12 && months.length > 0) {
+                    if (index < 12 && monthsData.length > 0) {
                       setScrollEnabled(false);
                       setTimeout(() => {
                         getMoreMonth('prev', index);
@@ -221,19 +340,19 @@ export const CalendarBox = ({
                         setCurrentIndex(index + 12);
                         setScrollEnabled(true);
                       }, 120);
-                    } else if (months.length - index < 12) {
+                    } else if (monthsData.length - index < 12) {
                       getMoreMonth('next', index);
                       setCurrentIndex(index);
                     } else {
                       setCurrentIndex(index);
                     }
                   }
-                }, 25);
+                }, 0);
               }
             }}
             horizontal={horizontal}
             pagingEnabled>
-            {months.map((item, index) => {
+            {monthsData.map((item, index) => {
               if (index > currentIndex + 2 || index < currentIndex - 1) {
                 return (
                   <Box
