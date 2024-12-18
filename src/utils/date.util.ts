@@ -11,23 +11,28 @@ interface Result {
 export const getDaysOfYear = (
   year: number,
   format: DateFormatType = 'YYYY-MM-DD',
+  firstDay: number = 0,
 ): Result[] => {
   const months = Array.from({length: 12});
   return months.map((_, index) => {
-    return getDaysOfMonth(index + 1, year, format);
+    return getDaysOfMonth(index + 1, year, format, firstDay);
   });
 };
+
+// Adjust day indices based on the chosen `firstDay`
+const adjustDay = (day: number, firstDay: number) => (day - firstDay + 7) % 7;
 
 export const getDaysOfMonth = (
   month: number,
   year: number,
   format: DateFormatType = 'YYYY-MM-DD',
+  firstDay: number = 0,
 ): Result => {
   const startDayOfWeek = new Date(`${year}-${month}-01`).getDay();
   const monthDay = new Date(year, month, 0);
   const dayEndStartWeek = monthDay.getDay() === 6 ? 0 : monthDay.getDay() + 1;
-  const dayNo = startDayOfWeek === 0 ? 6 : startDayOfWeek - 1;
-  const dayEndNo = dayEndStartWeek === 0 ? 6 : dayEndStartWeek - 1;
+  const dayNo = adjustDay(startDayOfWeek, firstDay);
+  const dayEndNo = adjustDay(dayEndStartWeek, firstDay);
 
   let monthBefore = month - 1;
   let yearBefore = year;
