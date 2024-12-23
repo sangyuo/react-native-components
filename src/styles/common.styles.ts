@@ -100,7 +100,6 @@ export const commonStyles = StyleSheet.create({
   'w-2/5': {width: '40%'},
   'w-3/5': {width: '60%'},
   'w-4/5': {width: '80%'},
-  'w-1/7': {width: `${(1 / 7) * 100}%`},
   'w-full': {width: '100%'},
   'w-screen': {width: device.width},
   'min-w-auto': {minWidth: 'auto'},

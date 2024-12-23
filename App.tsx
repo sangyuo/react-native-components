@@ -2,6 +2,7 @@ import React from 'react';
 import {SafeAreaView} from 'react-native';
 import {CalendarBox} from './src/atomic/organisms/CalendarBox';
 import {formatDate} from './src/utils/date.util';
+import {TextBox} from './src';
 
 function App(): React.JSX.Element {
   const [value, setValue] = React.useState(formatDate('2024-02-02'));
@@ -21,8 +22,13 @@ function App(): React.JSX.Element {
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
       <CalendarBox
+        monthType="long"
+        firstDay={1}
+        minYear={2020}
+        maxYear={2026}
         initDate={value}
         selectedDates={selectedDates}
+        months={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]}
         onChangeDate={({dateString}) => {
           setSelectedDates({[dateString]: {}});
         }}
