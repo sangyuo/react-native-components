@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {ScrollView, TouchableWithoutFeedback} from 'react-native';
+import {Modal, ScrollView, TouchableWithoutFeedback} from 'react-native';
 import {DropDownProps} from '../../model';
 import {classNames, device, isNumber} from '../../utils';
 import useClassNameDropdown from '../../hook/useClassNameDropdown';
@@ -164,6 +164,7 @@ export const DropdownBox = <ItemT,>({
           title={item?.[pickLabel] as string}
           onPress={() => {
             onChange && onChange(item);
+            onClose();
           }}
           numberOfLines={numberOfLinesOption}
           rightContent={
@@ -242,22 +243,55 @@ export const DropdownBox = <ItemT,>({
       </Box>
       {isVisible && (
         <>
-          <TouchableWithoutFeedback
-            onPress={onClose}
-            onLayout={({nativeEvent}) => {
-              if (refTimeMaxContent.current) {
-                clearTimeout(refTimeMaxContent.current);
-              }
-              refTimeMaxContent.current = setTimeout(() => {
-                setMaxContent({
-                  height: Math.floor(nativeEvent.layout.height),
-                  width: Math.floor(nativeEvent.layout.width),
-                });
-              }, 0);
-            }}>
-            <Box className="absolute w-full h-full z-9" />
-          </TouchableWithoutFeedback>
-          <Box className={classNames(classDropOption)}>
+          <Modal
+            transparent
+            visible={isVisible}
+            animationType="fade"
+            onRequestClose={onClose}>
+            <Box className="flex-1 bg-red-200">
+              <Box
+                style={{
+                  marginTop: offsetLayout.top,
+                  marginLeft: offsetLayout.left,
+                }}>
+                {enableSearch && (
+                  <TextInputBox
+                    value={inputSearch?.value ?? keyword}
+                    classInput={classNames(
+                      'h-10 rounded mx-2',
+                      inputSearch?.classInput,
+                    )}
+                    placeholder={inputSearch?.placeholder ?? 'Search'}
+                    onChangeText={setKeyword}
+                    leftContent={inputSearch?.leftContent}
+                    rightContent={
+                      inputSearch?.rightContent ?? (
+                        <Box className="row-center gap-1 px-2">
+                          {keyword ? (
+                            <ButtonBox
+                              className="p-2 rounded-full bg-gray-300 center"
+                              onPress={handleClear}>
+                              <IconClose width={14} />
+                            </ButtonBox>
+                          ) : null}
+                          <ButtonBox
+                            className="p-1 border rounded"
+                            onPress={() => {
+                              handleSearch(keyword);
+                            }}
+                            disabled={saveKeywordType !== 'submit'}>
+                            <IconSearch width={16} />
+                          </ButtonBox>
+                        </Box>
+                      )
+                    }
+                  />
+                )}
+                {renderOption()}
+              </Box>
+            </Box>
+          </Modal>
+          {/* <Box className={classNames(classDropOption)}>
             {enableSearch && (
               <TextInputBox
                 value={inputSearch?.value ?? keyword}
@@ -292,7 +326,7 @@ export const DropdownBox = <ItemT,>({
               />
             )}
             {renderOption()}
-          </Box>
+          </Box> */}
         </>
       )}
     </>
